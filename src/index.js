@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-// import Navigation from './navigation';
+import Navigation from './navigation';
 
 console.log('hola hola');
 
@@ -18,14 +18,14 @@ console.log('hola hola');
 
 // // store.subscribe(saveState)
 
-// window.React = React
-// window.store = store
+window.React = React;
+window.store = store;
 
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <BrowserRouter>
-//       <Navigation />
-//     </BrowserRouter>
-//   </Provider>,
-//   document.getElementById('root'),
-// );
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Navigation />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root'),
+);

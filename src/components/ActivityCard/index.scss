@@ -1,0 +1,19 @@
+.activityCardContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .iconContainer {
+        width: 20%;
+    }
+
+    .textContainer{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+    }
+
+    .toggleContainer{
+        width: 20%;
+    }
+}

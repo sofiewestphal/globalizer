@@ -1,0 +1,28 @@
+$mintGreen: '#28A08A';
+$black: '#242424';
+$grey: '#DCDCDC';
+$white: '#FEFEFE';
+
+nav{
+    background-color: $mintGreen;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    .rightAlignedNav {
+        display: flex;
+        flex-direction: row;
+    }
+
+    a {
+        color: $white;
+        padding: 0 20px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}
+.activeNavLink{
+    color: $black;
+}
