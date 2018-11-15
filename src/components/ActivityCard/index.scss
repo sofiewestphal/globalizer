@@ -1,19 +1,35 @@
 .activityCardContainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .iconContainer {
+    width: 20%;
+  }
+
+  .textContainer{
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    flex-direction: column;
+    width: 60%;
 
-    .iconContainer {
-        width: 20%;
+    .attendContainer{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .textContainer{
-        display: flex;
-        flex-direction: column;
-        width: 60%;
+    .btnToggleAttend{
+      align-self: flex-end;
     }
+  }
 
-    .toggleContainer{
-        width: 20%;
+  .toggleContainer{
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+
+    .btnTtoggleActivityCard{
+      align-self: flex-end;
     }
+  }
 }

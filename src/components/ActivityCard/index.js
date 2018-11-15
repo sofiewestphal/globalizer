@@ -8,35 +8,69 @@ const icons = {
   outdoor: outdoorIcon,
 };
 
-const ActivityCard = (props) => {
-  const {
-    category, date, title, location, description, currentNumberOfAttendees, MaxNumberOfAttendees,
-  } = props;
-  return (
-    <div className="activityCardContainer">
-      <div className="iconContainer">
-        <img src={icons[category]} className="App-logo" alt="logo" />
-      </div>
-      <div className="textContainer">
-        <div>
-          <p>{date}</p>
-          <h2>{title}</h2>
-          <p>{location}</p>
+class ActivityCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDescription: false,
+    };
+  }
+
+  toggleDesription = () => {
+    const { showDescription } = this.state;
+    this.setState({
+      showDescription: !showDescription,
+    });
+  }
+
+  render() {
+    const {
+      category, date, title, location, description, currentNumberOfAttendees, MaxNumberOfAttendees,
+    } = this.props;
+
+    const { showDescription } = this.state;
+
+    return (
+      <div className="activityCardContainer">
+        <div className="iconContainer">
+          <img src={icons[category]} className="App-logo" alt="logo" />
         </div>
-        <div className="activityCardDetails">
-          <p>{description}</p>
-          <div className="attendeesContainer">
-            <p>{`Attendees (${currentNumberOfAttendees}/${MaxNumberOfAttendees})`}</p>
+        <div className="textContainer">
+          <div>
+            <p>{date}</p>
+            <h2>{title}</h2>
+            <p>{location}</p>
           </div>
-          <button type="button">Attend</button>
+          {showDescription && (
+          <div className="activityCardDetails" style={{}}>
+            <p>{description}</p>
+            <div className="attendeesContainer">
+              <p>{`Attendees (${currentNumberOfAttendees}/${MaxNumberOfAttendees})`}</p>
+            </div>
+            <div className="attendContainer">
+              <button
+                className="btnToggleAttend"
+                type="button"
+              >
+                Attend
+              </button>
+            </div>
+          </div>
+          )}
+        </div>
+        <div className="toggleContainer">
+          <button
+            className="btnTtoggleActivityCard"
+            type="button"
+            onClick={() => this.toggleDesription()}
+          >
+            <img src={editIcon} alt="toggle activity card" />
+          </button>
         </div>
       </div>
-      <div className="toggleContainer">
-        <img src={editIcon} className="toggleActivityCard" alt="toggle activity card" />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ActivityCard.propTypes = {
   category: PropTypes.string.isRequired,
