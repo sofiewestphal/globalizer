@@ -1,12 +1,13 @@
 import React from 'react';
 import ActivityCard from '../../components/ActivityCard';
+import SearchBar from '../../components/SearchBar';
 
 const BrowsingScreen = () => (
   <div className="container-fluid">
+    <SearchBar />
     <div className="row">
-
       <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
-        <h1>Find Activities...</h1>
+        <h1>Activities for you...</h1>
         <ActivityCard
           category="outdoor"
           date="15. November 2018"

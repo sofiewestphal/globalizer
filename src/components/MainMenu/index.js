@@ -5,7 +5,7 @@ import './index.scss';
 const MainMenu = () => (
   <nav className="navContainer">
     <NavLink to="/browse" activeClassName="activeNavLink">
-      <p>Logo</p>
+      <p>Globalizer</p>
     </NavLink>
 
     <div className="rightAlignedNav">
@@ -14,7 +14,7 @@ const MainMenu = () => (
       </NavLink>
 
       <NavLink to="/activities" activeClassName="activeNavLink">
-        <p>My Activity</p>
+        <p>My Activities</p>
       </NavLink>
     </div>
   </nav>
