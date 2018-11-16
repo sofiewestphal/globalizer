@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import editIcon from '../../assets/Images/other_icons/edit_icon.svg';
+import arrowIcon from '../../assets/Images/other_icons/arrow_icon.svg';
 import outdoorIcon from '../../assets/Images/activity_icons/outdoor_icon.svg';
 
 const icons = {
@@ -64,7 +64,7 @@ class ActivityCard extends React.Component {
             type="button"
             onClick={() => this.toggleDesription()}
           >
-            <img src={editIcon} alt="toggle activity card" />
+            <img src={arrowIcon} alt="toggle activity card" />
           </button>
         </div>
       </div>
