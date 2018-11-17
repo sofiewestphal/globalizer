@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import SearchBarOption from './SearchBarOption';
+import Dropdown from './Dropdown';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -9,6 +10,14 @@ class SearchBar extends React.Component {
       When: false,
       Attendees: false,
       Categories: false,
+      whenOptions: [
+        { label: 'today', id: 'when_today', checked: false },
+        { label: 'tomorrow', id: 'when_tomorrow', checked: true },
+      ],
+      categoriesOptions: [
+        { label: 'Beauty & Wellness', id: 'categories_beauti', checked: false },
+        { label: 'Culture', id: 'categories_culture', checked: true },
+      ],
     };
   }
 
@@ -24,7 +33,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { When, Attendees, Categories } = this.state;
+    const { When, Attendees, Categories, whenOptions, categoriesOptions } = this.state;
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-10 col-sm-offset-1 searchbarContainer">
@@ -32,6 +41,7 @@ class SearchBar extends React.Component {
           <SearchBarOption
             title="When"
             active={When}
+            options={whenOptions}
             handleClick={title => this.handleOptionClick(title)}
           />
           <SearchBarOption
@@ -42,6 +52,7 @@ class SearchBar extends React.Component {
           <SearchBarOption
             title="Categories"
             active={Categories}
+            options={categoriesOptions}
             handleClick={title => this.handleOptionClick(title)}
           />
         </div>
