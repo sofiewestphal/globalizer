@@ -2,14 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Dropdown = ({ title, options, shown }) => {
-  const dropdownClassNames = shown ? 'dropdownContainer active' : 'dropdownContainer';
+  let dropdownClassNames = 'dropdownContainer';
+  if(title === 'Categories') {
+    dropdownClassNames += ' categories';
+  }
+  if(shown) {
+    dropdownClassNames += ' active';
+  }
 
   if(options) {
     return (
       <div className={dropdownClassNames}>
         {options.map(option => (
-          <label className="checkboxContainer" id={option.id}>
-            {option.label}
+          <label
+            className="optionContainer"
+            id={option.id}
+            key={option.id}
+          >
+            <p>{option.label}</p>
             <input type="checkbox" defaultChecked={option.checked} />
             <span className="checkmark" />
           </label>
