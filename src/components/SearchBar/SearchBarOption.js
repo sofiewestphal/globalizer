@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import arrowIcon from '../../assets/Images/other_icons/arrow_icon.svg';
+import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import Dropdown from './Dropdown';
 
 const SearchBarOption = (props) => {

@@ -1,9 +1,15 @@
 import React from 'react';
 import ActivityCard from '../../components/ActivityCard';
 import SearchBar from '../../components/SearchBar';
+import headerImage from '../../assets/images/browsingbanner_1600x756.jpg';
+import HeaderImage from '../../components/HeaderImage';
 
 const BrowsingScreen = () => (
   <div className="container-fluid">
+    <HeaderImage
+      imageSource={headerImage}
+      alt="group of girls in green surroundings"
+    />
     <SearchBar />
     <div className="row">
       <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
