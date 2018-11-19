@@ -38,7 +38,7 @@ class ActivityCard extends React.Component {
         <div className="textContainer">
           <div>
             <p>{date}</p>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <p>{location}</p>
           </div>
           {showDescription && (
