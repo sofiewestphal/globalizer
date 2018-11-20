@@ -54,7 +54,7 @@ class SearchBar extends React.Component {
               <div className="col-xs-12 col-sm-4">
                 <input id="searchInput" placeholder="Search activities..." />
               </div>
-              <div className="col-xs-0 col-sm-2">
+              <div className="col-xs-12 col-sm-2">
                 <SearchBarOption
                   title="When"
                   active={When}
@@ -62,14 +62,14 @@ class SearchBar extends React.Component {
                   handleClick={title => this.handleOptionClick(title)}
                 />
               </div>
-              <div className="col-xs-0 col-sm-3">
+              <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Attendees"
                   active={Attendees}
                   handleClick={title => this.handleOptionClick(title)}
                 />
               </div>
-              <div className="col-xs-0 col-sm-3">
+              <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Categories"
                   active={Categories}

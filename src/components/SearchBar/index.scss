@@ -21,11 +21,13 @@
         border: none;
     }
     .searchBarOption {
+        display: flex;
+        justify-content: space-between;
         cursor: pointer;
         border-bottom: 1px solid #FFF;
         margin: 0;
         font-size: 12px;
-        padding: 10px 10px 12px 10px;
+        padding: 10px 0px 12px 0px;
 
         &.active {
             color: #28A08A;
@@ -135,12 +137,6 @@
 }
 
 @media screen and (max-width: 844px) {
-  .searchbarContainer{
-    .searchBarOption {
-      padding-left: 0px;
-    }
-  }
-
   .dropdownContainer {
     position: relative;
     padding-left: 0;
