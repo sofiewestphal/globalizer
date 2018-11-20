@@ -52,7 +52,7 @@ class SearchBar extends React.Component {
           <div className="searchbarContainer">
             <div className="row">
               <div className="col-xs-12 col-sm-4">
-                <input placeholder="Search activities..." />
+                <input id="searchInput" placeholder="Search activities..." />
               </div>
               <div className="col-xs-0 col-sm-2">
                 <SearchBarOption

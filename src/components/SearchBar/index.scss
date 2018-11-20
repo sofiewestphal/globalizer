@@ -35,17 +35,17 @@
 }
 
 .dropdownContainer {
-  width: fit-content;
-  min-width: 175px;
-  display: none;
-  background-color: #242424;
-  cursor: pointer;
   position: absolute;
+  display: none;
   top: 100%;
-  z-index: 10;
+  cursor: pointer;
+  min-width: 175px;
+  width: fit-content;
+  background-color: #242424;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   padding: 20px 20px 8px 20px;
+  z-index: 10;
 
     &.active {
       display: block;
@@ -131,6 +131,30 @@
         border: solid #FEFEFE;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
+      }     
+}
+
+@media screen and (max-width: 844px) {
+  .searchbarContainer{
+    .searchBarOption {
+      padding-left: 0px;
+    }
+  }
+
+  .dropdownContainer {
+    position: relative;
+    padding-left: 0;
+
+    p {
+      margin: 0;
+    }
+
+    &.active {
+      &.categories {
+        left: 0;
+        min-width: 100%;
+        max-height: fit-content;
       }
-      
+    } 
+  }
 }
