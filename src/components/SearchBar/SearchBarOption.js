@@ -8,7 +8,7 @@ const SearchBarOption = (props) => {
   const { title, active, options, handleClick } = props;
   const pClassName = active ? 'searchBarOption active' : 'searchBarOption';
 
-  return(
+  return (
     <div
       className="searchBarOptionContainer"
       onClick={() => handleClick(title)}

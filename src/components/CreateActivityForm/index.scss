@@ -1,0 +1,40 @@
+.col-left {
+}
+
+.col-right {
+}
+
+.label {
+  width: 100%;
+  display: flex; 
+  flex-flow: column;
+  margin-top: 30px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  color: #28A08A;
+  font-size: 12px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-style: none;
+  border-bottom: 1px solid #242424;
+  color: #CECECE;
+  background-color: transparent;
+  font-family: 'PT Sans', sans-serif;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.primaryBtn {
+  padding: 10px 50px;	
+  border-radius: 2px;	
+  background-color: #28A08A;
+  color: #FEFEFE;	
+  font-family: BrownStd;	
+  font-size: 16px;	
+  text-align: center;
+}

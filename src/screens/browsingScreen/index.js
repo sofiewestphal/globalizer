@@ -21,7 +21,7 @@ const BrowsingScreen = () => (
 
       <div className="col-xs-12 col-sm-4 col-md-3">
         <p>Applied filters</p>
-        <h2>Can't find the right activity?<br/>Create your own...</h2>
+        <h2>Can't find the right activity?<br />Create your own...</h2>
         <button>Create Activity</button>
       </div>
 
