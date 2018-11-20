@@ -1,0 +1,34 @@
+@media screen and (max-width: 844px) {
+  .explorerElementContainer{
+    margin-bottom: 15px;
+  }
+}
+
+.explorerContainer{
+  margin-bottom: 50px;
+}
+
+.explorerElementContainer {
+  position: relative;
+  height: 150px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 2px;
+
+  img {
+    width: 100%;
+  }
+  .textContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h2 {
+    color: #FEFEFE;
+    z-index: 10;
+  }
+}

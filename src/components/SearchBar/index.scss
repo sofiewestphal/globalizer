@@ -1,30 +1,33 @@
 .searchbarContainer {
     background-color: #242424;
     color: #FFF;
-    display: flex;
     flex-direction: row;
     align-items: center;
     padding: 20px;
     height: fit-content;
+    border-radius: 2px;
+    margin-top: -40px;
 
     input{
-        height: fit-content;
         padding: 10px 10px 12px 10px;
+        width: 100%;
         color: #CECECE;
         border-radius: 2px;
         background-color: #FEFEFE;
-        background-image: url('../../assets/Images/other_icons/loupe_icon.svg');
+        background-image: url('../../assets/icons/other_icons/loupe_icon.svg');
         background-repeat: no-repeat;
         background-position-x: right;
         background-position-y: center;
         border: none;
     }
     .searchBarOption {
+        display: flex;
+        justify-content: space-between;
         cursor: pointer;
         border-bottom: 1px solid #FFF;
         margin: 0;
         font-size: 12px;
-        padding: 10px 10px 12px 10px;
+        padding: 10px 0px 12px 0px;
 
         &.active {
             color: #28A08A;
@@ -34,27 +37,52 @@
 }
 
 .dropdownContainer {
-   display: none;
-   background-color: #242424;
-   position: absolute;
-   top: 100%;
+  position: absolute;
+  display: none;
+  top: 100%;
+  cursor: pointer;
+  min-width: 175px;
+  width: fit-content;
+  background-color: #242424;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  padding: 20px 20px 8px 20px;
+  z-index: 10;
 
     &.active {
-        display: block;    
+      display: block;
+
+      &.categories {
+        right: 0;
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 150px;
+        min-width: 475px;
+        flex-direction: column;
+      }
     }
 
-    .checkboxContainer {
+    p {
+      font-size: 12px;
+    }
+    
+    .optionContainer {
         display: block;
         position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
+        padding-left: 25px;
+        padding-bottom: 12px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 12px;
         user-select: none;
+
+        p {
+            margin: 0;
+            display: inline-block;
+        }
       }
       
       /* Hide the browser's default checkbox */
-      .container input {
+      .optionContainer input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
@@ -67,19 +95,21 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
+        height: 15px;
+        width: 15px;
+        border: 1px solid #FEFEFE;
+        border-radius: 2px;
+        background-color: #242424;
       }
       
       /* On mouse-over, add a grey background color */
-      .container:hover input ~ .checkmark {
-        background-color: #ccc;
+      .optionContainer:hover input ~ .checkmark {
+        background-color: #343434;
       }
       
       /* When the checkbox is checked, add a blue background */
-      .container input:checked ~ .checkmark {
-        background-color: #2196F3;
+      .optionContainer input:checked ~ .checkmark {
+        background-color: #242424;
       }
       
       /* Create the checkmark/indicator (hidden when not checked) */
@@ -90,19 +120,37 @@
       }
       
       /* Show the checkmark when checked */
-      .container input:checked ~ .checkmark:after {
+      .optionContainer input:checked ~ .checkmark:after {
         display: block;
       }
       
       /* Style the checkmark/indicator */
-      .container .checkmark:after {
-        left: 9px;
-        top: 5px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
+      .optionContainer .checkmark:after {
+        left: 4px;
+        top: 0px;
+        width: 4px;
+        height: 8px;
+        border: solid #FEFEFE;
+        border-width: 0 2px 2px 0;
         transform: rotate(45deg);
+      }     
+}
+
+@media screen and (max-width: 844px) {
+  .dropdownContainer {
+    position: relative;
+    padding-left: 0;
+
+    p {
+      margin: 0;
+    }
+
+    &.active {
+      &.categories {
+        left: 0;
+        min-width: 100%;
+        max-height: fit-content;
       }
-      
+    } 
+  }
 }

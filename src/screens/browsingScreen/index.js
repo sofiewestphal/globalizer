@@ -1,9 +1,12 @@
 import React from 'react';
 import ActivityCard from '../../components/ActivityCard';
 import SearchBar from '../../components/SearchBar';
+import HeaderImage from '../../components/HeaderImage';
+import Explorer from '../../components/Explorer';
 
 const BrowsingScreen = () => (
   <div className="container-fluid">
+    <HeaderImage />
     <SearchBar />
     <div className="row">
       <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
@@ -21,11 +24,12 @@ const BrowsingScreen = () => (
 
       <div className="col-xs-12 col-sm-4 col-md-3">
         <p>Applied filters</p>
-        <h2>Can't find the right activity?<br />Create your own...</h2>
+        <h3>Can't find the right activity?<br />Create your own...</h3>
         <button>Create Activity</button>
       </div>
 
     </div>
+    <Explorer />
   </div>
 );
 

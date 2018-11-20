@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import arrowIcon from '../../assets/Images/other_icons/arrow_icon.svg';
+import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import Dropdown from './Dropdown';
 
 const SearchBarOption = (props) => {
-  const { title, active, options, handleClick } = props;
+  const {
+    title, active, options, handleClick,
+  } = props;
   const pClassName = active ? 'searchBarOption active' : 'searchBarOption';
 
   return (
     <div
       className="searchBarOptionContainer"
+      role="button"
       onClick={() => handleClick(title)}
     >
       <p className={pClassName}>

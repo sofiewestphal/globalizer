@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import arrowIcon from '../../assets/Images/other_icons/arrow_icon.svg';
-import outdoorIcon from '../../assets/Images/activity_icons/outdoor_icon.svg';
+import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
+import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
 
 const icons = {
   outdoor: outdoorIcon,
@@ -38,7 +38,7 @@ class ActivityCard extends React.Component {
         <div className="textContainer">
           <div>
             <p>{date}</p>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <p>{location}</p>
           </div>
           {showDescription && (
