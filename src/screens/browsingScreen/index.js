@@ -9,14 +9,28 @@ const BrowsingScreen = () => (
     <HeaderImage />
     <SearchBar />
     <div className="row">
-      <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
+      <div className="col-xs-12 col-md-10 col-md-offset-1">
         <h1>Activities for you...</h1>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
         <ActivityCard
-          category="outdoor"
+          category="nightlife"
           date="15. November 2018"
           title="Malene's Birthday"
           location="LA Bar"
-          description="holahola"
+          description="Kom på LA Bar og vær med til at fejre min fødselsdag. Vi starter med snørrebåndsleg, stopdans og dans med appelsiner. Senere er der fri dans. Der er fri bar den første time."
+          currentNumberOfAttendees={3}
+          MaxNumberOfAttendees={10}
+        />
+
+        <ActivityCard
+          category="outdoor"
+          date="22. November 2018"
+          title="Climbing"
+          location="Nørrebrohallen"
+          description="We are going climbing at Nørrebro's Klatreklub. It costs 50 krones for the entrance and then you can find old climbing shoes there in case you don't have your own shoes."
           currentNumberOfAttendees={3}
           MaxNumberOfAttendees={10}
         />

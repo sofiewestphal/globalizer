@@ -45,6 +45,22 @@ h3 {
 
 p {
   font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.secondaryButton {
+  background-color: #242424;
+  cursor: pointer;
+  color: #FEFEFE;
+  border-radius: 2px;
+  border: none;
+  min-width: 85px;
+  min-height: 25px;
 }
 
 .img-responsive {
