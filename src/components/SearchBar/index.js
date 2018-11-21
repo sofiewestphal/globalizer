@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './index.scss';
 import SearchBarOption from './SearchBarOption';
+import { setCategoryChecked } from '../../actions';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      when: false,
-      attendees: false,
-      categories: false,
+      showWhen: false,
+      showAttendees: false,
+      showCategories: false,
       whenOptions: [
         { label: 'Any time', id: 'when_anytime', checked: true },
         { label: 'Today', id: 'when_today', checked: false },
@@ -16,38 +19,41 @@ class SearchBar extends React.Component {
         { label: 'This week', id: 'when_thisWeek', checked: false },
         { label: 'This month', id: 'when_thisMonth', checked: false },
       ],
-      categoriesOptions: [
-        { label: 'Beauty & Wellness', id: 'categories_beautyWellness', checked: false },
-        { label: 'Culture', id: 'categories_culture', checked: true },
-        { label: 'Family', id: 'categories_family', checked: false },
-        { label: 'Food & Drinks', id: 'categories_foodDrinks', checked: false },
-        { label: 'Games', id: 'categories_games', checked: false },
-        { label: 'Hobbies & Crafts', id: 'categories_hobbiesCrafts', checked: false },
-        { label: 'Languages', id: 'categories_languages', checked: false },
-        { label: 'Movies', id: 'categories_movies', checked: false },
-        { label: 'Music', id: 'categories_music', checked: false },
-        { label: 'Nightlife', id: 'categories_nightlift', checked: false },
-        { label: 'Outdoor', id: 'categories_outdoor', checked: false },
-        { label: 'Sports', id: 'categories_sports', checked: false },
-      ],
     };
   }
 
-  handleOptionClick = (optionTitle) => {
+  handleDropdownClick = (optionTitle) => {
     const newTitleState = !this.state[optionTitle];
 
     this.setState({
-      when: false,
-      attendees: false,
-      categories: false,
+      showWhen: false,
+      showAttendees: false,
+      showCategories: false,
       [optionTitle]: newTitleState,
     });
   }
 
+  handleWhenSelection = (label) => {
+    console.log(label);
+  }
+
+  handleAttendeesSelection = (label) => {
+    console.log(label);
+  }
+
+  handleCategorySelection = (label) => {
+    console.log(label);
+    const { dispatchSetCategoryChecked } = this.props;
+    dispatchSetCategoryChecked(label);
+  }
+
   render() {
     const {
-      when, attendees, categories, whenOptions, categoriesOptions,
+      showWhen, showAttendees, showCategories, whenOptions,
     } = this.state;
+
+    const { categories } = this.props;
+
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -59,27 +65,30 @@ class SearchBar extends React.Component {
               <div className="col-xs-12 col-sm-2">
                 <SearchBarOption
                   title="When"
-                  optionTitle="when"
-                  active={when}
+                  optionTitle="showWhen"
+                  active={showWhen}
                   options={whenOptions}
-                  handleClick={title => this.handleOptionClick(title)}
+                  handleClick={title => this.handleDropdownClick(title)}
+                  handleSelection={label => this.handleWhenSelection(label)}
                 />
               </div>
               <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Attendees"
-                  optionTitle="attendees"
-                  active={attendees}
-                  handleClick={title => this.handleOptionClick(title)}
+                  optionTitle="showAttendees"
+                  active={showAttendees}
+                  handleClick={title => this.handleDropdownClick(title)}
+                  handleSelection={label => this.handleAttendeesSelection(label)}
                 />
               </div>
               <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Categories"
-                  optionTitle="categories"
-                  active={categories}
-                  options={categoriesOptions}
-                  handleClick={title => this.handleOptionClick(title)}
+                  optionTitle="showCategories"
+                  active={showCategories}
+                  options={categories}
+                  handleClick={title => this.handleDropdownClick(title)}
+                  handleSelection={label => this.handleCategorySelection(label)}
                 />
               </div>
             </div>
@@ -90,4 +99,17 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+SearchBar.propTypes = {
+  categories: PropTypes.array.isRequired,
+  dispatchSetCategoryChecked: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  categories: state.categories.categories,
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

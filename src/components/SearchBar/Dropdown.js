@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Dropdown = ({ title, options, shown }) => {
+const Dropdown = ({ title, options, shown, handleClick }) => {
   let dropdownClassNames = 'dropdownContainer';
   if(title === 'Categories') {
     dropdownClassNames += ' categories';
@@ -20,7 +20,11 @@ const Dropdown = ({ title, options, shown }) => {
             key={option.id}
           >
             <p>{option.label}</p>
-            <input type="checkbox" defaultChecked={option.checked} />
+            <input
+              type="checkbox"
+              defaultChecked={option.checked}
+              onClick={() => handleClick(option.label)}
+            />
             <span className="checkmark" />
           </label>
         ))}
@@ -41,6 +45,7 @@ Dropdown.propTypes = {
     PropTypes.array,
     PropTypes.bool,
   ]),
+  handleClick: PropTypes.func.isRequired,
 };
 
 Dropdown.defaultProps = {

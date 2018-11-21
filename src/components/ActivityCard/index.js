@@ -8,8 +8,8 @@ import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg'
 import SecondaryButton from '../SecondaryButton';
 
 const icons = {
-  outdoor: outdoorIcon,
-  nightlife: nightlifeIcon,
+  categories_outdoor: outdoorIcon,
+  categories_nightlife: nightlifeIcon,
 };
 
 class ActivityCard extends React.Component {
@@ -29,20 +29,21 @@ class ActivityCard extends React.Component {
 
   render() {
     const {
-      category, date, title, location, description, currentNumberOfAttendees, MaxNumberOfAttendees,
+      category, date, title, location, description, owner, attendees, maxNumberOfAttendees,
     } = this.props;
 
+    const currentNumberOfAttendees = attendees.length + 1;
     const { showDescription } = this.state;
 
-    const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer'; 
+    const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer';
 
     return (
       <div className="row">
         <div className={containerClassName}>
-          
+
           <div className="col-xs-10">
             <div className="row flexContainer">
-              
+
               <div className="col-xs-3">
                 <div className="iconContainer">
                   <img src={icons[category]} className="categoryIcon" alt="category icon" />
@@ -70,7 +71,7 @@ class ActivityCard extends React.Component {
                 <div className="activityCardDetails" style={{}}>
                   <p>{description}</p>
                   <div className="attendeesContainer">
-                    <p>{`Attendees (${currentNumberOfAttendees}/${MaxNumberOfAttendees})`}</p>
+                    <p>{`Attendees (${currentNumberOfAttendees}/${maxNumberOfAttendees})`}</p>
                   </div>
                   <div className="attendContainer">
                     <SecondaryButton
@@ -109,8 +110,9 @@ ActivityCard.propTypes = {
   title: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  currentNumberOfAttendees: PropTypes.number.isRequired,
-  MaxNumberOfAttendees: PropTypes.number.isRequired,
+  owner: PropTypes.number.isRequired,
+  attendees: PropTypes.array.isRequired,
+  maxNumberOfAttendees: PropTypes.number.isRequired,
 };
 
 export default ActivityCard;
