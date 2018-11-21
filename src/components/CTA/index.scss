@@ -1,0 +1,19 @@
+.ctaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    margin-bottom: 0px;
+    &.secondText {
+      margin-top: 0px;
+      margin-bottom: -5px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ctaContainer{
+    align-items: center;
+  }
+}

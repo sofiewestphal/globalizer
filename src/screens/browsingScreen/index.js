@@ -6,6 +6,7 @@ import HeaderImage from '../../components/HeaderImage';
 import Explorer from '../../components/Explorer';
 import { setCategoryChecked } from '../../actions';
 import ActivityList from '../../components/ActivityList';
+import CTA from '../../components/CTA';
 
 class BrowsingScreen extends React.Component {
   constructor(props) {
@@ -83,16 +84,10 @@ class BrowsingScreen extends React.Component {
 
           <div className="col-xs-12 col-sm-4 col-md-3">
             <p>Applied filters</p>
-            <h3>
-              Can't find the right activity?
-              <br />
-              Create your own...
-            </h3>
-            <button
-              type="button"
-            >
-              Create Activity
-            </button>
+            <CTA
+              text="Can't find the right activity?"
+              secondText="Create your own..."
+            />
           </div>
 
         </div>

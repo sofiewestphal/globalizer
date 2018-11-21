@@ -13,7 +13,7 @@ const MainButton = (props) => {
       type="button"
       onClick={onClick}
     >
-      {text}
+      <p>{text}</p>
     </button>
   );
 };
