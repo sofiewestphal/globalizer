@@ -11,7 +11,7 @@ const initialState = {
     { label: 'Languages', id: 'categories_languages', checked: false },
     { label: 'Movies', id: 'categories_movies', checked: false },
     { label: 'Music', id: 'categories_music', checked: false },
-    { label: 'Nightlife', id: 'categories_nightlift', checked: false },
+    { label: 'Nightlife', id: 'categories_nightlife', checked: false },
     { label: 'Outdoor', id: 'categories_outdoor', checked: false },
     { label: 'Sports', id: 'categories_sports', checked: false },
   ],

@@ -8,8 +8,8 @@ import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg'
 import SecondaryButton from '../SecondaryButton';
 
 const icons = {
-  outdoor: outdoorIcon,
-  nightlife: nightlifeIcon,
+  categories_outdoor: outdoorIcon,
+  categories_nightlife: nightlifeIcon,
 };
 
 class ActivityCard extends React.Component {

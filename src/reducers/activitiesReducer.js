@@ -3,7 +3,7 @@ import { RESET, ACTIVITY_ADD } from '../actions/actionCreators';
 const initialState = {
   activities: [
     {
-      category: 'nightlife',
+      category: 'categories_nightlife',
       date: '15. November 2018',
       title: 'Malene\'s Birthday',
       location: 'LA Bar',
@@ -14,7 +14,7 @@ const initialState = {
 
     },
     {
-      category: 'outdoor',
+      category: 'categories_outdoor',
       date: '22. November 2018',
       title: 'Climbing',
       location: 'Nørrebrohallen',

@@ -10,7 +10,9 @@ import { setCategoryChecked } from '../../actions';
 class BrowsingScreen extends React.Component {
   constructor(props) {
     super(props);
+    const { activities } = this.props;
     this.state = {
+      filteredActivities: activities,
       loaded: false,
     };
   }
@@ -25,14 +27,39 @@ class BrowsingScreen extends React.Component {
     //   }
     // });
 
+    this.filterActivities();
+
     this.setState({
       loaded: true,
     });
   };
 
+  componentDidUpdate = (prevProps) => {
+    const { categories } = this.props;
+    if(prevProps.categories !== categories) {
+      this.filterActivities();
+    }
+  }
+
+  filterActivities = () => {
+    const { activities, categories } = this.props;
+    const selectedCategories = categories.filter(
+      category => category.checked,
+    ).map(category => category.id);
+    const filteredActivities = activities.filter(
+      activity => selectedCategories.indexOf(activity.category) > -1,
+    );
+
+    console.log(filteredActivities);
+
+    this.setState({
+      filteredActivities,
+    });
+  }
+
   render() {
     const { loaded } = this.state;
-    const { activities } = this.props;
+    const { filteredActivities } = this.state;
 
     if(!loaded) {
       return (
@@ -51,7 +78,7 @@ class BrowsingScreen extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
-            {activities.map(activity => (
+            {filteredActivities.map(activity => (
               <ActivityCard
                 category={activity.category}
                 date={activity.date}
