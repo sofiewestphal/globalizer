@@ -16,13 +16,15 @@
 //   src: url('/src/assets/fonts/BrownStdRegular.otf') format('opentype');
 // }
 
+@import './variables.scss'; 
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #F5F5F5;
+  background-color: $lightGrey;
 }
 
 h1, h2, h3 {
@@ -41,6 +43,14 @@ h2 {
 
 h3 {
   font-size: 16px;
+}
+
+h4 {
+  margin-top: 30px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  color: #28A08A;
+  font-size: 12px;
 }
 
 p {
