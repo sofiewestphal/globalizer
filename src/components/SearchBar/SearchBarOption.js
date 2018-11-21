@@ -10,7 +10,7 @@ const SearchBarOption = (props) => {
   } = props;
   const pClassName = active ? 'searchBarOption active' : 'searchBarOption';
 
-  return(
+  return (
     <div
       className="searchBarOptionContainer"
       role="button"

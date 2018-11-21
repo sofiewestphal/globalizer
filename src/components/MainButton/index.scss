@@ -1,0 +1,24 @@
+@import '../../style/variables.scss';
+
+.mainBtn {
+  margin-top: 20px;
+  padding: 10px 40px;	
+  border-radius: 2px;	
+  border: none;
+  background-color: $mintGreen;
+  color: $white;	
+  font-family: BrownStd;	
+  font-size: 12px;	
+  text-align: center;
+  float: right;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: $mintGreenDarker;
+    transform: scale(1.03);
+  }
+  &:focus {
+    background-color: $mintGreenDarkest;
+    outline: none;
+  }
+}

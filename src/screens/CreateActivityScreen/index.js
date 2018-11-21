@@ -1,8 +1,12 @@
 import React from 'react';
+import CreateActivityForm from '../../components/CreateActivityForm';
 
 const CreateActivityScreen = () => (
-  <div>
-    <h1>Create Activity</h1>
+  <div className="container-fluid">
+    <div className="col-xs-12 col-sm-10 col-sm-offset-1 screenContainer">
+      <h1>Create Activity</h1>
+    </div>
+    <CreateActivityForm />
   </div>
 );
 

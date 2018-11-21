@@ -1,0 +1,154 @@
+@import '../../style/variables';
+.screenContainer {
+  margin-top: 80px;
+}
+
+.inputContainer {
+  .label {
+    width: 100%;
+    display: flex; 
+    flex-flow: column;
+    margin-top: 30px;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 700;
+    color: $mintGreen;
+    font-size: 12px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 10px;
+    border-style: none;
+    border-bottom: 1px solid $black;
+    color: $black;
+    background-color: transparent;
+    font-family: 'PT Sans', sans-serif;
+
+    &.description {
+      padding-bottom: 150px;
+    }
+  }
+
+  ::placeholder { 
+    color: $grey;
+  }
+
+  textarea:focus, input:focus{
+    outline: none;
+  }
+}
+
+.activityFormOption {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+  cursor: pointer;
+  border-bottom: 1px solid $black;
+  margin: 0;
+  font-size: 12px;
+  padding: 10px 0px 12px 0px;
+
+  span {
+    margin-left: 40px;
+  }
+
+  &.active {
+      color: $mintGreen;
+      border-bottom-color: $mintGreen;
+      .optionArrow {
+        transform: rotate(180deg); 
+        .arrow_stroke {
+        stroke: $mintGreen;
+        }
+      }
+  }
+}
+
+.dropdownActivityContainer {
+  position: relative;
+  display: none;
+  cursor: pointer;
+  width: fit-content;
+  background-color: transparent;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  padding-top: 20px;
+  z-index: 10;
+
+    &.active {
+      display: block;
+    }
+
+    p {
+      font-size: 12px;
+    }
+    
+    .optionContainer {
+        display: block;
+        position: relative;
+        padding-left: 25px;
+        padding-bottom: 12px;
+        cursor: pointer;
+        font-size: 12px;
+        user-select: none;
+
+        p {
+            margin: 0;
+            display: inline-block;
+        }
+      }
+      
+      /* Hide the browser's default checkbox */
+      .optionContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        border: 1px solid $black;
+        border-radius: 2px;
+        background-color: $lightGrey;
+      }
+      
+      /* On mouse-over, add a grey background color */
+      .optionContainer:hover input ~ .checkmark {
+        background-color: $lightGrey;
+      }
+      
+      /* When the checkbox is checked, add a blue background */
+      .optionContainer input:checked ~ .checkmark {
+        background-color: $lightGrey;
+      }
+      
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      
+      /* Show the checkmark when checked */
+      .optionContainer input:checked ~ .checkmark:after {
+        display: block;
+      }
+      
+      /* Style the checkmark/indicator */
+      .optionContainer .checkmark:after {
+        left: 4px;
+        top: 0px;
+        width: 4px;
+        height: 8px;
+        border: solid $black;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }     
+}
