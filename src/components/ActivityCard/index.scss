@@ -1,4 +1,4 @@
-.activityCardContainer{
+.activityCardContainer {
   display: flex;
   background-color: #FEFEFE;
   border-radius: 2px;
@@ -13,7 +13,7 @@
     align-items: center;
   }
 
-  .textContainer{
+  .textContainer {
     display: flex;
     flex-direction: column;
     padding-bottom: 8px;
@@ -37,16 +37,16 @@
     }
   }
 
-  .activityCardDetails{
+  .activityCardDetails {
     display: none;
   }
 
-  .toggleContainer{
+  .toggleContainer {
     height: 100%;
     display: flex;
     justify-content: flex-end;
 
-    .btnTtoggleActivityCard{
+    .btnTtoggleActivityCard {
       align-self: flex-end;
       background-color: #FEFEFE;
       cursor: pointer;
@@ -64,16 +64,16 @@
       p {
         margin-top: 0px;
       }
-      .attendeesContainer{
+      .attendeesContainer {
         color: #D8D8D8;
       }
-      .attendContainer{
+      .attendContainer {
         align-self: flex-end;
       }
     }
 
-    .toggleContainer{    
-      .btnTtoggleActivityCard{
+    .toggleContainer {    
+      .btnTtoggleActivityCard {
         transform: rotate(180deg);
       }
     }

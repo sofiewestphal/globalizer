@@ -6,7 +6,7 @@ import Dropdown from './Dropdown';
 
 const SearchBarOption = (props) => {
   const {
-    title, active, options, handleClick,
+    title, active, optionTitle, options, handleClick,
   } = props;
   const pClassName = active ? 'searchBarOption active' : 'searchBarOption';
 
@@ -14,7 +14,7 @@ const SearchBarOption = (props) => {
     <div
       className="searchBarOptionContainer"
       role="button"
-      onClick={() => handleClick(title)}
+      onClick={() => handleClick(optionTitle)}
     >
       <p className={pClassName}>
         {title}
@@ -33,6 +33,7 @@ const SearchBarOption = (props) => {
 
 SearchBarOption.propTypes = {
   title: PropTypes.string.isRequired,
+  optionTitle: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   options: PropTypes.oneOfType([
     PropTypes.array,

@@ -6,9 +6,9 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      When: false,
-      Attendees: false,
-      Categories: false,
+      when: false,
+      attendees: false,
+      categories: false,
       whenOptions: [
         { label: 'Any time', id: 'when_anytime', checked: true },
         { label: 'Today', id: 'when_today', checked: false },
@@ -33,19 +33,21 @@ class SearchBar extends React.Component {
     };
   }
 
-  handleOptionClick = (title) => {
-    const newTitleState = !this.state[title];
+  handleOptionClick = (optionTitle) => {
+    const newTitleState = !this.state[optionTitle];
 
     this.setState({
-      When: false,
-      Attendees: false,
-      Categories: false,
-      [title]: newTitleState,
+      when: false,
+      attendees: false,
+      categories: false,
+      [optionTitle]: newTitleState,
     });
   }
 
   render() {
-    const { When, Attendees, Categories, whenOptions, categoriesOptions } = this.state;
+    const {
+      when, attendees, categories, whenOptions, categoriesOptions,
+    } = this.state;
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -57,7 +59,8 @@ class SearchBar extends React.Component {
               <div className="col-xs-12 col-sm-2">
                 <SearchBarOption
                   title="When"
-                  active={When}
+                  optionTitle="when"
+                  active={when}
                   options={whenOptions}
                   handleClick={title => this.handleOptionClick(title)}
                 />
@@ -65,14 +68,16 @@ class SearchBar extends React.Component {
               <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Attendees"
-                  active={Attendees}
+                  optionTitle="attendees"
+                  active={attendees}
                   handleClick={title => this.handleOptionClick(title)}
                 />
               </div>
               <div className="col-xs-12 col-sm-3">
                 <SearchBarOption
                   title="Categories"
-                  active={Categories}
+                  optionTitle="categories"
+                  active={categories}
                   options={categoriesOptions}
                   handleClick={title => this.handleOptionClick(title)}
                 />
