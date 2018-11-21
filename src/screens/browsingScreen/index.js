@@ -1,50 +1,105 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ActivityCard from '../../components/ActivityCard';
 import SearchBar from '../../components/SearchBar';
 import HeaderImage from '../../components/HeaderImage';
 import Explorer from '../../components/Explorer';
+import { setCategoryChecked } from '../../actions';
 
-const BrowsingScreen = () => (
-  <div className="container-fluid">
-    <HeaderImage />
-    <SearchBar />
-    <div className="row">
-      <div className="col-xs-12 col-md-10 col-md-offset-1">
-        <h1>Activities for you...</h1>
+class BrowsingScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false,
+    };
+  }
+
+  componentDidMount = () => {
+    //  // move this to confirm selected categories
+    // const { categories, initialSelectedCategories, dispatchSetCategoryChecked } = this.props;
+
+    // categories.forEach((category) => {
+    //   if(initialSelectedCategories.indexOf(category.label) > -1) {
+    //     dispatchSetCategoryChecked(category.label);
+    //   }
+    // });
+
+    this.setState({
+      loaded: true,
+    });
+  };
+
+  render() {
+    const { loaded } = this.state;
+    const { activities } = this.props;
+
+    if(!loaded) {
+      return (
+        <h1>Loading</h1>
+      );
+    }
+
+    return (
+      <div className="container-fluid">
+        <HeaderImage />
+        <SearchBar />
+        <div className="row">
+          <div className="col-xs-12 col-md-10 col-md-offset-1">
+            <h1>Activities for you...</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
+            {activities.map(activity => (
+              <ActivityCard
+                category={activity.category}
+                date={activity.date}
+                title={activity.title}
+                location={activity.location}
+                description={activity.description}
+                owner={activity.owner}
+                attendees={activity.attendees}
+                maxNumberOfAttendees={activity.maxNumberOfAttendees}
+              />
+            ))}
+          </div>
+
+          <div className="col-xs-12 col-sm-4 col-md-3">
+            <p>Applied filters</p>
+            <h3>
+              Can't find the right activity?<br/>Create your own...
+            </h3>
+            <button
+              type="button"
+            >
+              Create Activity
+            </button>
+          </div>
+
+        </div>
+        <Explorer />
       </div>
-    </div>
-    <div className="row">
-      <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
-        <ActivityCard
-          category="nightlife"
-          date="15. November 2018"
-          title="Malene's Birthday"
-          location="LA Bar"
-          description="Kom på LA Bar og vær med til at fejre min fødselsdag. Vi starter med snørrebåndsleg, stopdans og dans med appelsiner. Senere er der fri dans. Der er fri bar den første time."
-          currentNumberOfAttendees={3}
-          MaxNumberOfAttendees={10}
-        />
+    );
+  }
+}
 
-        <ActivityCard
-          category="outdoor"
-          date="22. November 2018"
-          title="Climbing"
-          location="Nørrebrohallen"
-          description="We are going climbing at Nørrebro's Klatreklub. It costs 50 krones for the entrance and then you can find old climbing shoes there in case you don't have your own shoes."
-          currentNumberOfAttendees={3}
-          MaxNumberOfAttendees={10}
-        />
-      </div>
+BrowsingScreen.propTypes = {
+  activities: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  initialSelectedCategories: PropTypes.array.isRequired,
+  dispatchSetCategoryChecked: PropTypes.func.isRequired,
+};
 
-      <div className="col-xs-12 col-sm-4 col-md-3">
-        <p>Applied filters</p>
-        <h3>Can't find the right activity?<br/>Create your own...</h3>
-        <button>Create Activity</button>
-      </div>
+const mapStateToProps = state => ({
+  activities: state.activities.activities,
+  categories: state.categories.categories,
+  initialSelectedCategories: state.user.categories,
+});
 
-    </div>
-    <Explorer />
-  </div>
-);
 
-export default BrowsingScreen;
+const mapDispatchToProps = dispatch => ({
+  dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen);

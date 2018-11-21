@@ -1,14 +1,13 @@
 import { RESET } from '../actions/actionCreators';
 
 const initialState = {
-  userId: null,
-  name: '',
-  lastname: '',
-  age: 0,
-  email: '',
-  password: '',
-  ownedActivities: [],
-  attendingActivities: [],
+  userId: 1,
+  name: 'Sara',
+  lastname: 'Jepsen',
+  age: 25,
+  email: 'saraaaroee@hotmail.com',
+  password: '1234',
+  categories: ['Food & Drinks', 'Music', 'Sports'],
 };
 
 export default function userReducer(state = initialState, action) {

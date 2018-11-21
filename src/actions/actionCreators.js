@@ -15,5 +15,6 @@ export const ACTIVITY_UPDATE = 'ACTIVITY_UPDATE';
 export const ACTIVITY_DELETE = 'ACTIVITY_DELETE';
 
 export const CATEGORY_GET = 'CATEGORY_GET';
+export const CATEGORY_SET_CHECKED = 'CATEGORY_SET_CHECKED';
 
 export const RESET = 'RESET';
