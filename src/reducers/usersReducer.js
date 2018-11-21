@@ -11,7 +11,7 @@ const initialState = [
     categories: ['Food & Drinks', 'Music', 'Sports'],
   },
   {
-    userId: 2,
+    id: 2,
     name: 'Sofie',
     lastname: 'Pedersen',
     age: 27,
