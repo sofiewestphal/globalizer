@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ActivityCard from '../../components/ActivityCard';
 import SearchBar from '../../components/SearchBar';
 import HeaderImage from '../../components/HeaderImage';
 import Explorer from '../../components/Explorer';
 import { setCategoryChecked } from '../../actions';
+import ActivityList from '../../components/ActivityList';
 
 class BrowsingScreen extends React.Component {
   constructor(props) {
@@ -52,8 +52,6 @@ class BrowsingScreen extends React.Component {
       activity => selectedCategories.indexOf(activity.category) > -1,
     );
 
-    console.log(filteredActivities);
-
     this.setState({
       filteredActivities,
     });
@@ -79,20 +77,9 @@ class BrowsingScreen extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
-            {filteredActivities.map(activity => (
-              <ActivityCard
-                category={activity.category}
-                date={activity.date}
-                title={activity.title}
-                location={activity.location}
-                description={activity.description}
-                owner={activity.owner}
-                attendees={activity.attendees}
-                maxNumberOfAttendees={activity.maxNumberOfAttendees}
-              />
-            ))}
-          </div>
+          <ActivityList
+            activitiesArray={filteredActivities}
+          />
 
           <div className="col-xs-12 col-sm-4 col-md-3">
             <p>Applied filters</p>

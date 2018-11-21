@@ -1,7 +1,7 @@
 import { RESET } from '../actions/actionCreators';
 
 const initialState = {
-  userId: 1,
+  id: 1,
   name: 'Sara',
   lastname: 'Jepsen',
   age: 25,

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.scss';
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import locationIcon from '../../assets/icons/other_icons/location_icon.svg';
 import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
