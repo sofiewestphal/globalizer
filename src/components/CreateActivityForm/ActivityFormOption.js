@@ -14,7 +14,6 @@ const ActivityFormOption = (props) => {
     handleClick,
   } = props;
   const pClassName = active ? 'activityFormOption active' : 'activityFormOption';
-
   return (
     <div className="row">
       <div className="col-xs-12">

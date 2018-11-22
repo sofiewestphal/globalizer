@@ -6,16 +6,19 @@ import ActivityFormOption from './ActivityFormOption';
 
 class CreateActivityForm extends React.Component {
   constructor(props) {
+    let attendees = Array.from(Array(29), (_, x) => x + 2);
+    console.log(attendees);
     super(props);
     this.state = {
       activitytitle: '',
       location: '',
       description: '',
+      selectDate: false,
       selectCategory: false,
       numberOfAttendees: false,
       categoryOptions: [
         { label: 'Beauty & Wellness', id: 'categories_beautyWellness', checked: false },
-        { label: 'Culture', id: 'categories_culture', checked: true },
+        { label: 'Culture', id: 'categories_culture', checked: false },
         { label: 'Family', id: 'categories_family', checked: false },
         { label: 'Food & Drinks', id: 'categories_foodDrinks', checked: false },
         { label: 'Games', id: 'categories_games', checked: false },
@@ -27,9 +30,7 @@ class CreateActivityForm extends React.Component {
         { label: 'Outdoor', id: 'categories_outdoor', checked: false },
         { label: 'Sports', id: 'categories_sports', checked: false },
       ],
-      attendeesOptions: [
-        { label: '02', id: '02', checked: false },
-      ],
+      attendeesOptions: attendees,
     };
   }
 
@@ -54,6 +55,9 @@ class CreateActivityForm extends React.Component {
       activitytitle,
       location,
       description,
+      selectDate,
+      startTimeHours,
+      startTimeMinutes,
       selectCategory,
       categoryOptions,
       numberOfAttendees,
@@ -71,20 +75,35 @@ class CreateActivityForm extends React.Component {
                 value={activitytitle}
                 onChange={this.handleInputChange}
               />
+              <ActivityFormOption
+                labelName="Date"
+                title="Select date"
+                optionTitle="selectDate"
+                active={selectDate}
+                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+              />
+              <div className="timeOptionContainer">
+                <ActivityFormOption
+                  labelName="Time"
+                  title="00"
+                  optionTitle="startTimeHours"
+                  active={startTimeHours}
+                  handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                />
+                <p>:</p>
+                <ActivityFormOption
+                  title="00"
+                  optionTitle="startTimeMinutes"
+                  active={startTimeMinutes}
+                  handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                />
+              </div>
               <ActivityInputField
                 labelName="Location"
                 inputName="loaction"
                 placeholderText="The location of your activity..."
                 value={location}
                 onChange={this.handleInputChange}
-              />
-              <ActivityFormOption
-                labelName="Category"
-                title="Select category"
-                optionTitle="selectCategory"
-                active={selectCategory}
-                options={categoryOptions}
-                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
               />
               <ActivityFormOption
                 labelName="Number of attendees"
@@ -102,6 +121,14 @@ class CreateActivityForm extends React.Component {
                 placeholderText="Make a nice description for the participants..."
                 value={description}
                 onChange={this.handleInputChange}
+              />
+              <ActivityFormOption
+                labelName="Category"
+                title="Select category"
+                optionTitle="selectCategory"
+                active={selectCategory}
+                options={categoryOptions}
+                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
               />
               <div className="row btnContainer">
                 <div className="col-xs-12">

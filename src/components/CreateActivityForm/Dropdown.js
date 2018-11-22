@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Dropdown = ({ options, shown }) => {
+const Dropdown = ({ title, options, shown }) => {
   let dropdownClassNames = 'dropdownActivityContainer';
+  if (title === 'Select category') {
+    dropdownClassNames += ' categories';
+  }
   if (shown) {
     dropdownClassNames += ' active';
   }
@@ -31,6 +34,7 @@ const Dropdown = ({ options, shown }) => {
 };
 
 Dropdown.propTypes = {
+  title: PropTypes.string.isRequired,
   shown: PropTypes.bool.isRequired,
   options: PropTypes.oneOfType([
     PropTypes.array,
