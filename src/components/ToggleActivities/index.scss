@@ -1,0 +1,35 @@
+.toggleActivitiesContainer{
+  margin-top: 30px;
+
+  :first-child { 
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+
+  :nth-child(2) { 
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
+  .toggleButton {
+    background-color: #FEFEFE;
+    cursor: pointer;
+    color: #242424;
+    border: 1px solid #242424;
+    min-width: 85px;
+    min-height: 25px;
+    font-family: 'BrownStd';
+    font-weight: 100;
+    padding: 0px 15px;
+    margin-bottom: 20px;
+
+    p{
+      margin: 0px;
+    }
+
+    &.active {
+      background-color: #242424;
+      color: #FEFEFE;
+    }
+  }
+}
