@@ -1,0 +1,27 @@
+@import '../../style/variables';
+
+.topBarContainer{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+
+    .rightAlignedNav {
+        display: flex;
+        flex-direction: row;
+    }
+
+    a {
+        color: #FFF;
+        font-size: 12px;
+        padding: 0 20px;
+        text-align: center;
+        text-decoration: none;
+    }
+}
+.activeNavLink{
+    color: $black;
+}

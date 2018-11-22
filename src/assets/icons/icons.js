@@ -29,6 +29,34 @@ export const Arrow = (props) => {
   );
 };
 
+export const Close = (props) => {
+  const {
+    width,
+    height,
+    strokeColour,
+    iconClassName,
+  } = props;
+  return (
+    <svg
+      className={iconClassName}
+      width={width}
+      height={height}
+      viewBox="0 0 20 20"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="Styles" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g transform="translate(-273.000000, -3382.000000)" fill={strokeColour} fillRule="nonzero" id="Group-2">
+          <g transform="translate(272.000000, 3382.000000)">
+            <rect id="Rectangle-3" transform="translate(11.000000, 10.388889) rotate(-45.000000) translate(-11.000000, -10.388889) " x="-1.96296296" y="8.88888889" width="25.9259259" height="3" rx="1.5"></rect>
+            <rect id="Rectangle-3" transform="translate(11.000000, 10.388889) scale(-1, 1) rotate(-45.000000) translate(-11.000000, -10.388889) " x="-1.96296296" y="8.88888889" width="25.9259259" height="3" rx="1.5"></rect>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 const generalProptypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
@@ -36,7 +64,5 @@ const generalProptypes = {
   iconClassName: PropTypes.string.isRequired,
 };
 
+Close.propTypes = generalProptypes;
 Arrow.propTypes = generalProptypes;
-
-
-export default Arrow;

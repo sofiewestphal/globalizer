@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 import Dropdown from './Dropdown';
-import Arrow from '../../assets/icons/icons';
+import { Arrow } from '../../assets/icons/icons';
 
 const ActivityFormOption = (props) => {
   const {
