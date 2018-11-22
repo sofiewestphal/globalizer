@@ -3,7 +3,9 @@ import './index.scss';
 import PropTypes from 'prop-types';
 
 const ActivityInputField = (props) => {
-  const { labelName, inputName, placeholderText } = props;
+  const {
+    labelName, inputName, placeholderText,
+  } = props;
   let inputClassNames = 'input';
   if (inputName === 'description') {
     inputClassNames += ' description';
@@ -12,7 +14,7 @@ const ActivityInputField = (props) => {
     <div className="row inputContainer">
       <div className="col-xs-12">
         <label className="label">
-          {labelName}
+          <h4>{labelName}</h4>
           <input
             className={inputClassNames}
             name={inputName}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const Arrow = (props) => {
+export const Arrow = (props) => {
   const {
     width,
     height,
@@ -29,12 +29,14 @@ const Arrow = (props) => {
   );
 };
 
-Arrow.propTypes = {
+const generalProptypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
   strokeColour: PropTypes.string.isRequired,
   iconClassName: PropTypes.string.isRequired,
 };
+
+Arrow.propTypes = generalProptypes;
 
 
 export default Arrow;
