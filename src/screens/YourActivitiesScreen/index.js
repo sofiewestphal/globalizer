@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
+import ToggleActivities from '../../components/ToggleActivities';
 
 class YourActivitiesScreen extends React.Component {
   constructor(props) {
@@ -43,25 +44,37 @@ class YourActivitiesScreen extends React.Component {
     });
   }
 
+  handleToggle = (toggleTo) => {
+    console.log(toggleTo)
+    this.setState({
+      activeScreen: toggleTo,
+    });
+  }
+
   render() {
     const { activeScreen, attendingActivities, ownedActivities } = this.state;
     const activitiesToRender = activeScreen === 'attending' ? attendingActivities : ownedActivities;
+
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-xs-12 col md-10 col-md-offset-1">
             <h1>My Activities</h1>
-            <div className="row">
-              <ActivityList
-                activitiesArray={activitiesToRender}
-              />
+          </div>
+        </div>
+        <ToggleActivities
+          activeToggleButton={activeScreen}
+          handleToggle={toggleTo => this.handleToggle(toggleTo)}
+        />
+        <div className="row">
+          <ActivityList
+            activitiesArray={activitiesToRender}
+          />
 
-              <div className="col-xs-12 col-sm-4 col-md-3">
-                <CTA
-                  text="Be the most awesome person and create a cool activity!"
-                />
-              </div>
-            </div>
+          <div className="col-xs-12 col-sm-4 col-md-3">
+            <CTA
+              text="Be the most awesome person and create a cool activity!"
+            />
           </div>
         </div>
       </div>

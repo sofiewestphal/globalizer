@@ -4,25 +4,39 @@ import PropTypes from 'prop-types';
 
 const ActivityInputField = (props) => {
   const {
-    labelName, inputName, placeholderText,
+    labelName, inputName, value, type, placeholderText, onChange,
   } = props;
   let inputClassNames = 'input';
   if (inputName === 'description') {
     inputClassNames += ' description';
   }
+  const selectingAttendees = inputName === 'numberOfAttendees';
+
   return (
-    <div className="row inputContainer">
-      <div className="col-xs-12">
-        <label className="label">
-          <h4>{labelName}</h4>
+    <div className="inputContainer">
+      <label className="label">
+        <h4>{labelName}</h4>
+        {selectingAttendees ? (
           <input
             className={inputClassNames}
             name={inputName}
-            placeholder={placeholderText}
-            type="string"
+            value={value}
+            type={type}
+            onChange={() => onChange(inputName, event.target.value)}
+            min={2}
+            max={30}
           />
-        </label>
-      </div>
+        ) : (
+          <input
+            className={inputClassNames}
+            name={inputName}
+            value={value}
+            type={type}
+            placeholder={placeholderText}
+            onChange={() => onChange(inputName, event.target.value)}
+          />
+        )}
+      </label>
     </div>
   );
 };
@@ -30,7 +44,15 @@ const ActivityInputField = (props) => {
 ActivityInputField.propTypes = {
   labelName: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
-  placeholderText: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholderText: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string,
+};
+
+ActivityInputField.defaultProps = {
+  type: 'text',
+  placeholderText: '',
 };
 
 export default ActivityInputField;

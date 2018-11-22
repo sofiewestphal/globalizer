@@ -22,7 +22,17 @@ const initialState = {
       owner: 3,
       attendees: [2],
       maxNumberOfAttendees: 5,
-    }
+    },
+    {
+      category: 'categories_games',
+      date: '28. November 2018',
+      title: 'Pub Quiz',
+      location: 'Angel',
+      description: 'Let\'s win this time!',
+      owner: 2,
+      attendees: [1],
+      maxNumberOfAttendees: 6,
+    },
   ],
 };
 

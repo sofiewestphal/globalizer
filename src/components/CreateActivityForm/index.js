@@ -1,36 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './index.scss';
 import ActivityInputField from './ActivityInputField';
 import MainButton from '../MainButton';
-import ActivityFormOption from './ActivityFormOption';
+import SelectOption from './SelectOption';
 
 class CreateActivityForm extends React.Component {
   constructor(props) {
-    let attendees = Array.from(Array(29), (_, x) => x + 2);
-    console.log(attendees);
     super(props);
+    const { categories } = this.props;
     this.state = {
       activitytitle: '',
       location: '',
+      numberOfAttendees: '',
+      startTime: '',
+      endTime: '',
+      date: '',
       description: '',
-      selectDate: false,
-      selectCategory: false,
-      numberOfAttendees: false,
-      categoryOptions: [
-        { label: 'Beauty & Wellness', id: 'categories_beautyWellness', checked: false },
-        { label: 'Culture', id: 'categories_culture', checked: false },
-        { label: 'Family', id: 'categories_family', checked: false },
-        { label: 'Food & Drinks', id: 'categories_foodDrinks', checked: false },
-        { label: 'Games', id: 'categories_games', checked: false },
-        { label: 'Hobbies & Crafts', id: 'categories_hobbiesCrafts', checked: false },
-        { label: 'Languages', id: 'categories_languages', checked: false },
-        { label: 'Movies', id: 'categories_movies', checked: false },
-        { label: 'Music', id: 'categories_music', checked: false },
-        { label: 'Nightlife', id: 'categories_nightlift', checked: false },
-        { label: 'Outdoor', id: 'categories_outdoor', checked: false },
-        { label: 'Sports', id: 'categories_sports', checked: false },
-      ],
-      attendeesOptions: attendees,
+      category: '',
+
+      setEndTime: false,
+      categoryOptions: categories,
     };
   }
 
@@ -40,29 +31,77 @@ class CreateActivityForm extends React.Component {
     });
   }
 
-  handleOptionClick = (optionTitle) => {
-    const newTitleState = !this.state[optionTitle];
-
+  handleSelect = (category) => {
     this.setState({
-      selectCategory: false,
-      numberOfAttendees: false,
-      [optionTitle]: newTitleState,
+      category,
     });
+  }
+
+  handleSetEndTime = () => {
+    this.setState({
+      setEndTime: true,
+    });
+  }
+
+  handleSubmit = () => {
+    const {
+      activitytitle, location, description, startTime, endTime,
+      date, numberOfAttendees, category,
+    } = this.state;
+
+    const { userId } = this.props;
+
+    const activity = {
+      category,
+      date,
+      title: activitytitle,
+      location,
+      startTime,
+      endTime,
+      description,
+      owner: userId,
+      attendees: [],
+      maxNumberOfAttendees: numberOfAttendees,
+    };
+
+    console.log(activity);
+  }
+
+  renderEndTime = () => {
+    const { endTime, setEndTime } = this.state;
+
+    if(setEndTime) {
+      return(
+        <ActivityInputField
+          labelName="End Time"
+          inputName="endTime"
+          type="time"
+          value={endTime}
+          onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+        />
+      );
+    }
+
+    return(
+      <div className="endTimeContainer">
+        <h4>End Time</h4>
+        <button
+          className="btnAddEndTime"
+          type="button"
+          onClick={() => this.handleSetEndTime()}
+        >
+          + add end time
+        </button>
+      </div>
+    );
   }
 
   render() {
     const {
-      activitytitle,
-      location,
-      description,
-      selectDate,
-      startTimeHours,
-      startTimeMinutes,
-      selectCategory,
-      categoryOptions,
-      numberOfAttendees,
-      attendeesOptions,
+      activitytitle, location, numberOfAttendees, description, date,
+      startTime, category, categoryOptions,
     } = this.state;
+
     return (
       <div className="col-xs-12 col-sm-10 col-sm-offset-1">
         <div className="row">
@@ -73,67 +112,65 @@ class CreateActivityForm extends React.Component {
                 inputName="activitytitle"
                 placeholderText="Give an inspiring title..."
                 value={activitytitle}
-                onChange={this.handleInputChange}
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
-              <ActivityFormOption
+              <ActivityInputField
                 labelName="Date"
-                title="Select date"
-                optionTitle="selectDate"
-                active={selectDate}
-                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                inputName="date"
+                value={date}
+                type="date"
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
+
               <div className="timeOptionContainer">
-                <ActivityFormOption
-                  labelName="Time"
-                  title="00"
-                  optionTitle="startTimeHours"
-                  active={startTimeHours}
-                  handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                <ActivityInputField
+                  labelName="Start Time"
+                  inputName="startTime"
+                  type="time"
+                  value={startTime}
+                  onChange={(inputName, value) => this.handleInputChange(inputName, value)}
                 />
-                <p>:</p>
-                <ActivityFormOption
-                  title="00"
-                  optionTitle="startTimeMinutes"
-                  active={startTimeMinutes}
-                  handleClick={optionTitle => this.handleOptionClick(optionTitle)}
-                />
+                {this.renderEndTime()}
               </div>
+
               <ActivityInputField
                 labelName="Location"
-                inputName="loaction"
+                inputName="location"
                 placeholderText="The location of your activity..."
                 value={location}
-                onChange={this.handleInputChange}
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
-              <ActivityFormOption
+              <ActivityInputField
                 labelName="Number of attendees"
-                title="02"
-                optionTitle="numberOfAttendees"
-                active={numberOfAttendees}
-                options={attendeesOptions}
-                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                inputName="numberOfAttendees"
+                type="number"
+                value={numberOfAttendees}
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
             </div>
+
             <div className="col-xs-12 col-md-6 col-right">
               <ActivityInputField
                 labelName="Description"
                 inputName="description"
                 placeholderText="Make a nice description for the participants..."
                 value={description}
-                onChange={this.handleInputChange}
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
-              <ActivityFormOption
+              <SelectOption
                 labelName="Category"
                 title="Select category"
                 optionTitle="selectCategory"
-                active={selectCategory}
                 options={categoryOptions}
-                handleClick={optionTitle => this.handleOptionClick(optionTitle)}
+                currentlySelected={category}
+                handleSelect={selectedCategory => this.handleSelect(selectedCategory)}
               />
+
               <div className="row btnContainer">
                 <div className="col-xs-12">
                   <MainButton
                     text="Submit activity"
+                    onClick={() => this.handleSubmit()}
                   />
                 </div>
               </div>
@@ -145,4 +182,14 @@ class CreateActivityForm extends React.Component {
   }
 }
 
-export default CreateActivityForm;
+CreateActivityForm.propTypes = {
+  userId: PropTypes.number.isRequired,
+  categories: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+  categories: state.categories.categories,
+  userId: state.user.id,
+});
+
+export default connect(mapStateToProps)(CreateActivityForm);

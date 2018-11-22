@@ -4,11 +4,13 @@ import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import locationIcon from '../../assets/icons/other_icons/location_icon.svg';
 import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
 import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg';
+import gamesIcon from '../../assets/icons/activity_icons/games_icon.svg';
 import SecondaryButton from '../SecondaryButton';
 
 const icons = {
   categories_outdoor: outdoorIcon,
   categories_nightlife: nightlifeIcon,
+  categories_games: gamesIcon,
 };
 
 class ActivityCard extends React.Component {
