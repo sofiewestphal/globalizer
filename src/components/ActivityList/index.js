@@ -7,6 +7,7 @@ const ActivityList = ({ activitiesArray }) => (
   <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
     {activitiesArray.map(activity => (
       <ActivityCard
+        key={activity.title}
         category={activity.category}
         date={activity.date}
         title={activity.title}

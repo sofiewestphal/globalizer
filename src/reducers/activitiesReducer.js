@@ -32,7 +32,7 @@ const initialState = {
       owner: 2,
       attendees: [1],
       maxNumberOfAttendees: 6,
-    }
+    },
   ],
 };
 
