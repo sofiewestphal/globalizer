@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './index.scss';
 import InputField from '../InputField';
@@ -26,6 +27,7 @@ class CreateActivityForm extends React.Component {
       setDateTime: true,
       categoryOptions: categories,
       selectDateTimeOptions: [{ id: 'dateTimeSelector', label: 'Date and time is not important' }],
+      navigate: false,
     };
   }
 
@@ -73,10 +75,14 @@ class CreateActivityForm extends React.Component {
       description,
       owner: userId,
       attendees: [],
-      maxNumberOfAttendees: numberOfAttendees,
+      maxNumberOfAttendees: Number(numberOfAttendees),
     };
 
     dispatchAddActivity(activity);
+
+    this.setState({
+      navigate: true,
+    });
   }
 
   renderEndTime = () => {
@@ -124,8 +130,15 @@ class CreateActivityForm extends React.Component {
   render() {
     const {
       activitytitle, location, numberOfAttendees, description, date,
-      startTime, category, categoryOptions, selectDateTimeOptions, setDateTime,
+      startTime, category, categoryOptions, selectDateTimeOptions, setDateTime, navigate,
     } = this.state;
+
+    const submit = activitytitle !== '' && location !== '' && description !== ''
+      && numberOfAttendees !== '' && category !== '';
+
+    if (navigate === true) {
+      return <Redirect to="/activities" />;
+    }
 
     return (
       <div className="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -133,7 +146,7 @@ class CreateActivityForm extends React.Component {
           <form>
             <div className="col-xs-12 col-md-6 col-left">
               <InputField
-                labelName="Activity title"
+                labelName="Activity title *"
                 inputName="activitytitle"
                 placeholderText="Give an inspiring title..."
                 required
@@ -169,7 +182,7 @@ class CreateActivityForm extends React.Component {
               </div>
 
               <InputField
-                labelName="Location"
+                labelName="Location *"
                 inputName="location"
                 placeholderText="The location of your activity..."
                 required
@@ -177,7 +190,7 @@ class CreateActivityForm extends React.Component {
                 onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
               <InputField
-                labelName="Number of attendees"
+                labelName="Number of attendees *"
                 inputName="numberOfAttendees"
                 type="number"
                 required
@@ -188,7 +201,7 @@ class CreateActivityForm extends React.Component {
 
             <div className="col-xs-12 col-md-6 col-right">
               <InputField
-                labelName="Description"
+                labelName="Description *"
                 inputName="description"
                 placeholderText="Make a nice description for the participants..."
                 required
@@ -197,7 +210,7 @@ class CreateActivityForm extends React.Component {
               />
               <SelectOption
                 selectingCategory
-                labelName="Category"
+                labelName="Category *"
                 options={categoryOptions}
                 currentlySelected={category}
                 handleSelect={selectedCategory => this.handleSelect(selectedCategory)}
@@ -206,6 +219,7 @@ class CreateActivityForm extends React.Component {
               <div className="row btnContainer">
                 <div className="col-xs-12">
                   <MainButton
+                    disabled={!submit}
                     text="Submit activity"
                     onClick={() => this.handleSubmit()}
                   />
