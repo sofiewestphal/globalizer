@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './index.scss';
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import Dropdown from './Dropdown';
+import { Arrow } from '../../assets/icons/icons';
 
 const SearchBarOption = (props) => {
   const {
@@ -19,7 +20,12 @@ const SearchBarOption = (props) => {
       <p className={pClassName}>
         {title}
         <span>
-          <img src={arrowIcon} alt="arrow down" />
+          <Arrow
+            iconClassName="optionArrow"
+            width="8px"
+            height="5px"
+            strokeColour="#fefefe"
+          />
         </span>
       </p>
       <Dropdown

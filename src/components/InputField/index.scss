@@ -1,0 +1,40 @@
+@import '../../style/variables';
+
+.inputContainer {
+
+  .label {
+    width: 100%;
+    display: flex; 
+    flex-flow: column;
+    font-weight: 700;
+    color: $mintGreen;
+    font-size: 12px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 10px;
+    border-style: none;
+    border-bottom: 1px solid $black;
+    color: $black;
+    background-color: transparent;
+
+    &.description {
+      padding-bottom: 120px;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ::placeholder { 
+    color: $grey;
+    font-family: 'BrownStd';
+    font-weight: 100;
+  }
+
+  textarea:focus, input:focus{
+    outline: none;
+  }
+}

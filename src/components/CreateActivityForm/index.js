@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './index.scss';
-import ActivityInputField from './ActivityInputField';
+import InputField from '../InputField';
 import MainButton from '../MainButton';
-import SelectOption from './SelectOption';
+import SelectOption from '../SelectOption';
 
 class CreateActivityForm extends React.Component {
   constructor(props) {
@@ -70,9 +70,9 @@ class CreateActivityForm extends React.Component {
   renderEndTime = () => {
     const { endTime, setEndTime } = this.state;
 
-    if(setEndTime) {
-      return(
-        <ActivityInputField
+    if (setEndTime) {
+      return (
+        <InputField
           labelName="End Time"
           inputName="endTime"
           type="time"
@@ -82,7 +82,7 @@ class CreateActivityForm extends React.Component {
       );
     }
 
-    return(
+    return (
       <div className="endTimeContainer">
         <h4>End Time</h4>
         <button
@@ -107,14 +107,14 @@ class CreateActivityForm extends React.Component {
         <div className="row">
           <form>
             <div className="col-xs-12 col-md-6 col-left">
-              <ActivityInputField
+              <InputField
                 labelName="Activity title"
                 inputName="activitytitle"
                 placeholderText="Give an inspiring title..."
                 value={activitytitle}
                 onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
-              <ActivityInputField
+              <InputField
                 labelName="Date"
                 inputName="date"
                 value={date}
@@ -123,7 +123,7 @@ class CreateActivityForm extends React.Component {
               />
 
               <div className="timeOptionContainer">
-                <ActivityInputField
+                <InputField
                   labelName="Start Time"
                   inputName="startTime"
                   type="time"
@@ -133,14 +133,14 @@ class CreateActivityForm extends React.Component {
                 {this.renderEndTime()}
               </div>
 
-              <ActivityInputField
+              <InputField
                 labelName="Location"
                 inputName="location"
                 placeholderText="The location of your activity..."
                 value={location}
                 onChange={(inputName, value) => this.handleInputChange(inputName, value)}
               />
-              <ActivityInputField
+              <InputField
                 labelName="Number of attendees"
                 inputName="numberOfAttendees"
                 type="number"
@@ -150,7 +150,7 @@ class CreateActivityForm extends React.Component {
             </div>
 
             <div className="col-xs-12 col-md-6 col-right">
-              <ActivityInputField
+              <InputField
                 labelName="Description"
                 inputName="description"
                 placeholderText="Make a nice description for the participants..."

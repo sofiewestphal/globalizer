@@ -13,7 +13,7 @@ const Navigation = () => (
     <Route path="/create" component={CreateActivityScreen} />
     <Route path="/activities" component={YourActivitiesScreen} />
     <Route path="/landing" component={LandingScreen} />
-    <Redirect to="/browse" />
+    <Redirect to="/landing" />
   </div>
 );
 

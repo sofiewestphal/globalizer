@@ -2,7 +2,7 @@ import React from 'react';
 import './index.scss';
 import PropTypes from 'prop-types';
 
-const ActivityInputField = (props) => {
+const InputField = (props) => {
   const {
     labelName, inputName, value, type, placeholderText, onChange,
   } = props;
@@ -27,21 +27,21 @@ const ActivityInputField = (props) => {
             max={30}
           />
         ) : (
-          <input
-            className={inputClassNames}
-            name={inputName}
-            value={value}
-            type={type}
-            placeholder={placeholderText}
-            onChange={() => onChange(inputName, event.target.value)}
-          />
-        )}
+            <input
+              className={inputClassNames}
+              name={inputName}
+              value={value}
+              type={type}
+              placeholder={placeholderText}
+              onChange={() => onChange(inputName, event.target.value)}
+            />
+          )}
       </label>
     </div>
   );
 };
 
-ActivityInputField.propTypes = {
+InputField.propTypes = {
   labelName: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -50,9 +50,9 @@ ActivityInputField.propTypes = {
   type: PropTypes.string,
 };
 
-ActivityInputField.defaultProps = {
+InputField.defaultProps = {
   type: 'text',
   placeholderText: '',
 };
 
-export default ActivityInputField;
+export default InputField;

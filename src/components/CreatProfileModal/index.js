@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 import CreateProfileForm from './CreateProfileForm';
 import { Close } from '../../assets/icons/icons';
@@ -24,7 +25,12 @@ const CreateProfileModal = (props) => {
       </div>
     </div>
   );
-}
+};
+
+CreateProfileModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  handleVisibility: PropTypes.func.isRequired,
+};
 
 
 export default CreateProfileModal;

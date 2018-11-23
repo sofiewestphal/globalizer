@@ -33,6 +33,9 @@
         &.active {
             color: #28A08A;
             border-bottom-color: #28A08A;
+            .arrow_stroke {
+              stroke: #28A08A;
+            }
         }
     }
 }
