@@ -3,12 +3,15 @@
 .inputContainer {
 
   .label {
-    width: 100%;
     display: flex; 
     flex-flow: column;
     font-weight: 700;
     color: $mintGreen;
     font-size: 12px;
+
+    &.fitContent {
+      width: fit-content;
+    }
   }
 
   .input {
@@ -18,9 +21,14 @@
     border-bottom: 1px solid $black;
     color: $black;
     background-color: transparent;
+    font-family: 'BrownStd', sans-serif;
 
     &.description {
       padding-bottom: 120px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
     }
   }
 
@@ -30,7 +38,7 @@
 
   ::placeholder { 
     color: $grey;
-    font-family: 'BrownStd';
+    font-family: 'BrownStd', sans-serif;
     font-weight: 100;
   }
 

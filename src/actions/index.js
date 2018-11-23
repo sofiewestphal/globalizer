@@ -1,6 +1,11 @@
-import { CATEGORY_SET_CHECKED } from './actionCreators';
+import { CATEGORY_SET_CHECKED, ACTIVITY_ADD } from './actionCreators';
 
-export const setCategoryChecked = (label) => ({
+export const setCategoryChecked = label => ({
   type: CATEGORY_SET_CHECKED,
-  payload: label
+  payload: label,
+});
+
+export const addActivity = activity => ({
+  type: ACTIVITY_ADD,
+  payload: activity,
 });

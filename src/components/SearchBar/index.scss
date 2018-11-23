@@ -69,65 +69,6 @@
   p {
     font-size: 12px;
   }
-  
-  .optionContainer {
-    display: block;
-    position: relative;
-    padding-left: 25px;
-    padding-bottom: 12px;
-    cursor: pointer;
-    font-size: 12px;
-    user-select: none;
-
-    &:hover input ~ .checkmark {
-      background-color: #343434;
-    }
-
-    p {
-        margin: 0;
-        display: inline-block;
-    }
-
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
-
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 15px;
-      width: 15px;
-      border: 1px solid #FEFEFE;
-      border-radius: 2px;
-      background-color: #242424;
-
-      &:after {
-        left: 4px;
-        top: 0px;
-        width: 4px;
-        height: 8px;
-        border: solid #FEFEFE;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-        content: "";
-        position: absolute;
-        display: none;
-      }
-    }
-
-    input:checked ~ .checkmark {
-      background-color: #242424;
-    }
-
-    input:checked ~ .checkmark:after {
-      display: block;
-    } 
-  }
 }
 
 @media screen and (max-width: 768px) {

@@ -4,21 +4,30 @@
   padding: 60px 0 80px;
 }
 
-.col-left {
-  padding-right: 30px !important;
-}
-
-.col-right {
-  padding-left: 30px !important;
-}
-
-.timeOptionContainer {
+.dateContainer {
   width: 100%;
   display: flex;
   flex-flow: row;
 
   :first-child {
     margin-right: 30px;
+  }
+}
+
+.timeOptionContainer {
+  @extend .dateContainer;
+
+  
+
+  .setEndTimeContainer {
+    display: flex;
+    align-items: flex-start;
+
+    .closeSetEndTime{
+      padding: 30px 15px;
+      margin-left: -60px;
+      cursor: pointer;
+    }
   }
 
   p {
@@ -36,6 +45,11 @@
       color: $black;
       border: 1px solid $black;
       border-radius: 2px;
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
     }
   }
 }
@@ -53,5 +67,17 @@
     padding: 10px 0px 12px 0px;
 
 
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .screenContainer {
+    .col-left {
+      padding-right: 30px;
+    }
+    
+    .col-right {
+      padding-left: 30px;
+    }
   }
 }
