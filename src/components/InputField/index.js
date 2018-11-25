@@ -20,31 +20,39 @@ const InputField = (props) => {
 
   return (
     <div className="inputContainer">
-      <label className={labelClassName}>
+      <label
+        className={labelClassName}
+        htmlFor={inputName}
+        id={inputName}
+      >
         <h4>{labelName}</h4>
-        {selectingAttendees ? (
+        {/* {selectingAttendees ? ( */}
+        <input
+          className={inputClassNames}
+          id={inputName}
+          name={inputName}
+          value={value}
+          placeholder={placeholderText}
+          type={type}
+          disabled={disabled}
+          required={required}
+          onChange={event => onChange(inputName, event.target.value)}
+          min={2}
+          max={30}
+        />
+        {/* ) : (
           <input
             className={inputClassNames}
-            name={inputName}
-            value={value}
-            type={type}
-            required={required}
-            onChange={() => onChange(inputName, event.target.value)}
-            min={2}
-            max={30}
-          />
-        ) : (
-          <input
-            className={inputClassNames}
+            id={inputName}
             name={inputName}
             value={value}
             disabled={disabled}
             type={type}
             placeholder={placeholderText}
             required={required}
-            onChange={() => onChange(inputName, event.target.value)}
+            onChange={event => onChange(inputName, event.target.value)}
           />
-        )}
+        )} */}
       </label>
     </div>
   );

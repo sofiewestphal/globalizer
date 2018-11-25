@@ -1,43 +1,52 @@
 .searchbarContainer {
-    background-color: #242424;
-    color: #FEFEFE;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-    height: fit-content;
+  background-color: #242424;
+  color: #FEFEFE;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  height: fit-content;
+  border-radius: 2px;
+  margin-top: -40px;
+
+  input{
+    padding: 10px 10px 12px 10px;
+    width: 100%;
+    color: #CECECE;
     border-radius: 2px;
-    margin-top: -40px;
+    background-color: #FEFEFE;
+    background-image: url('../../assets/icons/other_icons/loupe_icon.svg');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: center;
+    border: none;
+  }
 
-    input{
-        padding: 10px 10px 12px 10px;
-        width: 100%;
-        color: #CECECE;
-        border-radius: 2px;
-        background-color: #FEFEFE;
-        background-image: url('../../assets/icons/other_icons/loupe_icon.svg');
-        background-repeat: no-repeat;
-        background-position-x: right;
-        background-position-y: center;
-        border: none;
+  .searchBarOptionContainer {
+    button{
+      width: 100%;
+      background-color: #242424;
+      border: none;
     }
+  
     .searchBarOption {
-        display: flex;
-        justify-content: space-between;
-        cursor: pointer;
-        border-bottom: 1px solid #FEFEFE;
-        color: #FEFEFE;
-        margin: 0;
-        font-size: 12px;
-        padding: 10px 0px 12px 0px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      border-bottom: 1px solid #FEFEFE;
+      color: #FEFEFE;
+      margin: 0;
+      font-size: 12px;
+      padding: 10px 0px 12px 0px;
 
-        &.active {
-            color: #28A08A;
-            border-bottom-color: #28A08A;
-            .arrow_stroke {
-              stroke: #28A08A;
-            }
+      &.active {
+        color: #28A08A;
+        border-bottom-color: #28A08A;
+        .arrow_stroke {
+          stroke: #28A08A;
         }
+      }
     }
+  }
 }
 
 .dropdownContainer {

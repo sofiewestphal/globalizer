@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
-import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import Dropdown from './Dropdown';
 import { Arrow } from '../../assets/icons/icons';
 
@@ -12,22 +11,23 @@ const SearchBarOption = (props) => {
   const pClassName = active ? 'searchBarOption active' : 'searchBarOption';
 
   return (
-    <div
-      className="searchBarOptionContainer"
-      role="button"
-      onClick={() => handleClick(optionTitle)}
-    >
-      <p className={pClassName}>
-        {title}
-        <span>
-          <Arrow
-            iconClassName="optionArrow"
-            width="8px"
-            height="5px"
-            strokeColour="#fefefe"
-          />
-        </span>
-      </p>
+    <div className="searchBarOptionContainer">
+      <button
+        type="button"
+        onClick={() => handleClick(optionTitle)}
+      >
+        <p className={pClassName}>
+          {title}
+          <span>
+            <Arrow
+              iconClassName="optionArrow"
+              width="8px"
+              height="5px"
+              strokeColour="#fefefe"
+            />
+          </span>
+        </p>
+      </button>
       <Dropdown
         title={title}
         shown={active}
