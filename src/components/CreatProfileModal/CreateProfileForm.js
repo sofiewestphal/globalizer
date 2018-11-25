@@ -158,6 +158,7 @@ class CreateProfileForm extends React.Component {
               <div className="row">
                 <div className="col-sx-12 col-md-8">
                   <SelectOption
+                    selectingCategory
                     labelName="Interests"
                     title="Select category"
                     optionTitle="selectCategory"

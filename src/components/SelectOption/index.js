@@ -4,40 +4,48 @@ import './index.scss';
 
 const SelectOption = (props) => {
   const {
-    labelName, options, handleSelect, currentlySelected,
+    labelName, options, handleSelect, currentlySelected, selectingCategory,
   } = props;
+  const containerClassNames = selectingCategory ? 'categoriesContainer selectOptionContainer' : 'selectOptionContainer';
 
   return (
-    <div className="row">
-      <div className="col-xs-12">
-        <h4>{labelName}</h4>
-        <div className="categoriesContainer">
-          {options.map(option => (
-            <label
-              className="optionContainer"
-              id={option.id}
-              key={option.id}
-            >
-              <p>{option.label}</p>
-              <input
-                onChange={() => handleSelect(option.label)}
-                type="checkbox"
-                checked={currentlySelected === option.label}
-              />
-              <span className="checkmark" />
-            </label>
-          ))}
-        </div>
+    <div>
+      <h4>{labelName}</h4>
+      <div className={containerClassNames}>
+        {options.map(option => (
+          <label
+            className="optionContainer"
+            id={option.id}
+            key={option.id}
+          >
+            <p>{option.label}</p>
+            <input
+              onChange={() => handleSelect(option.id)}
+              type="checkbox"
+              checked={selectingCategory ? currentlySelected === option.id : currentlySelected}
+            />
+            <span className="checkmark" />
+          </label>
+        ))}
       </div>
     </div>
   );
 };
 
 SelectOption.propTypes = {
-  labelName: PropTypes.string.isRequired,
-  currentlySelected: PropTypes.string.isRequired,
+  labelName: PropTypes.string,
+  currentlySelected: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+  ]).isRequired,
   options: PropTypes.array.isRequired,
+  selectingCategory: PropTypes.bool,
   handleSelect: PropTypes.func.isRequired,
+};
+
+SelectOption.defaultProps = {
+  selectingCategory: false,
+  labelName: '',
 };
 
 export default SelectOption;

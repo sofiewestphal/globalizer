@@ -35,12 +35,14 @@ export const Close = (props) => {
     height,
     strokeColour,
     iconClassName,
+    handleClick,
   } = props;
   return (
     <svg
       className={iconClassName}
       width={width}
       height={height}
+      onClick={() => handleClick()}
       viewBox="0 0 20 20"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -60,9 +62,24 @@ export const Close = (props) => {
 const generalProptypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
-  strokeColour: PropTypes.string.isRequired,
-  iconClassName: PropTypes.string.isRequired,
+  strokeColour: PropTypes.string,
+  iconClassName: PropTypes.string,
 };
 
-Close.propTypes = generalProptypes;
+const defaultProptypes = {
+  strokeColour: '#242424',
+  iconClassName: '',
+};
+
+Close.propTypes = {
+  ...generalProptypes,
+  handleClick: PropTypes.func,
+};
+
+Close.defaultProps = {
+  ...defaultProptypes,
+  handleClick: () => {},
+};
+
 Arrow.propTypes = generalProptypes;
+Arrow.defaultProps = defaultProptypes;

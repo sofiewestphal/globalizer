@@ -2,15 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import locationIcon from '../../assets/icons/other_icons/location_icon.svg';
-import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
-import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg';
+import beautyIcon from '../../assets/icons/activity_icons/beauty-and-wellness_icon.svg';
+import cultureIcon from '../../assets/icons/activity_icons/culture_icon.svg';
+import familyIcon from '../../assets/icons/activity_icons/family_icon.svg';
+import foodIcon from '../../assets/icons/activity_icons/food-and-drinks_icon.svg';
 import gamesIcon from '../../assets/icons/activity_icons/games_icon.svg';
+import hobbiesIcon from '../../assets/icons/activity_icons/hobbies-and-crafts_icon.svg';
+import languageIcon from '../../assets/icons/activity_icons/language_icon.svg';
+import moviesIcon from '../../assets/icons/activity_icons/movies_icon.svg';
+import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg';
+import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
+import sportsIcon from '../../assets/icons/activity_icons/sports_icon.svg';
 import SecondaryButton from '../SecondaryButton';
 
 const icons = {
-  categories_outdoor: outdoorIcon,
-  categories_nightlife: nightlifeIcon,
+  categories_beautyWellness: beautyIcon,
+  categories_culture: cultureIcon,
+  categories_family: familyIcon,
+  categories_foodDrinks: foodIcon,
   categories_games: gamesIcon,
+  categories_hobbiesCrafts: hobbiesIcon,
+  categories_language: languageIcon,
+  categories_movies: moviesIcon,
+  categories_nightlife: nightlifeIcon,
+  categories_outdoor: outdoorIcon,
+  categories_sports: sportsIcon,
 };
 
 class ActivityCard extends React.Component {

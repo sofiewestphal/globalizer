@@ -5,11 +5,15 @@ import './index.scss';
 const MainButton = (props) => {
   const {
     text,
+    disabled,
     onClick,
   } = props;
+
+  const btnClassName = disabled ? 'mainBtn disabled' : 'mainBtn';
   return (
     <button
-      className="mainBtn"
+      className={btnClassName}
+      disabled={disabled}
       type="button"
       onClick={onClick}
     >
@@ -20,7 +24,12 @@ const MainButton = (props) => {
 
 MainButton.propTypes = {
   text: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+};
+
+MainButton.defaultProps = {
+  disabled: false,
 };
 
 export default MainButton;

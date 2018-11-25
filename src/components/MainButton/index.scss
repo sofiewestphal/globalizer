@@ -12,10 +12,26 @@
   text-align: center;
   float: right;
   transition: 0.3s;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $mintGreen;
+      transform: scale(1);
+    }
+
+    &:focus {
+      background-color: $mintGreen;
+      outline: none;
+    }
+  }
 
   &:hover {
     background-color: $mintGreenDarker;
     transform: scale(1.03);
+    
   }
   &:focus {
     background-color: $mintGreenDarkest;
