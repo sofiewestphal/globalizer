@@ -1,0 +1,32 @@
+@import '../../style/variables.scss';
+
+.secondaryButton {
+  background-color: $black;
+  cursor: pointer;
+  color: $white;
+  border-radius: 2px;
+  border: none;
+  min-width: 85px;
+  min-height: 25px;
+  font-family: 'BrownStd';
+  font-weight: 100;
+
+  p {
+    margin: 0px;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $black;
+      transform: scale(1);
+      cursor: default;
+    }
+  }
+
+  &:hover {
+    background-color: #343434;
+    transform: scale(1.03);
+  }
+}

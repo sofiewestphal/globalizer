@@ -1,8 +1,9 @@
-import { RESET, ACTIVITY_ADD } from '../actions/actionCreators';
+import { RESET, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from '../actions/actionCreators';
 
 const initialState = {
   activities: [
     {
+      id: 1,
       category: 'categories_nightlife',
       date: '15. November 2018',
       title: 'Malene\'s Birthday',
@@ -14,6 +15,7 @@ const initialState = {
 
     },
     {
+      id: 2,
       category: 'categories_outdoor',
       date: '22. November 2018',
       title: 'Climbing',
@@ -21,17 +23,18 @@ const initialState = {
       description: 'We are going climbing at Nørrebro\'s Klatreklub. It costs 50 krones for the entrance and then you can find old climbing shoes there in case you don\'t have your own shoes.',
       owner: 3,
       attendees: [2],
-      maxNumberOfAttendees: 5,
+      maxNumberOfAttendees: 2,
     },
     {
+      id: 3,
       category: 'categories_games',
       date: '28. November 2018',
       title: 'Pub Quiz',
       location: 'Angel',
       description: 'Let\'s win this time!',
       owner: 2,
-      attendees: [1],
-      maxNumberOfAttendees: 6,
+      attendees: [1, 3],
+      maxNumberOfAttendees: 3,
     },
   ],
 };
@@ -42,6 +45,17 @@ export default function activitiesReducer(state = initialState, action) {
       return ({
         ...state,
         activities: [...state.activities, action.payload],
+      });
+
+    case ACTIVITY_TOGGLE_ATTEND:
+      return ({
+        ...state,
+        activities: state.activities.map((activity) => {
+          if(activity.id === action.payload.id) {
+            return action.payload;
+          }
+          return activity;
+        }),
       });
     case RESET:
       return(initialState);

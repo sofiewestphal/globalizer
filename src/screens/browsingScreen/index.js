@@ -36,8 +36,8 @@ class BrowsingScreen extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    const { categories } = this.props;
-    if(prevProps.categories !== categories) {
+    const { categories, activities } = this.props;
+    if(prevProps.categories !== categories || prevProps.activities !== activities) {
       this.filterActivities();
     }
   }

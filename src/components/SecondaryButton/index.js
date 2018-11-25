@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './index.scss';
 
 const SecondaryButton = (props) => {
-  const { id, title, handleClick } = props;
+  const {
+    id, title, disabled, handleClick,
+  } = props;
+  const btnClassNames = disabled ? 'secondaryButton disabled' : 'secondaryButton';
   return(
     <button
-      className="secondaryButton"
+      className={btnClassNames}
       id={id}
       type="button"
-      onClick={handleClick}
+      disabled={disabled}
+      onClick={() => handleClick()}
     >
-      {title}
+      <p>
+        {title}
+      </p>
     </button>
   );
 };
@@ -18,7 +25,12 @@ const SecondaryButton = (props) => {
 SecondaryButton.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   handleClick: PropTypes.func.isRequired,
+};
+
+SecondaryButton.defaultProps = {
+  disabled: false,
 };
 
 export default SecondaryButton;

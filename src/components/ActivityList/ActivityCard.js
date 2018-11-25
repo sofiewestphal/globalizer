@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import locationIcon from '../../assets/icons/other_icons/location_icon.svg';
@@ -14,6 +15,7 @@ import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg'
 import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
 import sportsIcon from '../../assets/icons/activity_icons/sports_icon.svg';
 import SecondaryButton from '../SecondaryButton';
+import { toggleAttend } from '../../actions';
 
 const icons = {
   categories_beautyWellness: beautyIcon,
@@ -34,7 +36,72 @@ class ActivityCard extends React.Component {
     super(props);
     this.state = {
       showDescription: false,
+      btnAttendLabel: '',
+      btnAttendDisabled: false,
     };
+  }
+
+  componentDidMount = () => {
+    this.setAttendingState();
+  }
+
+  componentDidUpdate = (prevProps) => {
+    console.log('component did update');
+    const { activity } = this.props;
+    console.log(prevProps.activity, activity);
+    if(prevProps.activity !== activity) {
+      console.log('new attendee state');
+      this.setAttendingState();
+    }
+  }
+
+  setAttendingState = () => {
+    const {
+      userId, activity,
+    } = this.props;
+
+    let btnAttendLabel;
+    let btnAttendDisabled;
+
+    if(userId === activity.owner) {
+      btnAttendLabel = 'Your Activity';
+      btnAttendDisabled = true;
+    } else if(activity.attendees.indexOf(userId) > -1) {
+      btnAttendLabel = 'Not Attend';
+      btnAttendDisabled = false;
+    } else if(activity.attendees.length + 1 === activity.maxNumberOfAttendees) {
+      btnAttendLabel = 'It\'s full';
+      btnAttendDisabled = true;
+    } else {
+      btnAttendLabel = 'Attend';
+      btnAttendDisabled = false;
+    }
+
+    this.setState({
+      btnAttendLabel,
+      btnAttendDisabled,
+    });
+  }
+
+  toggleAttend = () => {
+    const {
+      activity, userId, dispatchToggleAttend,
+    } = this.props;
+
+    let newAttendees;
+
+    if(activity.attendees.indexOf(userId) > -1) {
+      newAttendees = activity.attendees.filter(attendee => attendee !== userId);
+    } else {
+      newAttendees = [...activity.attendees, userId];
+    }
+
+    const updatedActivity = {
+      ...activity,
+      attendees: newAttendees,
+    };
+
+    dispatchToggleAttend(updatedActivity);
   }
 
   toggleDesription = () => {
@@ -45,13 +112,10 @@ class ActivityCard extends React.Component {
   }
 
   render() {
-    const {
-      category, date, title, location, description, owner, attendees, maxNumberOfAttendees,
-    } = this.props;
+    const { activity } = this.props;
+    const { showDescription, btnAttendLabel, btnAttendDisabled } = this.state;
 
-    const currentNumberOfAttendees = attendees.length + 1;
-    const { showDescription } = this.state;
-
+    const currentNumberOfAttendees = activity.attendees.length + 1;
     const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer';
 
     return (
@@ -63,20 +127,20 @@ class ActivityCard extends React.Component {
 
               <div className="col-xs-3">
                 <div className="iconContainer">
-                  <img src={icons[category]} className="categoryIcon" alt="category icon" />
+                  <img src={icons[activity.category]} className="categoryIcon" alt="category icon" />
                 </div>
               </div>
 
               <div className="col-xs-9">
                 <div className="textContainer">
                   <div>
-                    <p>{date}</p>
-                    <h3>{title}</h3>
+                    <p>{activity.date}</p>
+                    <h3>{activity.title}</h3>
                     <p className="location">
                       <span>
                         <img src={locationIcon} alt="location icon" />
                       </span>
-                      {location}
+                      {activity.location}
                     </p>
                   </div>
                 </div>
@@ -86,16 +150,17 @@ class ActivityCard extends React.Component {
             <div className="row">
               <div className="col-xs-9 col-xs-offset-3">
                 <div className="activityCardDetails" style={{}}>
-                  <p>{description}</p>
+                  <p>{activity.description}</p>
                   <div className="attendeesContainer">
-                    <p>{`Attendees (${currentNumberOfAttendees}/${maxNumberOfAttendees})`}</p>
+                    <p>{`Attendees (${currentNumberOfAttendees}/${activity.maxNumberOfAttendees})`}</p>
                   </div>
                   <div className="attendContainer">
                     <SecondaryButton
                       id="btnToggleAttend"
-                      title="Attend"
+                      title={btnAttendLabel}
+                      disabled={btnAttendDisabled}
                       handleClick={() => {
-                        console.log('btnToggleAttend clicked');
+                        this.toggleAttend();
                       }}
                     />
                   </div>
@@ -122,14 +187,17 @@ class ActivityCard extends React.Component {
 }
 
 ActivityCard.propTypes = {
-  category: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  owner: PropTypes.number.isRequired,
-  attendees: PropTypes.array.isRequired,
-  maxNumberOfAttendees: PropTypes.number.isRequired,
+  activity: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
+  dispatchToggleAttend: PropTypes.func.isRequired,
 };
 
-export default ActivityCard;
+const mapStateToProps = state => ({
+  userId: state.user.id,
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatchToggleAttend: updatedActivity => dispatch(toggleAttend(updatedActivity)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityCard);
