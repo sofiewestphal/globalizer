@@ -23,14 +23,21 @@ class SearchBar extends React.Component {
   }
 
   handleDropdownClick = (optionTitle) => {
-    const newTitleState = !this.state[optionTitle];
+    // const newTitleState = !this.state[optionTitle];
 
-    this.setState({
+    this.setState(prevState => ({
       showWhen: false,
       showAttendees: false,
       showCategories: false,
-      [optionTitle]: newTitleState,
-    });
+      [optionTitle]: !prevState[optionTitle],
+    }));
+
+    // this.setState({
+    //   showWhen: false,
+    //   showAttendees: false,
+    //   showCategories: false,
+    //   [optionTitle]: newTitleState,
+    // });
   }
 
   handleWhenSelection = (label) => {

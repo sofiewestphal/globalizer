@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Dropdown = ({ title, options, shown, handleClick }) => {
+const Dropdown = ({
+  title, options, shown, handleClick,
+}) => {
   let dropdownClassNames = 'dropdownContainer';
   if(title === 'Categories') {
     dropdownClassNames += ' categories';
@@ -16,11 +18,12 @@ const Dropdown = ({ title, options, shown, handleClick }) => {
         {options.map(option => (
           <label
             className="optionContainer"
-            id={option.id}
+            htmlFor={option.id}
             key={option.id}
           >
             <p>{option.label}</p>
             <input
+              id={option.id}
               type="checkbox"
               defaultChecked={option.checked}
               onClick={() => handleClick(option.label)}
