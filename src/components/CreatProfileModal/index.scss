@@ -45,6 +45,34 @@
 
     .formContainer {
       padding: 0;
+
+      .languageOptionContainer {
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+      
+        :first-child {
+          margin-right: 30px;
+        }
+      
+        p {
+          padding: 0 10px;
+        }
+        
+        .secondLanguageContainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+      
+          .btnAddLanguage{
+            background: transparent;
+            cursor: pointer;
+            color: $black;
+            border: 1px solid $black;
+            border-radius: 2px;
+          }
+        }
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ import './index.scss';
 import MainButton from '../MainButton';
 import InputField from '../InputField';
 import SelectOption from '../SelectOption';
+import ImageUpload from '../ImageUpload';
 
 class CreateProfileForm extends React.Component {
   constructor(props) {
@@ -16,6 +17,8 @@ class CreateProfileForm extends React.Component {
       date: '',
       language: '',
       category: '',
+
+      setSecondLanguage: false,
       categoryOptions: categories,
     };
   }
@@ -24,6 +27,65 @@ class CreateProfileForm extends React.Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  handleSelect = (category) => {
+    this.setState({
+      category,
+    });
+  }
+
+  handleSetSecondLanguage = () => {
+    this.setState({
+      setSecondLanguage: true,
+    });
+  }
+
+  handleSubmit = () => {
+    const {
+      username,
+      userlastname,
+      date,
+      language,
+      category,
+    } = this.state;
+
+    const user = {
+      username,
+      userlastname,
+      date,
+      language,
+      category,
+    };
+    console.log(user);
+  }
+
+  renderSecondLanguage = () => {
+    const { secondLanguage, setSecondLanguage } = this.state;
+
+    if (setSecondLanguage) {
+      return (
+        <InputField
+          labelName="Second language"
+          inputName="secondLanguage"
+          placeholderText="Select language"
+          value={secondLanguage}
+          onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+        />
+      );
+    }
+
+    return (
+      <div className="secondLanguageContainer">
+        <button
+          className="btnAddLanguage"
+          type="button"
+          onClick={() => this.handleSetSecondLanguage()}
+        >
+          + add language
+        </button>
+      </div>
+    );
   }
 
   render() {
@@ -74,17 +136,23 @@ class CreateProfileForm extends React.Component {
                     />
                   </div>
 
-                  <div className="infoContainer">
+                  <div className="infoContainer languageOptionContainer">
                     <InputField
                       labelName="Language"
-                      inputName="langauge"
+                      inputName="language"
                       placeholderText="Select language"
                       value={language}
                       onChange={(inputName, value) => this.handleInputChange(inputName, value)}
                     />
+                    {this.renderSecondLanguage()}
                   </div>
                 </div>
-                <div className="col-sx-12 col-md-4"><h4>Profile picture</h4></div>
+                <div className="col-sx-12 col-md-4">
+                  <h4>Profile picture</h4>
+                  <ImageUpload
+                    type="file"
+                  />
+                </div>
               </div>
 
               <div className="row">

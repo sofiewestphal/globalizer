@@ -1,0 +1,37 @@
+@import '../../style/variables';
+
+.imageUploadContainer{
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  background-color: $grey;
+
+  .btn {
+    background-color: $black; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 50px; 
+    width: 50px; 
+    border-radius: 50%;
+    color: $white; 
+    font-size: 2rem;
+
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    &::before {
+      content: '+';
+      color: $white;
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      outline: none;
+      -webkit-user-select: none;
+      cursor: pointer;
+    }
+    &:active {
+      outline: 0;
+    }
+  }
+}
