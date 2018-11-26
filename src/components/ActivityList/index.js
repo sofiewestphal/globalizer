@@ -19,9 +19,10 @@ const ActivityList = (props) => {
 };
 
 const removePastActivities = (activity) => {
-  const currentDay = new Date().toLocaleDateString();
-  const activityDate = new Date(activity.date).toLocaleDateString();
-  return currentDay <= activityDate;
+  const currentDay = new Date().toISOString();
+  const activityDate = new Date(activity.date);
+  const activityDateISO = new Date(activityDate).toISOString();
+  return currentDay <= activityDateISO;
 };
 
 const compare = (a, b) => {
