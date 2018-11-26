@@ -20,6 +20,9 @@ const ActivityList = (props) => {
 
 const removePastActivities = (activity) => {
   const currentDay = new Date().toISOString();
+  if(activity.date === '') {
+    return true;
+  }
   const activityDate = new Date(activity.date);
   const activityDateISO = new Date(activityDate).toISOString();
   return currentDay <= activityDateISO;

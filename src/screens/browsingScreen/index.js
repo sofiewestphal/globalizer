@@ -96,6 +96,9 @@ class BrowsingScreen extends React.Component {
     const limitISO = new Date(limit).toISOString();
 
     const newFilteredActivities = filteredActivities.filter((activity) => {
+      if(activity.date === '') {
+        return true;
+      }
       const activityDate = new Date(activity.date).toISOString();
       console.log(activity.title, activityDate, limitISO);
       return activityDate <= limitISO;
