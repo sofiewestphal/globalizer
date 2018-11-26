@@ -23,21 +23,12 @@ class SearchBar extends React.Component {
   }
 
   handleDropdownClick = (optionTitle) => {
-    // const newTitleState = !this.state[optionTitle];
-
     this.setState(prevState => ({
       showWhen: false,
       showAttendees: false,
       showCategories: false,
       [optionTitle]: !prevState[optionTitle],
     }));
-
-    // this.setState({
-    //   showWhen: false,
-    //   showAttendees: false,
-    //   showCategories: false,
-    //   [optionTitle]: newTitleState,
-    // });
   }
 
   handleWhenSelection = (label) => {
@@ -63,7 +54,7 @@ class SearchBar extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-10 col-sm-offset-1">
+        <div className="col-xs-12 col-md-10 col-md-offset-1">
           <div className="searchbarContainer">
             <div className="row">
               <div className="col-xs-12 col-sm-4">
