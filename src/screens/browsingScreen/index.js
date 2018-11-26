@@ -36,25 +36,67 @@ class BrowsingScreen extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    const { categories, activities } = this.props;
-    if(prevProps.categories !== categories || prevProps.activities !== activities) {
+    const { categories, activities, when } = this.props;
+    if(prevProps.categories !== categories
+      || prevProps.activities !== activities
+      || prevProps.when !== when) {
       this.filterActivities();
     }
   }
 
   filterActivities = () => {
-    const { activities, categories } = this.props;
+    const { activities } = this.props;
 
+    let filteredActivities = activities;
+
+    filteredActivities = this.filterBasedOnCategories(filteredActivities);
+    filteredActivities = this.filterBasedOnWhen(filteredActivities);
+
+    this.setState({
+      filteredActivities,
+    });
+  }
+
+  filterBasedOnCategories = (filteredActivities) => {
+    const { categories } = this.props;
     const selectedCategories = categories.filter(
       category => category.checked,
     ).map(category => category.id);
 
-    const filteredActivities = activities.filter(
+    return filteredActivities.filter(
       activity => selectedCategories.indexOf(activity.category) > -1,
     );
+  }
 
-    this.setState({
-      filteredActivities,
+  filterBasedOnWhen = (filteredActivities) => {
+    console.log('filter based on when');
+    const { when } = this.props;
+
+    let dateInc = 0;
+    const selectedWhen = when.filter(option => option.checked);
+
+    switch(selectedWhen[0].label) {
+      case 'Today':
+        dateInc = 0;
+        break;
+      case 'Tomorrow':
+        dateInc = 1;
+        break;
+      case 'This week':
+        dateInc = 6;
+        break;
+      case 'This month':
+        dateInc = 30;
+        break;
+      default:
+        return filteredActivities;
+    }
+
+    const limit = new Date().setDate(new Date().getDate() + dateInc);
+
+    return filteredActivities.filter((activity) => {
+      const activityDate = new Date(activity.date);
+      return activityDate <= limit;
     });
   }
 
@@ -100,6 +142,7 @@ class BrowsingScreen extends React.Component {
 BrowsingScreen.propTypes = {
   activities: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
+  when: PropTypes.array.isRequired,
   initialSelectedCategories: PropTypes.array.isRequired,
   dispatchSetCategoryChecked: PropTypes.func.isRequired,
 };
@@ -107,6 +150,7 @@ BrowsingScreen.propTypes = {
 const mapStateToProps = state => ({
   activities: state.activities.activities,
   categories: state.categories.categories,
+  when: state.categories.when,
   initialSelectedCategories: state.user.categories,
 });
 

@@ -24,7 +24,7 @@ const icons = {
   categories_foodDrinks: foodIcon,
   categories_games: gamesIcon,
   categories_hobbiesCrafts: hobbiesIcon,
-  categories_language: languageIcon,
+  categories_languages: languageIcon,
   categories_movies: moviesIcon,
   categories_nightlife: nightlifeIcon,
   categories_outdoor: outdoorIcon,
@@ -46,11 +46,8 @@ class ActivityCard extends React.Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    console.log('component did update');
     const { activity } = this.props;
-    console.log(prevProps.activity, activity);
     if(prevProps.activity !== activity) {
-      console.log('new attendee state');
       this.setAttendingState();
     }
   }
@@ -117,6 +114,8 @@ class ActivityCard extends React.Component {
 
     const currentNumberOfAttendees = activity.attendees.length + 1;
     const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer';
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const activityDate = activity.date === '' ? 'Anytime' : `${new Date(activity.date).getDate()}. ${months[new Date(activity.date).getMonth()]} ${new Date(activity.date).getFullYear()}`;
 
     return (
       <div className="row">
@@ -134,7 +133,7 @@ class ActivityCard extends React.Component {
               <div className="col-xs-9">
                 <div className="textContainer">
                   <div>
-                    <p>{activity.date}</p>
+                    <p>{activityDate}</p>
                     <h3>{activity.title}</h3>
                     <p className="location">
                       <span>

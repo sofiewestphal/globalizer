@@ -25,8 +25,8 @@ const Dropdown = ({
             <input
               id={option.id}
               type="checkbox"
-              defaultChecked={option.checked}
-              onClick={() => handleClick(option.label)}
+              checked={option.checked}
+              onChange={() => handleClick(option.label)}
             />
             <span className="checkmark" />
           </label>

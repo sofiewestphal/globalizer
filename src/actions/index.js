@@ -1,7 +1,12 @@
-import { CATEGORY_SET_CHECKED, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from './actionCreators';
+import { CATEGORY_SET_CHECKED, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND, WHEN_SET_CHECKED } from './actionCreators';
 
 export const setCategoryChecked = label => ({
   type: CATEGORY_SET_CHECKED,
+  payload: label,
+});
+
+export const setWhenChecked = label => ({
+  type: WHEN_SET_CHECKED,
   payload: label,
 });
 

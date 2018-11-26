@@ -1,4 +1,4 @@
-import { CATEGORY_SET_CHECKED, RESET } from '../actions/actionCreators';
+import { CATEGORY_SET_CHECKED, RESET, WHEN_SET_CHECKED } from '../actions/actionCreators';
 
 const initialState = {
   categories: [
@@ -15,6 +15,17 @@ const initialState = {
     { label: 'Outdoor', id: 'categories_outdoor', checked: false },
     { label: 'Sports', id: 'categories_sports', checked: false },
   ],
+  when: [
+    { label: 'Any time', id: 'when_anytime', checked: true },
+    { label: 'Today', id: 'when_today', checked: false },
+    { label: 'Tomorrow', id: 'when_tomorrow', checked: false },
+    { label: 'This week', id: 'when_thisWeek', checked: false },
+    { label: 'This month', id: 'when_thisMonth', checked: false },
+  ],
+  attendees: {
+    min: 2,
+    max: 30,
+  },
 };
 
 export default function categoriesReducer(state = initialState, action) {
@@ -31,6 +42,12 @@ export default function categoriesReducer(state = initialState, action) {
           }
           return { ...category };
         }),
+      });
+
+    case WHEN_SET_CHECKED:
+      return({
+        ...state,
+        when: action.payload,
       });
     case RESET:
       return(initialState);

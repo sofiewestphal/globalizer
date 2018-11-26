@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './index.scss';
 import SearchBarOption from './SearchBarOption';
-import { setCategoryChecked } from '../../actions';
+import { setCategoryChecked, setWhenChecked } from '../../actions';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -12,13 +12,6 @@ class SearchBar extends React.Component {
       showWhen: false,
       showAttendees: false,
       showCategories: false,
-      whenOptions: [
-        { label: 'Any time', id: 'when_anytime', checked: true },
-        { label: 'Today', id: 'when_today', checked: false },
-        { label: 'Tomorrow', id: 'when_tomorrow', checked: false },
-        { label: 'This week', id: 'when_thisWeek', checked: false },
-        { label: 'This month', id: 'when_thisMonth', checked: false },
-      ],
     };
   }
 
@@ -32,7 +25,14 @@ class SearchBar extends React.Component {
   }
 
   handleWhenSelection = (label) => {
-    console.log(label);
+    const { dispatchSetWhenChecked, when } = this.props;
+    const newWhen = when.map((option) => {
+      if(option.label === label) {
+        return { ...option, checked: true };
+      }
+      return { ...option, checked: false };
+    });
+    dispatchSetWhenChecked(newWhen);
   }
 
   handleAttendeesSelection = (label) => {
@@ -40,17 +40,16 @@ class SearchBar extends React.Component {
   }
 
   handleCategorySelection = (label) => {
-    console.log(label);
     const { dispatchSetCategoryChecked } = this.props;
     dispatchSetCategoryChecked(label);
   }
 
   render() {
     const {
-      showWhen, showAttendees, showCategories, whenOptions,
+      showWhen, showAttendees, showCategories,
     } = this.state;
 
-    const { categories } = this.props;
+    const { categories, when } = this.props;
 
     return (
       <div className="row">
@@ -65,7 +64,7 @@ class SearchBar extends React.Component {
                   title="When"
                   optionTitle="showWhen"
                   active={showWhen}
-                  options={whenOptions}
+                  options={when}
                   handleClick={title => this.handleDropdownClick(title)}
                   handleSelection={label => this.handleWhenSelection(label)}
                 />
@@ -99,15 +98,19 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   categories: PropTypes.array.isRequired,
+  when: PropTypes.array.isRequired,
   dispatchSetCategoryChecked: PropTypes.func.isRequired,
+  dispatchSetWhenChecked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
+  when: state.categories.when,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
+  dispatchSetWhenChecked: newWhen => dispatch(setWhenChecked(newWhen)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
