@@ -9,7 +9,7 @@ const InputField = (props) => {
   } = props;
 
   let inputClassNames = 'input';
-  if(inputName === 'description') {
+  if (inputName === 'description') {
     inputClassNames += ' description';
   } if (disabled) {
     inputClassNames += ' disabled';
@@ -34,17 +34,17 @@ const InputField = (props) => {
             max={30}
           />
         ) : (
-          <input
-            className={inputClassNames}
-            name={inputName}
-            value={value}
-            disabled={disabled}
-            type={type}
-            placeholder={placeholderText}
-            required={required}
-            onChange={() => onChange(inputName, event.target.value)}
-          />
-        )}
+            <input
+              className={inputClassNames}
+              name={inputName}
+              value={value}
+              disabled={disabled}
+              type={type}
+              placeholder={placeholderText}
+              required={required}
+              onChange={() => onChange(inputName, event.target.value)}
+            />
+          )}
       </label>
     </div>
   );

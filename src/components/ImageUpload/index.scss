@@ -5,17 +5,17 @@
   height: 200px;
   margin-top: 20px;
   background-color: $grey;
+  display: flex; 
+  align-items: flex-end;
+  justify-content: flex-end;
 
-  .btn {
+  .imageUpload {
     background-color: $black; 
-    display: flex; 
-    justify-content: center;
-    align-items: center;
     height: 50px; 
     width: 50px; 
     border-radius: 50%;
-    color: $white; 
-    font-size: 2rem;
+    margin-bottom: -25px; 
+    margin-right: 10px;
 
     &::-webkit-file-upload-button {
       visibility: hidden;
@@ -23,14 +23,18 @@
     &::before {
       content: '+';
       color: $white;
+      font-size: 2rem;
       display: flex; 
       justify-content: center;
-      align-items: center;
+      margin-top: 3px;
       outline: none;
       -webkit-user-select: none;
       cursor: pointer;
     }
     &:active {
+      outline: 0;
+    }
+    &:focus {
       outline: 0;
     }
   }

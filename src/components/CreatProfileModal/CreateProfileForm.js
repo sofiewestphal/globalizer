@@ -6,6 +6,7 @@ import MainButton from '../MainButton';
 import InputField from '../InputField';
 import SelectOption from '../SelectOption';
 import ImageUpload from '../ImageUpload';
+import { Close } from '../../assets/icons/icons';
 
 class CreateProfileForm extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class CreateProfileForm extends React.Component {
       date: '',
       language: '',
       category: '',
+      image: '',
 
       setSecondLanguage: false,
       categoryOptions: categories,
@@ -36,8 +38,9 @@ class CreateProfileForm extends React.Component {
   }
 
   handleSetSecondLanguage = () => {
+    const { setSecondLanguage } = this.state;
     this.setState({
-      setSecondLanguage: true,
+      setSecondLanguage: !setSecondLanguage,
     });
   }
 
@@ -47,7 +50,9 @@ class CreateProfileForm extends React.Component {
       userlastname,
       date,
       language,
+      secondLanguage,
       category,
+      image,
     } = this.state;
 
     const user = {
@@ -55,7 +60,9 @@ class CreateProfileForm extends React.Component {
       userlastname,
       date,
       language,
+      secondLanguage,
       category,
+      image,
     };
     console.log(user);
   }
@@ -65,13 +72,22 @@ class CreateProfileForm extends React.Component {
 
     if (setSecondLanguage) {
       return (
-        <InputField
-          labelName="Second language"
-          inputName="secondLanguage"
-          placeholderText="Select language"
-          value={secondLanguage}
-          onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-        />
+        <div className="setSecondLanguageContainer">
+          <InputField
+            labelName="Second language"
+            inputName="secondLanguage"
+            placeholderText="Select language"
+            value={secondLanguage}
+            onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+          />
+          <Close
+            width="40px"
+            height="70px"
+            strokeColour="#242424"
+            iconClassName="closeSetSecondLanguage"
+            handleClick={() => this.handleSetSecondLanguage()}
+          />
+        </div>
       );
     }
 
@@ -96,7 +112,9 @@ class CreateProfileForm extends React.Component {
       language,
       categoryOptions,
       category,
+      image,
     } = this.state;
+
     return (
       <div className="container-fluid formContainer">
         <div className="row">
@@ -108,7 +126,7 @@ class CreateProfileForm extends React.Component {
                   <div className="infoContainer">
                     <div className="col-sx-12 col-md-6">
                       <InputField
-                        labelName="Name"
+                        labelName="Name *"
                         inputName="username"
                         placeholderText="Your name..."
                         value={username}
@@ -117,7 +135,7 @@ class CreateProfileForm extends React.Component {
                     </div>
                     <div className="col-sx-12 col-md-6">
                       <InputField
-                        labelName="Last name"
+                        labelName="Last name *"
                         inputName="userlastname"
                         placeholderText="Your lastname..."
                         value={userlastname}
@@ -127,39 +145,46 @@ class CreateProfileForm extends React.Component {
                   </div>
 
                   <div className="infoContainer">
-                    <InputField
-                      labelName="Date of Birth"
-                      inputName="date"
-                      value={date}
-                      type="date"
-                      onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                    />
+                    <div className="col-sx-12 dateContainer">
+                      <InputField
+                        labelName="Date of Birth *"
+                        inputName="date"
+                        value={date}
+                        type="date"
+                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                      />
+                    </div>
                   </div>
 
-                  <div className="infoContainer languageOptionContainer">
-                    <InputField
-                      labelName="Language"
-                      inputName="language"
-                      placeholderText="Select language"
-                      value={language}
-                      onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                    />
-                    {this.renderSecondLanguage()}
+                  <div className="infoContainer">
+                    <div className="col-sx-12 languageContainer">
+                      <InputField
+                        labelName="Language"
+                        inputName="language"
+                        placeholderText="Select language"
+                        value={language}
+                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                      />
+                      {this.renderSecondLanguage()}
+                    </div>
                   </div>
                 </div>
-                <div className="col-sx-12 col-md-4">
+                <div className="col-sx-12 col-md-4 imageContainer">
                   <h4>Profile picture</h4>
                   <ImageUpload
+                    inputName="image"
+                    value={image}
                     type="file"
+                    onChange={(inputName, value) => this.handleUploadFile(inputName, value)}
                   />
                 </div>
               </div>
 
-              <div className="row">
+              <div className="row bottomRow">
                 <div className="col-sx-12 col-md-8">
                   <SelectOption
                     selectingCategory
-                    labelName="Interests"
+                    labelName="Interests *"
                     title="Select category"
                     optionTitle="selectCategory"
                     options={categoryOptions}
@@ -167,8 +192,9 @@ class CreateProfileForm extends React.Component {
                     handleSelect={selectedCategory => this.handleSelect(selectedCategory)}
                   />
                 </div>
-                <div className="col-sx-12 col-md-4">
+                <div className="col-sx-12 col-md-4 btnContainer">
                   <MainButton
+                    className="mainBtn"
                     text="Create profile"
                     onClick={() => this.handleSubmit()}
                   />

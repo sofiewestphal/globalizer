@@ -4,17 +4,25 @@ import PropTypes from 'prop-types';
 
 const ImageUpload = (props) => {
   const {
-    type, onChange,
+    type, inputName, value, onChange,
   } = props;
   return (
     <div className="imageUploadContainer">
-      <input className="btn" name="file" type={type} onChange={onChange} />
+      <input
+        className="imageUpload"
+        name={inputName}
+        value={value}
+        type={type}
+        onChange={() => onChange(inputName, event.target.value)}
+      />
     </div>
   );
 };
 
 ImageUpload.propTypes = {
   type: PropTypes.string,
+  inputName: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
