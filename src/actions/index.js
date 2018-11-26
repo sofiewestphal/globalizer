@@ -14,3 +14,8 @@ export const toggleAttend = updatedActivity => ({
   type: ACTIVITY_TOGGLE_ATTEND,
   payload: updatedActivity,
 });
+
+export const addUser = user => ({
+  type: ACTIVITY_ADD,
+  payload: user,
+});

@@ -14,13 +14,13 @@
   bottom: 0;
   margin: auto;
   background-color: rgba(0,0,0, 0.5);
+  overflow: scroll;
 
   &.visible {
     display: flex;
   }
 
   .modal_inner {
-    position: absolute;
     padding: 50px !important;
     margin: auto;
     background: $white;
@@ -45,6 +45,82 @@
 
     .formContainer {
       padding: 0;
+
+      .infoContainer {
+
+        .dateContainer {
+        padding: 0 15px;
+        }
+
+        .languageContainer {
+          padding: 0 15px;
+          width: 100%;
+          display: flex;
+          flex-flow: row;
+        
+          :first-child {
+            margin-right: 30px;
+          }
+
+          .setSecondLanguageContainer {
+            display: flex;
+            align-items: flex-start;
+        
+            .closeSetSecondLanguage{
+              padding: 30px 15px;
+              margin-left: -60px;
+              cursor: pointer;
+            }
+          }
+
+          p {
+            padding: 0 10px;
+          }
+          
+          .secondLanguageContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        
+            .btnAddLanguage{
+              background: transparent;
+              cursor: pointer;
+              color: $black;
+              border: 1px solid $black;
+              border-radius: 2px;
+
+            }
+          }
+        }
+    }
+
+    .imageContainer {
+      display: flex;
+      flex-direction: column;
+      padding: 0 30px;
+    }
+
+    .bottomRow {
+      padding: 0 15px;
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    .modal_inner  {
+      width: 100%;
+
+      .bottomRow .btnContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
     }
   }
 }

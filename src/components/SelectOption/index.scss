@@ -35,3 +35,17 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .selectOptionContainer  {
+    &.categoriesContainer  {
+      padding-top: 20px;
+      flex-direction: column;
+      max-height: 190px;
+      min-width: 300px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+

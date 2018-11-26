@@ -9,7 +9,7 @@ const InputField = (props) => {
   } = props;
 
   let inputClassNames = 'input';
-  if(inputName === 'description') {
+  if (inputName === 'description') {
     inputClassNames += ' description';
   } if (disabled) {
     inputClassNames += ' disabled';
