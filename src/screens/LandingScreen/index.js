@@ -2,33 +2,49 @@ import React from 'react';
 import LandingHeading from '../../components/LandingHeading';
 import MainButton from '../../components/MainButton';
 import LandingTopBar from '../../components/LandingTopBar';
-import CreateProfileModal from '../../components/CreatProfileModal';
+import CreateProfileForm from '../../components/Modal/CreateProfileForm';
+import Modal from '../../components/Modal';
+import LoginForm from '../../components/Modal/LoginForm';
 
 class LandingScreen extends React.Component {
   constructor() {
     super();
     this.state = {
       showPopup: false,
+      showLogin: false,
     };
   }
 
-  toggleProfileModal() {
+  toggleModal(key) {
     this.setState({
-      showPopup: !this.state.showPopup
+      [key]: !this.state[key],
     });
   }
 
   render() {
-    const { showPopup } = this.state;
+    const { showPopup, showLogin } = this.state;
     return (
       <div className="container-fluid landingContainer">
-        <CreateProfileModal
+        <Modal
+          title="Create profile"
           visible={showPopup}
-          handleVisibility={() => this.toggleProfileModal()}
-        />
+          handleVisibility={() => this.toggleModal('showPopup')}
+        >
+          <CreateProfileForm />
+        </Modal>
+
+        <Modal
+          title="Login"
+          visible={showLogin}
+          handleVisibility={() => this.toggleModal('showLogin')}
+        >
+          <LoginForm />
+        </Modal>
         <div className="row overlay">
           <div className="col-sx-12 landingContentContainer">
-            <LandingTopBar />
+            <LandingTopBar
+              handleClick={key => this.toggleModal(key)}
+            />
             <div className="row landingCtaContainer">
               <div className="col-sx-12">
                 <LandingHeading />
@@ -36,7 +52,7 @@ class LandingScreen extends React.Component {
                   <div className="col-sx-12 buttonContainer">
                     <MainButton
                       text="Sign up"
-                      onClick={() => this.toggleProfileModal()}
+                      onClick={() => this.toggleModal('showPopup')}
                     />
                   </div>
                 </div>

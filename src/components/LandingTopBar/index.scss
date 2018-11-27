@@ -1,27 +1,25 @@
 @import '../../style/variables';
 
 .topBarContainer{
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  height: 80px;
+
+  button {
+    color: $white;
+    font-size: 12px;
+    padding: 0 20px;
+    text-align: center;
+    text-decoration: none;
     background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-
-    .rightAlignedNav {
-        display: flex;
-        flex-direction: row;
-    }
-
-    a {
-        color: $white;
-        font-size: 12px;
-        padding: 0 20px;
-        text-align: center;
-        text-decoration: none;
-    }
+    border: none;
+    cursor: pointer;
+  }
 }
 .activeNavLink{
-    color: $black;
+  color: $black;
 }

@@ -1,25 +1,28 @@
-import { NavLink } from 'react-router-dom';
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
-import logoGlobalizer from '../../assets/icons/other_icons/logo_globalizer.svg';
 
 
-const LandingTopBar = () => (
+const LandingTopBar = ({ handleClick }) => (
   <nav className="topBarContainer">
-    <NavLink to="/browse" activeClassName="activeNavLink">
-      <img src={logoGlobalizer} alt="logo" width="120px" className="logo" />
-    </NavLink>
+    <button
+      type="button"
+      onClick={() => handleClick('showPopup')}
+    >
+      <p>Sign up</p>
+    </button>
 
-    <div className="rightAlignedNav">
-      <NavLink to="/create" activeClassName="activeNavLink">
-        <p>Sign up</p>
-      </NavLink>
-
-      <NavLink to="/activities" activeClassName="activeNavLink">
-        <p>Log in</p>
-      </NavLink>
-    </div>
+    <button
+      type="button"
+      onClick={() => handleClick('showLogin')}
+    >
+      <p>Log in</p>
+    </button>
   </nav>
 );
+
+LandingTopBar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default LandingTopBar;

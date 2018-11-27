@@ -2,6 +2,7 @@ import {
   CATEGORY_SET_CHECKED, ACTIVITY_ADD, USER_ADD, ACTIVITY_TOGGLE_ATTEND, WHEN_SET_CHECKED,
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
+  AUTH_LOGIN_ERROR,
 } from './actionCreators';
 
 export const login = (email, password) => ({
@@ -15,6 +16,10 @@ export const login = (email, password) => ({
 export const loginSucces = userId => ({
   type: AUTH_LOGIN_SUCCESS,
   payload: userId,
+});
+
+export const loginError = () => ({
+  type: AUTH_LOGIN_ERROR,
 });
 
 export const setCategoryChecked = label => ({

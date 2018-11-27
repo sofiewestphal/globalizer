@@ -1,4 +1,6 @@
-import { RESET, AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR } from '../actions/actionCreators';
+import {
+  RESET, AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR,
+} from '../actions/actionCreators';
 
 const initialState = {
   userId: '',

@@ -277,10 +277,6 @@ CreateProfileForm.propTypes = {
 const mapStateToProps = state => ({
   categories: state.categories.categories,
   users: state.users.users,
-  initialSelectedCategories: PropTypes.array.isRequired,
-  dispatchSetCategoryChecked: PropTypes.func.isRequired,
-  dispatchAddUser: PropTypes.func.isRequired,
-  dispatchLoginSucces: PropTypes.func.isRequired,
 });
 
 const mapDispatchToProps = dispatch => ({
