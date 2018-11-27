@@ -4,26 +4,28 @@
 
   p {
     color: $grey;
+    margin: 10px 0px;
   } 
 
   .filterContainer {
     padding: 0 15px;
     display: flex; 
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 
     .selectedFilter {
       height: fit-content;
       margin: 0 5px;
-      padding: 2px 8px 3px;
-      background-color: $grey; 
-      color: $white; 
-      border-radius: 2px;
 
       p {
+        display: inline-block;
         color: $white;
         font-size: 11px;
-        margin: 0;
+        margin: 2px;
+        padding: 2px 8px 3px;
+        background-color: $grey; 
+        color: $white;
+        border-radius: 2px;
       }
     }
   }

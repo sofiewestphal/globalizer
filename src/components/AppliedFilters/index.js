@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './index.scss';
 import SelectedFilters from './SelectedFilter';
@@ -12,8 +13,15 @@ class AppliedFilters extends React.Component {
 
   render() {
     const {
-      selectedTime, minAttendees, maxAttendees, selectedCategory,
+      categories, minAttendees, maxAttendees, when,
     } = this.props;
+
+    const categoriesString = categories.filter(category => category.checked)
+      .map(category => category.label);
+
+    const whenString = when.filter(option => option.checked)
+      .map(option => option.label);
+
     return (
       <div className="appliedFiltersContainer">
         <p>Applied filters...</p>
@@ -21,7 +29,7 @@ class AppliedFilters extends React.Component {
           <div className="col-sx-12 filterContainer">
             <p>When</p>
             <SelectedFilters
-              text={selectedTime}
+              text={whenString}
             />
           </div>
         </div>
@@ -41,7 +49,7 @@ class AppliedFilters extends React.Component {
           <div className="col-sx-12 filterContainer">
             <p>Categories</p>
             <SelectedFilters
-              text={selectedCategory}
+              text={categoriesString}
             />
           </div>
         </div>
@@ -52,17 +60,19 @@ class AppliedFilters extends React.Component {
 
 
 AppliedFilters.propTypes = {
-  selectedTime: PropTypes.string,
   minAttendees: PropTypes.number,
   maxAttendees: PropTypes.number,
-  selectedCategory: PropTypes.string,
+  when: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
 };
 
 AppliedFilters.defaultProps = {
-  selectedTime: 'anytime',
   minAttendees: 2,
   maxAttendees: 30,
-  selectedCategory: 'no categories',
 };
 
-export default AppliedFilters;
+const mapStateToProps = state => ({
+  categories: state.categories.categories,
+  when: state.categories.when,
+})
+export default connect(mapStateToProps)(AppliedFilters);

@@ -5,7 +5,9 @@ const SelectFilter = (props) => {
   const { text } = props;
   return (
     <div className="selectedFilter">
-      <p>{text}</p>
+      {typeof text === 'object' ? (
+        text.map(t => <p>{t}</p>)
+      ) : <p>{text}</p>}
     </div>
   );
 };
