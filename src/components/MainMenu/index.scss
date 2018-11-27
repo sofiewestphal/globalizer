@@ -1,10 +1,7 @@
-$mintGreen: '#28A08A';
-$black: '#242424';
-$grey: '#DCDCDC';
-$white: '#FEFEFE';
+@import '../../style/variables.scss';
 
 nav{
-    background-color: #28A08A;
+    background-color: $mintGreen;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -18,7 +15,7 @@ nav{
     }
 
     a {
-        color: #FFF;
+        color: $white;
         font-size: 12px;
         padding: 0 20px;
         text-align: center;

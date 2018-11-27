@@ -64,6 +64,10 @@ p {
   border-radius: 50%;
 }
 
+:focus {
+  outline: 0;
+}
+
 .optionContainer {
   display: block;
   position: relative;

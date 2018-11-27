@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .toggleActivitiesContainer{
   margin-top: 30px;
 
@@ -12,10 +14,10 @@
   }
 
   .toggleButton {
-    background-color: #FEFEFE;
+    background-color: $white;
     cursor: pointer;
-    color: #242424;
-    border: 1px solid #242424;
+    color: $black;
+    border: 1px solid $black;
     min-width: 85px;
     min-height: 25px;
     font-family: 'BrownStd';
@@ -28,8 +30,8 @@
     }
 
     &.active {
-      background-color: #242424;
-      color: #FEFEFE;
+      background-color: $black;
+      color: $white;
     }
   }
 }

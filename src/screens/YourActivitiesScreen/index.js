@@ -22,7 +22,7 @@ class YourActivitiesScreen extends React.Component {
   componentDidUpdate = (prevProps) => {
     const { activities } = this.props;
 
-    if(prevProps.activities !== activities) {
+    if (prevProps.activities !== activities) {
       this.filterActivities();
     }
   }
@@ -45,7 +45,7 @@ class YourActivitiesScreen extends React.Component {
   }
 
   handleToggle = (toggleTo) => {
-    console.log(toggleTo)
+    console.log(toggleTo);
     this.setState({
       activeScreen: toggleTo,
     });
@@ -56,7 +56,7 @@ class YourActivitiesScreen extends React.Component {
     const activitiesToRender = activeScreen === 'attending' ? attendingActivities : ownedActivities;
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid screenContainer">
         <div className="row">
           <div className="col-xs-12 col md-10 col-md-offset-1">
             <h1>My Activities</h1>

@@ -1,6 +1,8 @@
+@import '../../style/variables.scss';
+
 .searchbarContainer {
-  background-color: #242424;
-  color: #FEFEFE;
+  background-color: $black;
+  color: $white;
   flex-direction: row;
   align-items: center;
   padding: 20px;
@@ -11,10 +13,9 @@
   input{
     padding: 10px 10px 12px 10px;
     width: 100%;
-    color: #CECECE;
+    color: $grey;
     border-radius: 2px;
-    background-color: #FEFEFE;
-    background-image: url('../../assets/icons/other_icons/loupe_icon.svg');
+    background-color: $white;
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;
@@ -24,7 +25,7 @@
   .searchBarOptionContainer {
     button{
       width: 100%;
-      background-color: #242424;
+      background-color: $black;
       border: none;
     }
   
@@ -32,17 +33,17 @@
       display: flex;
       justify-content: space-between;
       cursor: pointer;
-      border-bottom: 1px solid #FEFEFE;
-      color: #FEFEFE;
+      border-bottom: 1px solid $white;
+      color: $white;
       margin: 0;
       font-size: 12px;
       padding: 10px 0px 12px 0px;
 
       &.active {
-        color: #28A08A;
-        border-bottom-color: #28A08A;
+        color: $mintGreen;
+        border-bottom-color: $mintGreen;
         .arrow_stroke {
-          stroke: #28A08A;
+          stroke: $mintGreen;
         }
       }
     }
@@ -56,7 +57,7 @@
   cursor: pointer;
   min-width: 175px;
   width: fit-content;
-  background-color: #242424;
+  background-color: $black;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   padding: 20px 20px 8px 20px;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './index.scss';
 import SearchBarOption from './SearchBarOption';
+import SearchField from './SearchField';
 import { setCategoryChecked, setWhenChecked } from '../../actions';
 
 class SearchBar extends React.Component {
@@ -27,7 +28,7 @@ class SearchBar extends React.Component {
   handleWhenSelection = (label) => {
     const { dispatchSetWhenChecked, when } = this.props;
     const newWhen = when.map((option) => {
-      if(option.label === label) {
+      if (option.label === label) {
         return { ...option, checked: true };
       }
       return { ...option, checked: false };
@@ -57,7 +58,7 @@ class SearchBar extends React.Component {
           <div className="searchbarContainer">
             <div className="row">
               <div className="col-xs-12 col-sm-4">
-                <input id="searchInput" placeholder="Search activities..." />
+                <SearchField />
               </div>
               <div className="col-xs-12 col-sm-2">
                 <SearchBarOption
