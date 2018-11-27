@@ -241,7 +241,7 @@ CreateActivityForm.propTypes = {
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
-  userId: state.user.id,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = dispatch => ({

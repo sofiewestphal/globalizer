@@ -89,7 +89,7 @@ YourActivitiesScreen.propTypes = {
 
 const mapStateToProps = state => ({
   activities: state.activities.activities,
-  userId: state.user.id,
+  userId: state.auth.userId,
 });
 
 export default connect(mapStateToProps)(YourActivitiesScreen);

@@ -4,9 +4,9 @@ import './index.scss';
 
 const SelectOption = (props) => {
   const {
-    labelName, options, handleSelect, currentlySelected, selectingCategory,
+    labelName, options, handleSelect, currentlySelected, selectingCategory, selectingSeveral,
   } = props;
-  const containerClassNames = selectingCategory ? 'categoriesContainer selectOptionContainer' : 'selectOptionContainer';
+  const containerClassNames = selectingCategory || selectingSeveral ? 'categoriesContainer selectOptionContainer' : 'selectOptionContainer';
 
   return (
     <div>
@@ -20,9 +20,9 @@ const SelectOption = (props) => {
           >
             <p>{option.label}</p>
             <input
-              onChange={() => handleSelect(option.id)}
+              onChange={() => handleSelect(selectingSeveral ? option.label : option.id)}
               type="checkbox"
-              checked={selectingCategory ? currentlySelected === option.id : currentlySelected}
+              checked={selectingCategory ? currentlySelected === option.id : selectingSeveral ? option.checked : currentlySelected}
             />
             <span className="checkmark" />
           </label>
@@ -37,14 +37,17 @@ SelectOption.propTypes = {
   currentlySelected: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
-  ]).isRequired,
+  ]),
   options: PropTypes.array.isRequired,
   selectingCategory: PropTypes.bool,
+  selectingSeveral: PropTypes.bool,
   handleSelect: PropTypes.func.isRequired,
 };
 
 SelectOption.defaultProps = {
+  currentlySelected: false,
   selectingCategory: false,
+  selectingSeveral: false,
   labelName: '',
 };
 

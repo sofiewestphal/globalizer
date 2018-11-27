@@ -8,23 +8,24 @@ import InputField from '../InputField';
 import SelectOption from '../SelectOption';
 import ImageUpload from '../ImageUpload';
 import { Close } from '../../assets/icons/icons';
-import { addUser } from '../../actions';
+import { addUser, loginSucces, setCategoryChecked } from '../../actions';
 
 class CreateProfileForm extends React.Component {
   constructor(props) {
     super(props);
-    const { categories } = this.props;
     this.state = {
+      id: '',
       username: '',
       userlastname: '',
-      date: '',
+      dateOfBirth: '',
       language: '',
-      category: '',
+      secondLanguage: '',
+      email: '',
+      password: '',
       image: '',
 
       emails: [],
       setSecondLanguage: false,
-      categoryOptions: categories,
       navigate: false,
     };
   }
@@ -43,12 +44,6 @@ class CreateProfileForm extends React.Component {
     });
   }
 
-  handleSelect = (category) => {
-    this.setState({
-      category,
-    });
-  }
-
   handleSetSecondLanguage = () => {
     const { setSecondLanguage } = this.state;
     this.setState({
@@ -57,37 +52,36 @@ class CreateProfileForm extends React.Component {
   }
 
   handleSubmit = () => {
-    const { dispatchAddUser } = this.props;
+    const { dispatchAddUser, dispatchLoginSucces, categories } = this.props;
     const {
-      username,
-      userlastname,
-      email,
-      password,
-      date,
-      language,
-      secondLanguage,
-      category,
-      image,
+      id, username, userlastname, email, password,
+      dateOfBirth, language, secondLanguage, image,
       emails,
     } = this.state;
 
+    const selectedCategories = categories.filter(category => category.checked)
+      .map(category => category.label);
+
     const user = {
-      // userId: this.id,
-      username,
-      userlastname,
+      id: Number(emails.length + 1),
+      name: username,
+      lastname: userlastname,
       email,
       password,
-      date,
+      dateOfBirth,
       language,
       secondLanguage,
-      category,
+      categories: selectedCategories,
       image,
     };
     console.log(user);
     const uniqueEmail = emails.indexOf(email) === -1;
+
     if (uniqueEmail) {
       console.log('user dispatched');
       dispatchAddUser(user);
+      dispatchLoginSucces(id);
+
       this.setState({
         navigate: true,
       });
@@ -136,20 +130,16 @@ class CreateProfileForm extends React.Component {
 
   render() {
     const {
-      username,
-      userlastname,
-      email,
-      password,
-      date,
-      language,
-      categoryOptions,
-      category,
-      image,
+      username, userlastname,
+      email, password, dateOfBirth,
+      language, selectedCategories, image,
       navigate,
     } = this.state;
 
+    const { categories, dispatchSetCategoryChecked } = this.props;
+
     const submit = username !== '' && userlastname !== '' && email !== ''
-      && password !== '' && date !== '' && category !== '';
+      && password !== '' && dateOfBirth !== '' && categories !== '';
 
     if (navigate === true) {
       return <Redirect to="/browse" />;
@@ -210,8 +200,8 @@ class CreateProfileForm extends React.Component {
                     <div className="col-sx-12 dateContainer">
                       <InputField
                         labelName="Date of Birth *"
-                        inputName="date"
-                        value={date}
+                        inputName="dateOfBirth"
+                        value={dateOfBirth}
                         type="date"
                         onChange={(inputName, value) => this.handleInputChange(inputName, value)}
                       />
@@ -245,12 +235,12 @@ class CreateProfileForm extends React.Component {
               <div className="row bottomRow">
                 <div className="col-sx-12 col-md-8">
                   <SelectOption
-                    selectingCategory
+                    selectingSeveral
                     labelName="Interests *"
                     optionTitle="selectCategory"
-                    options={categoryOptions}
-                    currentlySelected={category}
-                    handleSelect={selectedCategory => this.handleSelect(selectedCategory)}
+                    options={categories}
+                    currentlySelected={selectedCategories}
+                    handleSelect={label => dispatchSetCategoryChecked(label)}
                   />
                 </div>
                 <div className="col-sx-12 col-md-4 btnContainer">
@@ -277,15 +267,23 @@ CreateProfileForm.propTypes = {
   categories: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
   dispatchAddUser: PropTypes.func.isRequired,
+  dispatchLoginSucces: PropTypes.func.isRequired,
+  dispatchSetCategoryChecked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
   users: state.users.users,
+  initialSelectedCategories: PropTypes.array.isRequired,
+  dispatchSetCategoryChecked: PropTypes.func.isRequired,
+  dispatchAddUser: PropTypes.func.isRequired,
+  dispatchLoginSucces: PropTypes.func.isRequired,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchAddUser: user => dispatch(addUser(user)),
+  dispatchLoginSucces: userId => dispatch(loginSucces(userId)),
+  dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProfileForm);

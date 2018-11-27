@@ -192,7 +192,7 @@ ActivityCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: state.user.id,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = dispatch => ({

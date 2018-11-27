@@ -151,15 +151,12 @@ BrowsingScreen.propTypes = {
   activities: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
-  initialSelectedCategories: PropTypes.array.isRequired,
-  dispatchSetCategoryChecked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   activities: state.activities.activities,
   categories: state.categories.categories,
   when: state.categories.when,
-  // initialSelectedCategories: state.user.categories,
 });
 
 
