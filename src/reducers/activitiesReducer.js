@@ -40,7 +40,7 @@ const initialState = {
 };
 
 export default function activitiesReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case ACTIVITY_ADD:
       return ({
         ...state,
@@ -51,14 +51,14 @@ export default function activitiesReducer(state = initialState, action) {
       return ({
         ...state,
         activities: state.activities.map((activity) => {
-          if(activity.id === action.payload.id) {
+          if (activity.id === action.payload.id) {
             return action.payload;
           }
           return activity;
         }),
       });
     case RESET:
-      return(initialState);
+      return (initialState);
 
     default:
       return state;

@@ -7,6 +7,7 @@ import Explorer from '../../components/Explorer';
 import { setCategoryChecked } from '../../actions';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
+import AppliedFilters from '../../components/AppliedFilters';
 
 class BrowsingScreen extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class BrowsingScreen extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     const { categories, activities } = this.props;
-    if(prevProps.categories !== categories || prevProps.activities !== activities) {
+    if (prevProps.categories !== categories || prevProps.activities !== activities) {
       this.filterActivities();
     }
   }
@@ -62,7 +63,7 @@ class BrowsingScreen extends React.Component {
     const { loaded } = this.state;
     const { filteredActivities } = this.state;
 
-    if(!loaded) {
+    if (!loaded) {
       return (
         <h1>Loading</h1>
       );
@@ -83,7 +84,7 @@ class BrowsingScreen extends React.Component {
           />
 
           <div className="col-xs-12 col-sm-4 col-md-3">
-            <p>Applied filters</p>
+            <AppliedFilters />
             <CTA
               text="Can't find the right activity?"
               secondText="Create your own..."
@@ -107,7 +108,7 @@ BrowsingScreen.propTypes = {
 const mapStateToProps = state => ({
   activities: state.activities.activities,
   categories: state.categories.categories,
-  initialSelectedCategories: state.user.categories,
+  // initialSelectedCategories: state.user.category,
 });
 
 

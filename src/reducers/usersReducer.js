@@ -1,41 +1,48 @@
-import { RESET } from '../actions/actionCreators';
+import { RESET, USER_ADD } from '../actions/actionCreators';
 
-const initialState = [
-  {
-    id: 1,
-    name: 'Sara',
-    lastname: 'Jepsen',
-    age: 25,
-    email: 'saraaaroee@hotmail.com',
-    password: '1234',
-    categories: ['Food & Drinks', 'Music', 'Sports'],
-  },
-  {
-    id: 2,
-    name: 'Sofie',
-    lastname: 'Pedersen',
-    age: 27,
-    email: 'sofiewestphal@gmail.com',
-    password: '123456',
-    categories: ['Beauty & Wellness', 'Outdoor', 'Sports'],
-  },
-  {
-    userId: 3,
-    name: 'Gavin',
-    lastname: 'Lerner',
-    age: 27,
-    email: 'gavinlerner@hotmail.com',
-    password: '12345678',
-    categories: ['Culture', 'Hobbies & Crafts', 'Outdoor', 'Sports'],
-  },
-];
+const initialState = {
+  users: [
+    {
+      id: 1,
+      name: 'Sara',
+      lastname: 'Jepsen',
+      age: 25,
+      email: 'saraaaroee@hotmail.com',
+      password: '1234',
+      categories: ['Food & Drinks', 'Music', 'Sports'],
+    },
+    {
+      id: 2,
+      name: 'Sofie',
+      lastname: 'Pedersen',
+      age: 27,
+      email: 'sofiewestphal@gmail.com',
+      password: '123456',
+      categories: ['Beauty & Wellness', 'Outdoor', 'Sports'],
+    },
+    {
+      userId: 3,
+      name: 'Gavin',
+      lastname: 'Lerner',
+      age: 27,
+      email: 'gavinlerner@hotmail.com',
+      password: '12345678',
+      categories: ['Culture', 'Hobbies & Crafts', 'Outdoor', 'Sports'],
+    },
+  ],
+};
 
-export default function userReducer(state = initialState, action) {
-  switch(action.type) {
+export default function usersReducer(state = initialState, action) {
+  switch (action.type) {
+    case USER_ADD:
+      return ({
+        ...state,
+        users: [...state.users, action.payload],
+      });
     case RESET:
-      return(initialState);
+      return (initialState);
 
     default:
-      return { ...state };
+      return state;
   }
 }

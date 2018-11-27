@@ -105,6 +105,16 @@
       display: flex;
       align-items: flex-end;
       flex-wrap: wrap;
+
+      .btnContainer .errorMessage {
+        color: red;
+        text-align: right;
+        display: none;
+
+        &.show {
+          display: flex;
+        }
+      }
     }
     }
   }
