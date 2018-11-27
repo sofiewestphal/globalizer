@@ -13,6 +13,7 @@ class SearchBar extends React.Component {
       showWhen: false,
       showAttendees: false,
       showCategories: false,
+      searchValue: '',
     };
   }
 
@@ -50,7 +51,12 @@ class SearchBar extends React.Component {
       showWhen, showAttendees, showCategories,
     } = this.state;
 
-    const { categories, when } = this.props;
+    const {
+      categories,
+      when,
+      handleSearch,
+      value,
+    } = this.props;
 
     return (
       <div className="row">
@@ -58,7 +64,10 @@ class SearchBar extends React.Component {
           <div className="searchbarContainer">
             <div className="row">
               <div className="col-xs-12 col-sm-4">
-                <SearchField />
+                <SearchField
+                  handleSearch={searchInput => handleSearch(searchInput)}
+                  value={value}
+                />
               </div>
               <div className="col-xs-12 col-sm-2">
                 <SearchBarOption
@@ -102,6 +111,8 @@ SearchBar.propTypes = {
   when: PropTypes.array.isRequired,
   dispatchSetCategoryChecked: PropTypes.func.isRequired,
   dispatchSetWhenChecked: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

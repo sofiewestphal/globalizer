@@ -16,6 +16,8 @@ class BrowsingScreen extends React.Component {
     this.state = {
       filteredActivities: activities,
       loaded: false,
+      searchValue: '',
+      filteredActivitiesSearch: '',
     };
   }
 
@@ -55,8 +57,25 @@ class BrowsingScreen extends React.Component {
 
     this.setState({
       filteredActivities,
+      filteredActivitiesSearch: filteredActivities,
     });
   }
+
+  handleSearch = (searchInput) => {
+    const { filteredActivitiesSearch } = this.state;
+    let newFilteredActivities;
+    if (searchInput === '') {
+      newFilteredActivities = filteredActivitiesSearch;
+    } else {
+      newFilteredActivities = filteredActivitiesSearch.filter(
+        activity => activity.title.toLowerCase().includes(searchInput.toLowerCase()),
+      );
+    }
+    this.setState({
+      searchValue: searchInput,
+      filteredActivities: newFilteredActivities,
+    });
+  };
 
   filterBasedOnCategories = (filteredActivities) => {
     const { categories } = this.props;
@@ -109,7 +128,7 @@ class BrowsingScreen extends React.Component {
   }
 
   render() {
-    const { loaded } = this.state;
+    const { loaded, searchValue } = this.state;
     const { filteredActivities } = this.state;
 
     if (!loaded) {
@@ -121,7 +140,10 @@ class BrowsingScreen extends React.Component {
     return (
       <div className="container-fluid">
         <HeaderImage />
-        <SearchBar />
+        <SearchBar
+          handleSearch={searchInput => this.handleSearch(searchInput)}
+          value={searchValue}
+        />
         <div className="row">
           <div className="col-xs-12 col-md-10 col-md-offset-1">
             <h1>Activities for you...</h1>
