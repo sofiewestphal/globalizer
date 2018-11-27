@@ -7,6 +7,7 @@ import Explorer from '../../components/Explorer';
 import { setCategoryChecked } from '../../actions';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
+import AppliedFilters from '../../components/AppliedFilters';
 
 class BrowsingScreen extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class BrowsingScreen extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     const { categories, activities, when } = this.props;
-    if(prevProps.categories !== categories
+    if (prevProps.categories !== categories
       || prevProps.activities !== activities
       || prevProps.when !== when) {
       this.filterActivities();
@@ -75,7 +76,7 @@ class BrowsingScreen extends React.Component {
     let dateInc = 0;
     const selectedWhen = when.filter(option => option.checked);
 
-    switch(selectedWhen[0].label) {
+    switch (selectedWhen[0].label) {
       case 'Today':
         dateInc = 0;
         break;
@@ -96,7 +97,7 @@ class BrowsingScreen extends React.Component {
     const limitISO = new Date(limit).toISOString();
 
     const newFilteredActivities = filteredActivities.filter((activity) => {
-      if(activity.date === '') {
+      if (activity.date === '') {
         return true;
       }
       const activityDate = new Date(activity.date).toISOString();
@@ -111,7 +112,7 @@ class BrowsingScreen extends React.Component {
     const { loaded } = this.state;
     const { filteredActivities } = this.state;
 
-    if(!loaded) {
+    if (!loaded) {
       return (
         <h1>Loading</h1>
       );
@@ -132,7 +133,7 @@ class BrowsingScreen extends React.Component {
           />
 
           <div className="col-xs-12 col-sm-4 col-md-3">
-            <p>Applied filters</p>
+            <AppliedFilters />
             <CTA
               text="Can't find the right activity?"
               secondText="Create your own..."
@@ -158,7 +159,7 @@ const mapStateToProps = state => ({
   activities: state.activities.activities,
   categories: state.categories.categories,
   when: state.categories.when,
-  initialSelectedCategories: state.user.categories,
+  // initialSelectedCategories: state.user.categories,
 });
 
 

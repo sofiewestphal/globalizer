@@ -88,7 +88,7 @@ class CreateActivityForm extends React.Component {
   renderEndTime = () => {
     const { endTime, setEndTime, setDateTime } = this.state;
     const btnAddEndTimeClassName = setDateTime ? 'btnAddEndTime' : 'btnAddEndTime disabled';
-    const handleClick = setDateTime ? () => this.handleSetEndTime() : () => {};
+    const handleClick = setDateTime ? () => this.handleSetEndTime() : () => { };
 
 
     if (setEndTime) {

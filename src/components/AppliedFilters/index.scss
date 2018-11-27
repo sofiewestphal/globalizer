@@ -1,0 +1,36 @@
+@import '../../style/variables';
+
+.appliedFiltersContainer {
+
+  p {
+    color: $grey;
+  } 
+
+  .filterContainer {
+    padding: 0 15px;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+
+    .selectedFilter {
+      height: fit-content;
+      margin: 0 5px;
+      padding: 2px 8px 3px;
+      background-color: $grey; 
+      color: $white; 
+      border-radius: 2px;
+
+      p {
+        color: $white;
+        font-size: 11px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .appliedFiltersContainer {
+    display: none;
+  }
+}

@@ -15,8 +15,7 @@ const InputField = (props) => {
     inputClassNames += ' disabled';
   }
 
-  const labelClassName = type === 'text' ? 'label' : 'label fitContent';
-  const selectingAttendees = inputName === 'numberOfAttendees';
+  const labelClassName = type === 'text' || 'password' ? 'label' : 'label fitContent';
 
   return (
     <div className="inputContainer">
@@ -26,7 +25,6 @@ const InputField = (props) => {
         id={inputName}
       >
         <h4>{labelName}</h4>
-        {/* {selectingAttendees ? ( */}
         <input
           className={inputClassNames}
           id={inputName}
@@ -40,19 +38,6 @@ const InputField = (props) => {
           min={2}
           max={30}
         />
-        {/* ) : (
-          <input
-            className={inputClassNames}
-            id={inputName}
-            name={inputName}
-            value={value}
-            disabled={disabled}
-            type={type}
-            placeholder={placeholderText}
-            required={required}
-            onChange={event => onChange(inputName, event.target.value)}
-          />
-        )} */}
       </label>
     </div>
   );

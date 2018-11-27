@@ -1,4 +1,6 @@
-import { CATEGORY_SET_CHECKED, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND, WHEN_SET_CHECKED } from './actionCreators';
+import {
+  CATEGORY_SET_CHECKED, ACTIVITY_ADD, USER_ADD, ACTIVITY_TOGGLE_ATTEND, WHEN_SET_CHECKED,
+} from './actionCreators';
 
 export const setCategoryChecked = label => ({
   type: CATEGORY_SET_CHECKED,
@@ -21,6 +23,6 @@ export const toggleAttend = updatedActivity => ({
 });
 
 export const addUser = user => ({
-  type: ACTIVITY_ADD,
+  type: USER_ADD,
   payload: user,
 });

@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import './index.scss';
 import MainButton from '../MainButton';
 import InputField from '../InputField';
 import SelectOption from '../SelectOption';
 import ImageUpload from '../ImageUpload';
 import { Close } from '../../assets/icons/icons';
+import { addUser } from '../../actions';
 
 class CreateProfileForm extends React.Component {
   constructor(props) {
@@ -20,9 +22,19 @@ class CreateProfileForm extends React.Component {
       category: '',
       image: '',
 
+      emails: [],
       setSecondLanguage: false,
       categoryOptions: categories,
+      navigate: false,
     };
+  }
+
+  componentDidMount = () => {
+    const { users } = this.props;
+    const emails = users.map(user => user.email);
+    this.setState({
+      emails,
+    });
   }
 
   handleInputChange = (name, value) => {
@@ -45,19 +57,26 @@ class CreateProfileForm extends React.Component {
   }
 
   handleSubmit = () => {
+    const { dispatchAddUser } = this.props;
     const {
       username,
       userlastname,
+      email,
+      password,
       date,
       language,
       secondLanguage,
       category,
       image,
+      emails,
     } = this.state;
 
     const user = {
+      // userId: this.id,
       username,
       userlastname,
+      email,
+      password,
       date,
       language,
       secondLanguage,
@@ -65,6 +84,17 @@ class CreateProfileForm extends React.Component {
       image,
     };
     console.log(user);
+    const uniqueEmail = emails.indexOf(email) === -1;
+    if (uniqueEmail) {
+      console.log('user dispatched');
+      dispatchAddUser(user);
+      this.setState({
+        navigate: true,
+      });
+    } else {
+      console.log('user already exists');
+      // const errorClassName = email === uniqueEmail ? 'errorMessage' : 'errorMessage show';
+    }
   }
 
   renderSecondLanguage = () => {
@@ -108,12 +138,22 @@ class CreateProfileForm extends React.Component {
     const {
       username,
       userlastname,
+      email,
+      password,
       date,
       language,
       categoryOptions,
       category,
       image,
+      navigate,
     } = this.state;
+
+    const submit = username !== '' && userlastname !== '' && email !== ''
+      && password !== '' && date !== '' && category !== '';
+
+    if (navigate === true) {
+      return <Redirect to="/browse" />;
+    }
 
     return (
       <div className="container-fluid formContainer">
@@ -139,6 +179,28 @@ class CreateProfileForm extends React.Component {
                         inputName="userlastname"
                         placeholderText="Your lastname..."
                         value={userlastname}
+                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="infoContainer">
+                    <div className="col-sx-12 col-md-6">
+                      <InputField
+                        labelName="Email *"
+                        inputName="email"
+                        placeholderText="Your email..."
+                        value={email}
+                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                      />
+                    </div>
+                    <div className="col-sx-12 col-md-6">
+                      <InputField
+                        labelName="Password *"
+                        inputName="password"
+                        placeholderText="Your lastname..."
+                        value={password}
+                        type="password"
                         onChange={(inputName, value) => this.handleInputChange(inputName, value)}
                       />
                     </div>
@@ -185,7 +247,6 @@ class CreateProfileForm extends React.Component {
                   <SelectOption
                     selectingCategory
                     labelName="Interests *"
-                    title="Select category"
                     optionTitle="selectCategory"
                     options={categoryOptions}
                     currentlySelected={category}
@@ -193,8 +254,12 @@ class CreateProfileForm extends React.Component {
                   />
                 </div>
                 <div className="col-sx-12 col-md-4 btnContainer">
+                  <div className="errorMessage">
+                    <p>Sorry, this email already exists...</p>
+                  </div>
                   <MainButton
                     className="mainBtn"
+                    disabled={!submit}
                     text="Create profile"
                     onClick={() => this.handleSubmit()}
                   />
@@ -210,10 +275,17 @@ class CreateProfileForm extends React.Component {
 
 CreateProfileForm.propTypes = {
   categories: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  dispatchAddUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
+  users: state.users.users,
 });
 
-export default connect(mapStateToProps)(CreateProfileForm);
+const mapDispatchToProps = dispatch => ({
+  dispatchAddUser: user => dispatch(addUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProfileForm);
