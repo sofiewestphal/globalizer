@@ -25,6 +25,7 @@ class CreateProfileForm extends React.Component {
       image: '',
 
       emails: [],
+      emailError: false,
       setSecondLanguage: false,
       navigate: false,
     };
@@ -74,11 +75,10 @@ class CreateProfileForm extends React.Component {
       categories: selectedCategories,
       image,
     };
-    console.log(user);
+
     const uniqueEmail = emails.indexOf(email) === -1;
 
     if (uniqueEmail) {
-      console.log('user dispatched');
       dispatchAddUser(user);
       dispatchLoginSucces(id);
 
@@ -86,8 +86,9 @@ class CreateProfileForm extends React.Component {
         navigate: true,
       });
     } else {
-      console.log('user already exists');
-      // const errorClassName = email === uniqueEmail ? 'errorMessage' : 'errorMessage show';
+      this.setState({
+        emailError: true,
+      });
     }
   }
 
@@ -133,13 +134,15 @@ class CreateProfileForm extends React.Component {
       username, userlastname,
       email, password, dateOfBirth,
       language, selectedCategories, image,
-      navigate,
+      navigate, emailError,
     } = this.state;
 
     const { categories, dispatchSetCategoryChecked } = this.props;
 
     const submit = username !== '' && userlastname !== '' && email !== ''
       && password !== '' && dateOfBirth !== '' && categories !== '';
+
+    const errorClassName = emailError ? 'errorMessage show' : 'errorMessage';
 
     if (navigate === true) {
       return <Redirect to="/browse" />;
@@ -244,7 +247,7 @@ class CreateProfileForm extends React.Component {
                   />
                 </div>
                 <div className="col-sx-12 col-md-4 btnContainer">
-                  <div className="errorMessage">
+                  <div className={errorClassName}>
                     <p>Sorry, this email already exists...</p>
                   </div>
                   <MainButton

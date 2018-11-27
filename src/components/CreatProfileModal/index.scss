@@ -106,13 +106,19 @@
       align-items: flex-end;
       flex-wrap: wrap;
 
-      .btnContainer .errorMessage {
-        color: red;
-        text-align: right;
-        display: none;
+      .btnContainer {
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
 
-        &.show {
-          display: flex;
+        .errorMessage {
+          color: red;
+          text-align: right;
+          display: none;
+
+          &.show {
+            display: block;
+          }
         }
       }
     }
