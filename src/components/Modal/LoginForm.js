@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import './index.scss';
 import MainButton from '../MainButton';
 import InputField from '../InputField';
-import { loginSucces, login, loginError } from '../../actions';
+import { loginSucces, login, loginError, setCategoryChecked } from '../../actions';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class LoginForm extends React.Component {
     this.state = {
       loginEmail: '',
       loginPassword: '',
-      id: '',
       emailError: false,
       navigate: false,
     };
@@ -26,27 +25,36 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit = () => {
-    const {
-      dispatchLogin, dispatchLoginSucces, dispatchLoginError, users,
-    } = this.props;
+    const { dispatchLogin, dispatchLoginError, users } = this.props;
     const { loginEmail, loginPassword } = this.state;
+
     dispatchLogin(loginEmail, loginPassword);
 
     const correctUser = users.filter(user => user.email === loginEmail);
-    const correctPassword = correctUser.password === loginPassword;
+    const correctPassword = correctUser[0].password === loginPassword;
     let errorMessage = false;
+
     if(correctUser.length === 0) {
       errorMessage = 'There is no user with that email';
       dispatchLoginError();
-    } if(!correctPassword) {
+    } else if(!correctPassword) {
       errorMessage = 'The email and password doesn\'t match';
       dispatchLoginError();
     } else {
-      dispatchLoginSucces(correctUser.id);
+      this.login(correctUser[0]);
     }
 
     this.setState({
       emailError: errorMessage,
+    });
+  }
+
+  login = (user) => {
+    const { dispatchLoginSucces, dispatchSetCategoryChecked } = this.props;
+    dispatchLoginSucces(user.id);
+    user.categories.map(category => dispatchSetCategoryChecked(category));
+    this.setState({
+      navigate: true,
     });
   }
 
@@ -123,6 +131,7 @@ LoginForm.propTypes = {
   dispatchLogin: PropTypes.func.isRequired,
   dispatchLoginSucces: PropTypes.func.isRequired,
   dispatchLoginError: PropTypes.func.isRequired,
+  dispatchSetCategoryChecked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -133,6 +142,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchLogin: (email, password) => dispatch(login(email, password)),
   dispatchLoginSucces: userId => dispatch(loginSucces(userId)),
   dispatchLoginError: () => dispatch(loginError()),
+  dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
