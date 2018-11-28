@@ -55,7 +55,7 @@ class CreateProfileForm extends React.Component {
   handleSubmit = () => {
     const { dispatchAddUser, dispatchLoginSucces, categories } = this.props;
     const {
-      id, username, userlastname, email, password,
+      username, userlastname, email, password,
       dateOfBirth, language, secondLanguage, image,
       emails,
     } = this.state;
@@ -63,8 +63,10 @@ class CreateProfileForm extends React.Component {
     const selectedCategories = categories.filter(category => category.checked)
       .map(category => category.label);
 
+    const id = Number(emails.length + 1)
+
     const user = {
-      id: Number(emails.length + 1),
+      id,
       name: username,
       lastname: userlastname,
       email,
