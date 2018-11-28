@@ -108,14 +108,39 @@ class ActivityCard extends React.Component {
     });
   }
 
+  renderDateTime = () => {
+    const { activity } = this.props;
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const activityDate = activity.date === '' ? 'Anytime' : `${new Date(activity.date).getDate()}. ${months[new Date(activity.date).getMonth()]} ${new Date(activity.date).getFullYear()}`;
+
+    if(activity.startTime !== '' && activity.endTime !== '') {
+      return (
+        <div className="timeContainer">
+          <p>
+            {`${activityDate} at ${activity.startTime} to ${activity.endTime}`}
+          </p>
+        </div>
+      );
+    }
+    if(activity.startTime !== '') {
+      return (
+        <div className="timeContainer">
+          <p>
+            {`${activityDate} at ${activity.startTime}`}
+          </p>
+        </div>
+      );
+    }
+    return <p>{activityDate}</p>;
+  }
+
   render() {
     const { activity } = this.props;
     const { showDescription, btnAttendLabel, btnAttendDisabled } = this.state;
 
     const currentNumberOfAttendees = activity.attendees.length + 1;
     const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer';
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const activityDate = activity.date === '' ? 'Anytime' : `${new Date(activity.date).getDate()}. ${months[new Date(activity.date).getMonth()]} ${new Date(activity.date).getFullYear()}`;
+   
 
     return (
       <div className="row">
@@ -133,7 +158,7 @@ class ActivityCard extends React.Component {
               <div className="col-xs-9">
                 <div className="textContainer">
                   <div>
-                    <p>{activityDate}</p>
+                    {this.renderDateTime()}
                     <h3>{activity.title}</h3>
                     <p className="location">
                       <span>
