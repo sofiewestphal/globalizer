@@ -1,14 +1,28 @@
+/**
+ * Core
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+/**
+ * Components
+ */
 import SearchBar from '../../components/SearchBar';
 import HeaderImage from '../../components/HeaderImage';
 import Explorer from '../../components/Explorer';
-import { setCategoryChecked } from '../../actions';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
 import AppliedFilters from '../../components/AppliedFilters';
+/**
+ * Actions
+ */
+import { setCategoryChecked } from '../../actions';
 
+/* END OF IMPORTS */
+
+/**
+ * Returns browsing screen
+ */
 class BrowsingScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +53,12 @@ class BrowsingScreen extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    const { categories, activities, when } = this.props;
+    const {
+      categories, attendees, activities, when,
+    } = this.props;
     if (prevProps.categories !== categories
       || prevProps.activities !== activities
+      || prevProps.attendees !== attendees
       || prevProps.when !== when) {
       this.filterActivities();
     }
@@ -54,6 +71,7 @@ class BrowsingScreen extends React.Component {
 
     filteredActivities = this.filterBasedOnCategories(filteredActivities);
     filteredActivities = this.filterBasedOnWhen(filteredActivities);
+    filteredActivities = this.filterBasedOnAttendees(filteredActivities);
 
     this.setState({
       filteredActivities,
@@ -88,10 +106,15 @@ class BrowsingScreen extends React.Component {
     );
   }
 
+  filterBasedOnAttendees = (filteredActivities) => {
+    const { attendees } = this.props;
+    const filteredOnAttendees = filteredActivities.filter(activity => activity.maxNumberOfAttendees >= attendees.min && activity.maxNumberOfAttendees <= attendees.max);
+    return filteredOnAttendees;
+  }
+
   filterBasedOnWhen = (filteredActivities) => {
     console.log('filter based on when');
     const { when } = this.props;
-
     let dateInc = 0;
     const selectedWhen = when.filter(option => option.checked);
 
@@ -173,12 +196,14 @@ BrowsingScreen.propTypes = {
   activities: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
+  attendees: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   activities: state.activities.activities,
   categories: state.categories.categories,
   when: state.categories.when,
+  attendees: state.categories.attendees,
 });
 
 

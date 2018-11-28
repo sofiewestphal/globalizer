@@ -9,19 +9,21 @@
   display: flex;
   flex-flow: row;
 
-  :first-child {
-    margin-right: 30px;
+  .inputContainer {
+    width: 100%;
   }
 }
+
+.timeContainer {
+  display: flex;
 
 .timeOptionContainer {
   @extend .dateContainer;
 
-  
-
   .setEndTimeContainer {
     display: flex;
     align-items: flex-start;
+    width: 100%;
 
     .closeSetEndTime{
       padding: 30px 15px;
@@ -52,6 +54,7 @@
       }
     }
   }
+}
 }
 .activityFormOptionContainer {
   width: fit-content;

@@ -1,4 +1,8 @@
-import { CATEGORY_SET_CHECKED, RESET, WHEN_SET_CHECKED } from '../actions/actionCreators';
+import {
+  CATEGORY_SET_CHECKED,
+  RESET, WHEN_SET_CHECKED,
+  ATTENDEES_SET_RANGE,
+} from '../actions/actionCreators';
 
 const initialState = {
   categories: [
@@ -29,12 +33,12 @@ const initialState = {
 };
 
 export default function categoriesReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case CATEGORY_SET_CHECKED:
-      return({
+      return ({
         ...state,
         categories: state.categories.map((category) => {
-          if(category.label === action.payload) {
+          if (category.label === action.payload) {
             return {
               ...category,
               checked: !category.checked,
@@ -45,12 +49,17 @@ export default function categoriesReducer(state = initialState, action) {
       });
 
     case WHEN_SET_CHECKED:
-      return({
+      return ({
         ...state,
         when: action.payload,
       });
+    case ATTENDEES_SET_RANGE:
+      return ({
+        ...state,
+        attendees: action.payload,
+      });
     case RESET:
-      return(initialState);
+      return (initialState);
 
     default:
       return state;

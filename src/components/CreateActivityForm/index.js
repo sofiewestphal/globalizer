@@ -145,40 +145,53 @@ class CreateActivityForm extends React.Component {
         <div className="row">
           <form>
             <div className="col-xs-12 col-md-6 col-left">
-              <InputField
-                labelName="Activity title *"
-                inputName="activitytitle"
-                placeholderText="Give an inspiring title..."
-                required
-                value={activitytitle}
-                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-              />
-              <div className="dateContainer">
-                <InputField
-                  labelName="Date"
-                  inputName="date"
-                  disabled={!setDateTime}
-                  value={date}
-                  type="date"
-                  onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                />
-                <SelectOption
-                  options={selectDateTimeOptions}
-                  currentlySelected={!setDateTime}
-                  handleSelect={() => this.toggleDateTime()}
-                />
+              <div className="row">
+                <div className="col-xs-12">
+                  <InputField
+                    labelName="Activity title *"
+                    inputName="activitytitle"
+                    placeholderText="Give an inspiring title..."
+                    required
+                    value={activitytitle}
+                    onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                  />
+                </div>
               </div>
 
-              <div className="timeOptionContainer">
-                <InputField
-                  labelName="Start Time"
-                  inputName="startTime"
-                  type="time"
-                  disabled={!setDateTime}
-                  value={startTime}
-                  onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                />
-                {this.renderEndTime()}
+              <div className="row">
+                <div className="col-xs-12 col-sm-6 dateContainer">
+                  <InputField
+                    labelName="Date"
+                    inputName="date"
+                    disabled={!setDateTime}
+                    value={date}
+                    type="date"
+                    onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 dateContainer">
+                  <SelectOption
+                    options={selectDateTimeOptions}
+                    currentlySelected={!setDateTime}
+                    handleSelect={() => this.toggleDateTime()}
+                  />
+                </div>
+              </div>
+
+              <div className="row timeContainer">
+                <div className="col-xs-12 col-sm-6 timeOptionContainer">
+                  <InputField
+                    labelName="Start Time"
+                    inputName="startTime"
+                    type="time"
+                    disabled={!setDateTime}
+                    value={startTime}
+                    onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 timeOptionContainer">
+                  {this.renderEndTime()}
+                </div>
               </div>
 
               <InputField

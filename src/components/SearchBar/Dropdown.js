@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import RangeSlider from '../RangeSlider';
 
-const Dropdown = ({
-  title, options, shown, handleClick,
-}) => {
+const Dropdown = (props) => {
+  const {
+    title,
+    options,
+    shown,
+    handleClick,
+  } = props;
+
   let dropdownClassNames = 'dropdownContainer';
-  if(title === 'Categories') {
+  if (title === 'Categories') {
     dropdownClassNames += ' categories';
   }
-  if(shown) {
+  if (shown) {
     dropdownClassNames += ' active';
   }
 
-  if(options) {
+  if (options) {
     return (
       <div className={dropdownClassNames}>
         {options.map(option => (
@@ -37,6 +43,9 @@ const Dropdown = ({
   return (
     <div className={dropdownClassNames}>
       <p>Number of Attendees</p>
+      <RangeSlider
+        handleClick={handleClick}
+      />
     </div>
   );
 };
