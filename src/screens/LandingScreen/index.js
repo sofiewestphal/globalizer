@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import LandingHeading from '../../components/LandingHeading';
 import MainButton from '../../components/MainButton';
 import LandingTopBar from '../../components/LandingTopBar';
@@ -7,11 +10,13 @@ import Modal from '../../components/Modal';
 import LoginForm from '../../components/Modal/LoginForm';
 
 class LandingScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { userId } = this.props;
     this.state = {
       showPopup: false,
       showLogin: false,
+      navigate: userId !== '',
     };
   }
 
@@ -22,7 +27,12 @@ class LandingScreen extends React.Component {
   }
 
   render() {
-    const { showPopup, showLogin } = this.state;
+    const { showPopup, showLogin, navigate } = this.state;
+
+    if (navigate === true) {
+      return <Redirect to="/browse" />;
+    }
+
     return (
       <div className="container-fluid landingContainer">
         <Modal
@@ -65,4 +75,15 @@ class LandingScreen extends React.Component {
   }
 }
 
-export default LandingScreen;
+LandingScreen.propTypes = {
+  userId: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
+};
+
+const mapStateToProps = state => ({
+  userId: state.auth.userId,
+});
+
+export default connect(mapStateToProps)(LandingScreen);

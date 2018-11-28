@@ -5,7 +5,9 @@ import { Redirect } from 'react-router-dom';
 import './index.scss';
 import MainButton from '../MainButton';
 import InputField from '../InputField';
-import { loginSucces, login, loginError, setCategoryChecked } from '../../actions';
+import {
+  loginSucces, login, loginError, setCategoryChecked,
+} from '../../actions';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class LoginForm extends React.Component {
     dispatchLogin(loginEmail, loginPassword);
 
     const correctUser = users.filter(user => user.email === loginEmail);
+    console.log(correctUser);
     const correctPassword = correctUser[0].password === loginPassword;
     let errorMessage = false;
 
