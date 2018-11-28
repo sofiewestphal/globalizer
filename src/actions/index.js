@@ -1,5 +1,10 @@
 import {
-  CATEGORY_SET_CHECKED, ACTIVITY_ADD, USER_ADD, ACTIVITY_TOGGLE_ATTEND, WHEN_SET_CHECKED,
+  CATEGORY_SET_CHECKED,
+  ACTIVITY_ADD,
+  USER_ADD,
+  ACTIVITY_TOGGLE_ATTEND,
+  WHEN_SET_CHECKED,
+  ATTENDEES_SET_RANGE,
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_ERROR,
@@ -30,6 +35,11 @@ export const setCategoryChecked = label => ({
 export const setWhenChecked = label => ({
   type: WHEN_SET_CHECKED,
   payload: label,
+});
+
+export const setAttendeesRange = newAttendees => ({
+  type: ATTENDEES_SET_RANGE,
+  payload: newAttendees,
 });
 
 export const addActivity = activity => ({

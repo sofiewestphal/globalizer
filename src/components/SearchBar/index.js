@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './index.scss';
 import SearchBarOption from './SearchBarOption';
 import SearchField from './SearchField';
-import { setCategoryChecked, setWhenChecked } from '../../actions';
+import { setCategoryChecked, setWhenChecked, setAttendeesRange } from '../../actions';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -37,8 +37,25 @@ class SearchBar extends React.Component {
     dispatchSetWhenChecked(newWhen);
   }
 
-  handleAttendeesSelection = (label) => {
-    console.log(label);
+  handleAttendeesSelection = (key, value) => {
+    const { dispatchSetAttendeesRange, attendees } = this.props;
+    if (key === 'min') {
+      if (value <= attendees.max) {
+        const newAttRange = {
+          ...attendees,
+          [key]: value,
+        };
+        dispatchSetAttendeesRange(newAttRange);
+      }
+    } else if (key === 'max') {
+      if (value >= attendees.min) {
+        const newAttRange = {
+          ...attendees,
+          [key]: value,
+        };
+        dispatchSetAttendeesRange(newAttRange);
+      }
+    }
   }
 
   handleCategorySelection = (label) => {
@@ -85,7 +102,8 @@ class SearchBar extends React.Component {
                   optionTitle="showAttendees"
                   active={showAttendees}
                   handleClick={title => this.handleDropdownClick(title)}
-                  handleSelection={label => this.handleAttendeesSelection(label)}
+                  handleSelection={
+                    (key, rangeValue) => this.handleAttendeesSelection(key, rangeValue)}
                 />
               </div>
               <div className="col-xs-12 col-sm-3">
@@ -109,8 +127,10 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
+  attendees: PropTypes.object.isRequired,
   dispatchSetCategoryChecked: PropTypes.func.isRequired,
   dispatchSetWhenChecked: PropTypes.func.isRequired,
+  dispatchSetAttendeesRange: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
@@ -118,11 +138,13 @@ SearchBar.propTypes = {
 const mapStateToProps = state => ({
   categories: state.categories.categories,
   when: state.categories.when,
+  attendees: state.categories.attendees,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
   dispatchSetWhenChecked: newWhen => dispatch(setWhenChecked(newWhen)),
+  dispatchSetAttendeesRange: newAttRange => dispatch(setAttendeesRange(newAttRange)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
