@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SearchBar from '../../components/SearchBar';
 import HeaderImage from '../../components/HeaderImage';
@@ -186,4 +187,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen));

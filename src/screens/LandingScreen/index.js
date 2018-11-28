@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LandingHeading from '../../components/LandingHeading';
 import MainButton from '../../components/MainButton';
@@ -86,4 +86,4 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
 });
 
-export default connect(mapStateToProps)(LandingScreen);
+export default withRouter(connect(mapStateToProps)(LandingScreen));
