@@ -1,8 +1,10 @@
 import { RESET, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from '../actions/actionCreators';
 
 const initialState = {
+  nextId: 7,
   activities: [
     {
+      id: 1,
       category: 'categories_nightlife',
       date: '2018-11-15',
       title: 'Malene\'s Birthday',
@@ -16,6 +18,7 @@ const initialState = {
 
     },
     {
+      id: 2,
       category: 'categories_outdoor',
       date: '2018-12-26',
       title: 'Climbing',
@@ -28,6 +31,7 @@ const initialState = {
       maxNumberOfAttendees: 2,
     },
     {
+      id: 3,
       category: 'categories_games',
       date: '2018-11-28',
       title: 'Pub Quiz',
@@ -40,6 +44,7 @@ const initialState = {
       maxNumberOfAttendees: 3,
     },
     {
+      id: 4,
       category: 'categories_languages',
       date: '',
       title: 'Looking for a french language partner',
@@ -52,6 +57,7 @@ const initialState = {
       maxNumberOfAttendees: 2,
     },
     {
+      id: 5,
       category: 'categories_nightlife',
       date: '2018-11-27',
       title: 'Lets go to the pub',
@@ -64,6 +70,7 @@ const initialState = {
       maxNumberOfAttendees: 6,
     },
     {
+      id: 6,
       category: 'categories_hobbiesCrafts',
       date: '2018-12-01',
       title: 'Lets make Christmas decorations',
@@ -83,6 +90,7 @@ export default function activitiesReducer(state = initialState, action) {
     case ACTIVITY_ADD:
       return ({
         ...state,
+        nextId: state.nextId + 1,
         activities: [...state.activities, action.payload],
       });
 

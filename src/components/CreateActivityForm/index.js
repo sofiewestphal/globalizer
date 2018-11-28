@@ -63,9 +63,10 @@ class CreateActivityForm extends React.Component {
       date, numberOfAttendees, category,
     } = this.state;
 
-    const { userId, dispatchAddActivity } = this.props;
+    const { activityId, userId, dispatchAddActivity } = this.props;
 
     const activity = {
+      id: activityId,
       category,
       date,
       title: activitytitle,
@@ -248,6 +249,7 @@ class CreateActivityForm extends React.Component {
 
 CreateActivityForm.propTypes = {
   userId: PropTypes.number.isRequired,
+  activityId: PropTypes.number.isRequired,
   categories: PropTypes.array.isRequired,
   dispatchAddActivity: PropTypes.func.isRequired,
 };
@@ -255,6 +257,7 @@ CreateActivityForm.propTypes = {
 const mapStateToProps = state => ({
   categories: state.categories.categories,
   userId: state.auth.userId,
+  activityId: state.activities.nextId,
 });
 
 const mapDispatchToProps = dispatch => ({
