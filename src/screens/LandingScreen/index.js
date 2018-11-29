@@ -1,7 +1,13 @@
+/**
+ * Core
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+/**
+ * Components
+ */
 import LandingHeading from '../../components/LandingHeading';
 import MainButton from '../../components/MainButton';
 import LandingTopBar from '../../components/LandingTopBar';
@@ -9,6 +15,11 @@ import CreateProfileForm from '../../components/Modal/CreateProfileForm';
 import Modal from '../../components/Modal';
 import LoginForm from '../../components/Modal/LoginForm';
 
+/* END OF IMPORTS */
+
+/**
+ * @Component - returns landing screen
+ */
 class LandingScreen extends React.Component {
   constructor(props) {
     super(props);

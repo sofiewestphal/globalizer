@@ -1,10 +1,21 @@
+/**
+ * Core
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+/**
+ * Components
+ */
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
 import ToggleActivities from '../../components/ToggleActivities';
 
+/* END OF IMPORTS */
+
+/**
+ * @Component - returns my activity screen
+ */
 class YourActivitiesScreen extends React.Component {
   constructor(props) {
     super(props);

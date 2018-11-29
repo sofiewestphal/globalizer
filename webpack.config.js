@@ -53,6 +53,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/assets/Images/favicon.png',
     }),
     new ImageminPlugin({ test: /\.(png|jpg|gif)$/ }),
   ],
