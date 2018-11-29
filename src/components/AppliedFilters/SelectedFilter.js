@@ -13,7 +13,16 @@ const SelectFilter = (props) => {
 };
 
 SelectFilter.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
 };
+
+SelectFilter.defaultProps = {
+  text: '',
+};
+
 
 export default SelectFilter;

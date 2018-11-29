@@ -7,9 +7,9 @@ const initialState = {
       name: 'Sara',
       lastname: 'Jepsen',
       age: 25,
-      email: 'saraaaroee@hotmail.com',
-      password: '1234',
-      categories: ['Food & Drinks', 'Music', 'Sports'],
+      email: 's',
+      password: '1',
+      categories: ['Food & Drinks', 'Music', 'Sports', 'Beauty & Wellness', 'Outdoor', 'Culture', 'Hobbies & Crafts'],
     },
     {
       id: 2,

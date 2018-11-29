@@ -26,14 +26,17 @@ h1, h2, h3 {
 
 h1 {
   font-size: 32px;
+  letter-spacing: 0.8px;
 }
 
 h2 {
   font-size: 20px;
+  letter-spacing: 0.8px;
 }
 
 h3 {
   font-size: 16px;
+  line-height: 24px;
 }
 
 h4 {
@@ -41,13 +44,13 @@ h4 {
   margin-bottom: 0;
   font-family: 'Futura';
   color: $mintGreen;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-  line-height: 15px;
+  line-height: 18px;
 }
 
 .flexContainer {

@@ -5,41 +5,47 @@ import {
   Route, Switch, Redirect, withRouter,
 } from 'react-router-dom';
 import MainMenu from '../components/MainMenu';
+import Footer from '../components/Footer';
 import BrowsingScreen from '../screens/browsingScreen';
 import LandingScreen from '../screens/LandingScreen';
 import CreateActivityScreen from '../screens/CreateActivityScreen';
 import YourActivitiesScreen from '../screens/YourActivitiesScreen';
 
-const Auth = ({ component: Comp, loggedIn, path, ...rest }) => (
-  <Route
-    path={path}
-    {...rest}
-    render={(props) => {
-      if(!loggedIn) {
-        return <Comp {...props} />;
-      }
-      return <Redirect to="/browse" />;
-    }}
-  />
-);
+const Auth = ({
+  component: Comp, loggedIn, path, ...rest
+}) => (
+    <Route
+      path={path}
+      {...rest}
+      render={(props) => {
+        if (!loggedIn) {
+          return <Comp {...props} />;
+        }
+        return <Redirect to="/browse" />;
+      }}
+    />
+  );
 
-const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => (
-  <Route
-    path={path}
-    {...rest}
-    render={(props) => {
-      if(loggedIn) {
-        return (
-          <div>
-            <MainMenu />
-            <Comp {...props} />
-          </div>
-        );
-      }
-      return <Redirect to="/landing" />;
-    }}
-  />
-);
+const ProtectedRoute = ({
+  component: Comp, loggedIn, path, ...rest
+}) => (
+    <Route
+      path={path}
+      {...rest}
+      render={(props) => {
+        if (loggedIn) {
+          return (
+            <div>
+              <MainMenu />
+              <Comp {...props} />
+              <Footer />
+            </div>
+          );
+        }
+        return <Redirect to="/landing" />;
+      }}
+    />
+  );
 
 const Navigation = ({ userId }) => (
   <div className="page">

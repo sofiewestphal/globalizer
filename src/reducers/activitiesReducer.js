@@ -82,6 +82,19 @@ const initialState = {
       attendees: [],
       maxNumberOfAttendees: 6,
     },
+    {
+      id: 7,
+      category: 'categories_beautyWellness',
+      date: '2019-01-01',
+      title: 'Detox day',
+      location: 'Yin Detox Center',
+      startTime: '11:00',
+      endTime: '16:00',
+      description: 'New year, new me! Let us cleanse to release harmful toxins from New Years Eve, and begin the year of 2019 being fresh as a green apple. There will be healthy shakes, a selection of power food and plenty of clean and fresh water. Enjoy life. Namaste!',
+      owner: 2,
+      attendees: [],
+      maxNumberOfAttendees: 15,
+    },
   ],
 };
 

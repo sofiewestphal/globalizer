@@ -11,7 +11,7 @@
   padding: 0 !important;
 
   .overlay {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -25,7 +25,7 @@
   }
 
   .landingCtaContainer {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 140px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,7 +35,7 @@
       flex-flow: column; 
       align-items: center; 
     
-      h1, h3{
+      h1, p{
         color: $white !important; 
         text-align: center;
       }
@@ -45,9 +45,12 @@
         margin: 0;
       }
 
-      h3 {
-        max-width: 450px;
-        font-weight: 100;
+      p {
+        max-width: 560px;
+        font-weight: 100 !important;
+        color: $white;
+        font-size: 16px; 
+        line-height: 24px; 
       }
     }
 

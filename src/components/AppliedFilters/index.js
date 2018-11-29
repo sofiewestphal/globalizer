@@ -13,7 +13,7 @@ class AppliedFilters extends React.Component {
 
   render() {
     const {
-      categories, minAttendees, maxAttendees, when,
+      categories, attendees, when,
     } = this.props;
 
     const categoriesString = categories.filter(category => category.checked)
@@ -21,6 +21,10 @@ class AppliedFilters extends React.Component {
 
     const whenString = when.filter(option => option.checked)
       .map(option => option.label);
+
+    const minAttendees = attendees.min;
+
+    const maxAttendees = attendees.max;
 
     return (
       <div className="appliedFiltersContainer">
@@ -60,19 +64,15 @@ class AppliedFilters extends React.Component {
 
 
 AppliedFilters.propTypes = {
-  minAttendees: PropTypes.number,
-  maxAttendees: PropTypes.number,
   when: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
-};
-
-AppliedFilters.defaultProps = {
-  minAttendees: 2,
-  maxAttendees: 30,
+  attendees: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,
+  attendees: state.categories.attendees,
   when: state.categories.when,
-})
+});
+
 export default connect(mapStateToProps)(AppliedFilters);

@@ -1,8 +1,21 @@
+/**
+ * Core
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+/**
+ * Actions
+ */
+import { toggleAttend } from '../../actions';
+/**
+ * Components
+ */
+import SecondaryButton from '../SecondaryButton';
+/**
+ * Icons
+ */
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
-import locationIcon from '../../assets/icons/other_icons/location_icon.svg';
 import beautyIcon from '../../assets/icons/activity_icons/beauty-and-wellness_icon.svg';
 import cultureIcon from '../../assets/icons/activity_icons/culture_icon.svg';
 import familyIcon from '../../assets/icons/activity_icons/family_icon.svg';
@@ -14,8 +27,9 @@ import moviesIcon from '../../assets/icons/activity_icons/movies_icon.svg';
 import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg';
 import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
 import sportsIcon from '../../assets/icons/activity_icons/sports_icon.svg';
-import SecondaryButton from '../SecondaryButton';
-import { toggleAttend } from '../../actions';
+import { Marker } from '../../assets/icons/icons';
+
+/* END OF IMPORTS */
 
 const icons = {
   categories_beautyWellness: beautyIcon,
@@ -31,6 +45,10 @@ const icons = {
   categories_sports: sportsIcon,
 };
 
+
+/**
+ * @Component - returns activity card
+ */
 class ActivityCard extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +65,7 @@ class ActivityCard extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     const { activity } = this.props;
-    if(prevProps.activity !== activity) {
+    if (prevProps.activity !== activity) {
       this.setAttendingState();
     }
   }
@@ -60,13 +78,13 @@ class ActivityCard extends React.Component {
     let btnAttendLabel;
     let btnAttendDisabled;
 
-    if(userId === activity.owner) {
+    if (userId === activity.owner) {
       btnAttendLabel = 'Your Activity';
       btnAttendDisabled = true;
-    } else if(activity.attendees.indexOf(userId) > -1) {
+    } else if (activity.attendees.indexOf(userId) > -1) {
       btnAttendLabel = 'Not Attend';
       btnAttendDisabled = false;
-    } else if(activity.attendees.length + 1 === activity.maxNumberOfAttendees) {
+    } else if (activity.attendees.length + 1 === activity.maxNumberOfAttendees) {
       btnAttendLabel = 'It\'s full';
       btnAttendDisabled = true;
     } else {
@@ -87,7 +105,7 @@ class ActivityCard extends React.Component {
 
     let newAttendees;
 
-    if(activity.attendees.indexOf(userId) > -1) {
+    if (activity.attendees.indexOf(userId) > -1) {
       newAttendees = activity.attendees.filter(attendee => attendee !== userId);
     } else {
       newAttendees = [...activity.attendees, userId];
@@ -113,20 +131,20 @@ class ActivityCard extends React.Component {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const activityDate = activity.date === '' ? 'Anytime' : `${new Date(activity.date).getDate()}. ${months[new Date(activity.date).getMonth()]} ${new Date(activity.date).getFullYear()}`;
 
-    if(activity.startTime !== '' && activity.endTime !== '') {
+    if (activity.startTime !== '' && activity.endTime !== '') {
       return (
         <div className="timeContainer">
           <p>
-            {`${activityDate} at ${activity.startTime} to ${activity.endTime}`}
+            {`${activityDate}, ${activity.startTime} - ${activity.endTime}`}
           </p>
         </div>
       );
     }
-    if(activity.startTime !== '') {
+    if (activity.startTime !== '') {
       return (
         <div className="timeContainer">
           <p>
-            {`${activityDate} at ${activity.startTime}`}
+            {`${activityDate}, ${activity.startTime}`}
           </p>
         </div>
       );
@@ -140,7 +158,7 @@ class ActivityCard extends React.Component {
 
     const currentNumberOfAttendees = activity.attendees.length + 1;
     const containerClassName = showDescription ? 'activityCardContainer showDescription' : 'activityCardContainer';
-   
+
 
     return (
       <div className="row">
@@ -162,7 +180,12 @@ class ActivityCard extends React.Component {
                     <h3>{activity.title}</h3>
                     <p className="location">
                       <span>
-                        <img src={locationIcon} alt="location icon" />
+                        <Marker
+                          width="8px"
+                          height="10px"
+                          strokeColour="#242424"
+                          iconClassName="marker"
+                        />
                       </span>
                       {activity.location}
                     </p>
