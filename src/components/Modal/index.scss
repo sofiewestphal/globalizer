@@ -26,6 +26,10 @@
     background: $white;
     width: 80%;
     border-radius: 2px;
+
+    &.login_inner {
+      width: 40%;
+    }
   
     h1 {
       margin: 0;
@@ -48,6 +52,9 @@
       padding: 0;
 
       .infoContainer {
+        &.loginFields {
+          padding: 0 15px;
+        }
 
         .dateContainer {
         padding: 0 15px;
@@ -105,12 +112,12 @@
       padding: 0 15px;
       display: flex;
       align-items: flex-end;
+      justify-content: flex-end;
       flex-wrap: wrap;
 
       .btnContainer {
         display: flex;
-        justify-content: left;
-        flex-direction: column;
+        justify-content: flex-end;
 
         .errorMessage {
           color: red;
@@ -137,6 +144,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 30px;
       }
     }
   }

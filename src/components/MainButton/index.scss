@@ -1,6 +1,8 @@
 @import '../../style/variables.scss';
 
 .mainBtn {
+  display: flex; 
+  width: fit-content;
   margin-top: 20px;
   padding: 10px 40px;	
   border-radius: 2px;	

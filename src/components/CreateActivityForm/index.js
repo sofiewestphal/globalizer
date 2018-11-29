@@ -230,8 +230,8 @@ class CreateActivityForm extends React.Component {
                 handleSelect={selectedCategory => this.handleSelect(selectedCategory)}
               />
 
-              <div className="row btnContainer">
-                <div className="col-xs-12">
+              <div className="row">
+                <div className="col-xs-12 btnContainer">
                   <MainButton
                     disabled={!submit}
                     text="Submit activity"

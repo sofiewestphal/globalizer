@@ -36,6 +36,7 @@ class LandingScreen extends React.Component {
     return (
       <div className="container-fluid landingContainer">
         <Modal
+          innerModalClass="row modal_inner"
           title="Create profile"
           visible={showPopup}
           handleVisibility={() => this.toggleModal('showPopup')}
@@ -44,6 +45,7 @@ class LandingScreen extends React.Component {
         </Modal>
 
         <Modal
+          innerModalClass="row modal_inner login_inner"
           title="Login"
           visible={showLogin}
           handleVisibility={() => this.toggleModal('showLogin')}

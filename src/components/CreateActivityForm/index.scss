@@ -84,3 +84,10 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .screenContainer .col-right .btnContainer {
+    display: flex; 
+    justify-content: center;
+  }
+}

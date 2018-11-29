@@ -14,6 +14,7 @@ import Explorer from '../../components/Explorer';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
 import AppliedFilters from '../../components/AppliedFilters';
+import Loading from '../../components/Loading';
 /**
  * Actions
  */
@@ -157,7 +158,7 @@ class BrowsingScreen extends React.Component {
 
     if (!loaded) {
       return (
-        <h1>Loading</h1>
+        <Loading />
       );
     }
 

@@ -37,10 +37,10 @@ class LoginForm extends React.Component {
     const correctPassword = correctUser[0].password === loginPassword;
     let errorMessage = false;
 
-    if(correctUser.length === 0) {
+    if (correctUser.length === 0) {
       errorMessage = 'There is no user with that email';
       dispatchLoginError();
-    } else if(!correctPassword) {
+    } else if (!correctPassword) {
       errorMessage = 'The email and password doesn\'t match';
       dispatchLoginError();
     } else {
@@ -77,53 +77,43 @@ class LoginForm extends React.Component {
 
     return (
       <div className="container-fluid formContainer">
-        <div className="row">
-          <form>
-            <div className="col-sx-12 col">
-
-              <div className="row">
-                <div className="col-sx-12 col-md-8">
-
-                  <div className="infoContainer">
-                    <div className="col-sx-12 col-md-6">
-                      <InputField
-                        labelName="Email *"
-                        inputName="loginEmail"
-                        placeholderText="Your email..."
-                        value={loginEmail}
-                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                      />
-                    </div>
-                    <div className="col-sx-12 col-md-6">
-                      <InputField
-                        labelName="Password *"
-                        inputName="loginPassword"
-                        placeholderText="Your lastname..."
-                        value={loginPassword}
-                        type="password"
-                        onChange={(inputName, value) => this.handleInputChange(inputName, value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row bottomRow">
-                <div className="col-sx-12 col-md-4 btnContainer">
-                  <div className={errorClassName}>
-                    <p>{emailError}</p>
-                  </div>
-                  <MainButton
-                    className="mainBtn"
-                    disabled={!submit}
-                    text="Login"
-                    onClick={() => this.handleSubmit()}
-                  />
-                </div>
-              </div>
+        <form>
+          <div className="row infoContainer loginFields">
+            <div className="col-sx-12">
+              <InputField
+                labelName="Email *"
+                inputName="loginEmail"
+                placeholderText="Your email..."
+                value={loginEmail}
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+              />
             </div>
-          </form>
-        </div>
+            <div className="col-sx-12">
+              <InputField
+                labelName="Password *"
+                inputName="loginPassword"
+                placeholderText="Your lastname..."
+                value={loginPassword}
+                type="password"
+                onChange={(inputName, value) => this.handleInputChange(inputName, value)}
+              />
+            </div>
+          </div>
+
+          <div className="row bottomRow">
+            <div className="col-sx-12 btnContainer">
+              <div className={errorClassName}>
+                <p>{emailError}</p>
+              </div>
+              <MainButton
+                className="mainBtn"
+                disabled={!submit}
+                text="Login"
+                onClick={() => this.handleSubmit()}
+              />
+            </div>
+          </div>
+        </form>
       </div>
     );
   }
