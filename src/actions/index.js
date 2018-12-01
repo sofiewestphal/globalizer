@@ -8,6 +8,9 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_ERROR,
+  FETCH_FAILURE,
+  FETCH_SUCCESS,
+  FETCH_REQUEST,
 } from './actionCreators';
 
 export const login = (email, password) => ({
@@ -55,4 +58,18 @@ export const toggleAttend = updatedActivity => ({
 export const addUser = user => ({
   type: USER_ADD,
   payload: user,
+});
+
+export const fetchRequest = () => ({
+  type: FETCH_REQUEST,
+});
+
+export const fetchSuccess = activities => ({
+  type: FETCH_SUCCESS,
+  payload: activities,
+});
+
+export const fetchFailure = error => ({
+  type: FETCH_FAILURE,
+  payload: error,
 });

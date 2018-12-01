@@ -79,6 +79,12 @@ class CreateActivityForm extends React.Component {
       maxNumberOfAttendees: Number(numberOfAttendees),
     };
 
+    fetch("http://localhost:3000/api/activities", {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ activity }),
+    });
+
     dispatchAddActivity(activity);
 
     this.setState({
