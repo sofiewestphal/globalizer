@@ -22,20 +22,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-//API Service
+// API Service
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/testExpress')
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));;
+  .then(() => console.log('connection succesful'))
+  .catch((err) => console.error(err));
 
 var Activities = require('./models/ActivitiesModel');
 var Users = require('./models/UsersModel');
 
 var router = express.Router();
-//create api route
+
+// create api route
 app.use('/api/activities', router);
 
-app.post('/api/activities', function(req, res) {
+app.post('/api/activities', function (req, res) {
   var activity = new Activities();
   activity.id = req.body.activity.id;
   activity.category = req.body.activity.category;
@@ -49,7 +50,7 @@ app.post('/api/activities', function(req, res) {
   activity.attendees = req.body.activity.attendees;
   activity.maxNumberOfAttendees = req.body.activity.maxNumberOfAttendees;
 
-  activity.save(function(err) {
+  activity.save(function (err) {
     if (err) {
       res.send(err);
     }
@@ -57,8 +58,8 @@ app.post('/api/activities', function(req, res) {
   });
 });
 
-app.get('/api/activities', function(req, res) {
-  Activities.find(function(err, activities) {
+app.get('/api/activities', function (req, res) {
+  Activities.find(function (err, activities) {
     if (err) {
       res.send(err);
     }
@@ -66,7 +67,7 @@ app.get('/api/activities', function(req, res) {
   });
 });
 
-app.post('/api/users', function(req, res) {
+app.post('/api/users', function (req, res) {
   var user = new Users();
   user.id = req.body.user.id;
   user.name = req.body.user.name;
@@ -78,7 +79,7 @@ app.post('/api/users', function(req, res) {
   user.password = req.body.user.password;
   user.image = req.body.user.image;
 
-  user.save(function(err) {
+  user.save(function (err) {
     if (err) {
       res.send(err);
     }
@@ -86,8 +87,8 @@ app.post('/api/users', function(req, res) {
   });
 });
 
-app.get('/api/users', function(req, res) {
-  Users.find(function(err, activities) {
+app.get('/api/users', function (req, res) {
+  Users.find(function (err, activities) {
     if (err) {
       res.send(err);
     }
@@ -96,12 +97,12 @@ app.get('/api/users', function(req, res) {
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
