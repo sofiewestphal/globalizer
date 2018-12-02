@@ -14,6 +14,7 @@ import LandingTopBar from '../../components/LandingTopBar';
 import CreateProfileForm from '../../components/Modal/CreateProfileForm';
 import Modal from '../../components/Modal';
 import LoginForm from '../../components/Modal/LoginForm';
+import { addUser } from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -29,6 +30,20 @@ class LandingScreen extends React.Component {
       showLogin: false,
       navigate: userId !== '',
     };
+  }
+
+  componentDidMount = () => {
+    const { dispatchAddUser } = this.props;
+
+    fetch("http://localhost:3000/api/users")
+      .then(res => res.json())
+      .then((result) => {
+        result.map(user => dispatchAddUser(user));
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 
   toggleModal(key) {
@@ -93,10 +108,15 @@ LandingScreen.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]).isRequired,
+  dispatchAddUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   userId: state.auth.userId,
 });
 
-export default withRouter(connect(mapStateToProps)(LandingScreen));
+const mapDispatchToProps = dispatch => ({
+  dispatchAddUser: user => dispatch(addUser(user)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingScreen));

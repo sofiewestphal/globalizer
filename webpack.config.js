@@ -6,15 +6,15 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/public'),
     filename: 'index_bundle.js',
     publicPath: '/',
   },
 
   devServer: {
     inline: true,
-    contentBase: './dist',
-    port: 4000,
+    contentBase: './public',
+    port: 3000,
     historyApiFallback: true,
   },
 
@@ -52,7 +52,9 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
+      filename: 'index.html',
+      inject: 'body',
       favicon: './src/assets/Images/favicon.png',
     }),
     new ImageminPlugin({ test: /\.(png|jpg|gif)$/ }),

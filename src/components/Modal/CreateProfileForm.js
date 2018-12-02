@@ -84,6 +84,12 @@ class CreateProfileForm extends React.Component {
       dispatchAddUser(user);
       dispatchLoginSucces(id);
 
+      fetch("http://localhost:3000/api/users", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user }),
+      });
+
       this.setState({
         navigate: true,
       });

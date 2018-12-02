@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 /**
  * Components
  */
@@ -18,7 +19,7 @@ import Loading from '../../components/Loading';
 /**
  * Actions
  */
-import { setCategoryChecked } from '../../actions';
+import { setCategoryChecked, fetchRequest, fetchSuccess, fetchFailure, addActivity } from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -38,6 +39,21 @@ class BrowsingScreen extends React.Component {
   }
 
   componentDidMount = () => {
+    const { dispatchAddActivity } = this.props;
+
+    fetch("http://localhost:3000/api/activities")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          result.map(activity => dispatchAddActivity(activity));
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+
+
     //  // move this to confirm selected categories
     // const { categories, initialSelectedCategories, dispatchSetCategoryChecked } = this.props;
 
@@ -199,6 +215,7 @@ BrowsingScreen.propTypes = {
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
   attendees: PropTypes.object.isRequired,
+  dispatchAddActivity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -211,6 +228,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
+  dispatchAddActivity: activity => dispatch(addActivity(activity)),
+  dispatchFetchRequest: () => dispatch(fetchRequest()),
+  dispatchFetchSuccess: activities => dispatch(fetchSuccess(activities)),
+  dispatchFetchFailure: e => dispatch(fetchFailure(e)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen));
