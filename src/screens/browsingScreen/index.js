@@ -220,9 +220,9 @@ BrowsingScreen.propTypes = {
 
 const mapStateToProps = state => ({
   activities: state.activities.activities,
-  categories: state.categories.categories,
-  when: state.categories.when,
-  attendees: state.categories.attendees,
+  categories: state.filters.categories,
+  when: state.filters.when,
+  attendees: state.filters.attendees,
 });
 
 

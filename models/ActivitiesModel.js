@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const activitiesSchema = new Schema({
-  id: Number,
+  id: String,
   category: String,
   date: String,
   title: String,

@@ -44,8 +44,8 @@ RangeSlider.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  min: state.categories.attendees.min,
-  max: state.categories.attendees.max,
+  min: state.filters.attendees.min,
+  max: state.filters.attendees.max,
 });
 
 export default connect(mapStateToProps)(RangeSlider);

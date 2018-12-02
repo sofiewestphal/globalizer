@@ -11,6 +11,7 @@ const usersSchema = new Schema({
   secondLanguage: String,
   email: String,
   password: String,
+  categories: Array,
   image: String,
 });
 

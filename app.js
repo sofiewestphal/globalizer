@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -53,7 +55,7 @@ app.post('/api/activities', function(req, res) {
     if (err) {
       res.send(err);
     }
-    res.json({ message: 'Activity created. Check Robo 3T!' });
+    res.json();
   });
 });
 
@@ -76,6 +78,7 @@ app.post('/api/users', function(req, res) {
   user.secondLanguage = req.body.user.secondLanguage;
   user.email = req.body.user.email;
   user.password = req.body.user.password;
+  user.categories = req.body.user.categories;
   user.image = req.body.user.image;
 
   user.save(function(err) {

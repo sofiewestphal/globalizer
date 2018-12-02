@@ -283,7 +283,7 @@ CreateProfileForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  categories: state.categories.categories,
+  categories: state.filters.categories,
   users: state.users.users,
 });
 

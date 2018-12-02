@@ -32,7 +32,7 @@ const initialState = {
   },
 };
 
-export default function categoriesReducer(state = initialState, action) {
+export default function filtersReducer(state = initialState, action) {
   switch (action.type) {
     case CATEGORY_SET_CHECKED:
       return ({
