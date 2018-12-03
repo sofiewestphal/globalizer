@@ -1,11 +1,23 @@
 {
   "name": "prototype",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A prototype for our BA project",
+  "main": "/src/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "watch": "webpack --watch"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofiewestphal/prototype.git"
+  },
+  "author": "Sara Jepsen & Sofie Westphal Pedersen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofiewestphal/prototype/issues"
+  },
+  "homepage": "https://github.com/sofiewestphal/prototype#readme",
   "devDependencies": {
     "@types/react": "^16.7.7",
     "babel-core": "^6.26.3",
@@ -32,13 +44,12 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "mysql": "^2.16.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "whatwg-fetch": "^3.0.0"
+    "redux": "^4.0.1"
   }
 }

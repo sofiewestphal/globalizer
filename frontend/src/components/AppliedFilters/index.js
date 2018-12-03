@@ -70,9 +70,9 @@ AppliedFilters.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  categories: state.filters.categories,
-  attendees: state.filters.attendees,
-  when: state.filters.when,
+  categories: state.categories.categories,
+  attendees: state.categories.attendees,
+  when: state.categories.when,
 });
 
 export default connect(mapStateToProps)(AppliedFilters);

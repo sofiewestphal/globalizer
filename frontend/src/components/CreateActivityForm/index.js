@@ -79,13 +79,17 @@ class CreateActivityForm extends React.Component {
       maxNumberOfAttendees: Number(numberOfAttendees),
     };
 
-    fetch("http://localhost:5000/api/activities", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ activity }),
-    });
-
     dispatchAddActivity(activity);
+
+    try{
+      fetch("http://localhost:5000/api/activities", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ activity }),
+      });
+    } catch(e) {
+      console.log('oops user not saved');
+    }
 
     this.setState({
       navigate: true,
@@ -260,7 +264,7 @@ CreateActivityForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  categories: state.filters.categories,
+  categories: state.categories.categories,
   userId: state.auth.userId,
 });
 

@@ -8,17 +8,7 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_ERROR,
-  ACTIVITY_FETCH,
-  ACTIVITY_FETCH_SUCCESS,
-  ACTIVITY_FETCH_ERROR,
-  USERS_FETCH_REQUEST,
-  USERS_FETCH_SUCCESS,
-  USERS_FETCH_FAILURE,
 } from './actionCreators';
-
-/**
- * AUTH ACTIONS
-*/
 
 export const login = (email, password) => ({
   type: AUTH_LOGIN,
@@ -37,9 +27,6 @@ export const loginError = () => ({
   type: AUTH_LOGIN_ERROR,
 });
 
-/**
- * FILTERS ACTIONS
-*/
 export const setCategoryChecked = label => ({
   type: CATEGORY_SET_CHECKED,
   payload: label,
@@ -55,25 +42,6 @@ export const setAttendeesRange = newAttendees => ({
   payload: newAttendees,
 });
 
-/**
- * ACTIVITIES ACTIONS
- */
-
-export const fetchActivitiesRequest = () => ({
-  type: ACTIVITY_FETCH,
-});
-
-export const fetchActivitiesSuccess = activities => ({
-  type: ACTIVITY_FETCH_SUCCESS,
-  payload: activities,
-});
-
-export const fetchActivitiesFailure = error => ({
-  type: ACTIVITY_FETCH_ERROR,
-  payload: error,
-});
-
-
 export const addActivity = activity => ({
   type: ACTIVITY_ADD,
   payload: activity,
@@ -84,25 +52,7 @@ export const toggleAttend = updatedActivity => ({
   payload: updatedActivity,
 });
 
-/**
- * USER ACTIONS
-*/
-
 export const addUser = user => ({
   type: USER_ADD,
   payload: user,
-});
-
-export const fetchUsersRequest = () => ({
-  type: USERS_FETCH_REQUEST,
-});
-
-export const fetchUsersSuccess = activities => ({
-  type: USERS_FETCH_SUCCESS,
-  payload: activities,
-});
-
-export const fetchUsersFailure = error => ({
-  type: USERS_FETCH_FAILURE,
-  payload: error,
 });

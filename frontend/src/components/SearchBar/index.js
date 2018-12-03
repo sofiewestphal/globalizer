@@ -136,9 +136,9 @@ SearchBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  categories: state.filters.categories,
-  when: state.filters.when,
-  attendees: state.filters.attendees,
+  categories: state.categories.categories,
+  when: state.categories.when,
+  attendees: state.categories.attendees,
 });
 
 const mapDispatchToProps = dispatch => ({

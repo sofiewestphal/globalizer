@@ -14,7 +14,7 @@ module.exports = {
   devServer: {
     inline: true,
     contentBase: './public',
-    port: 3000,
+    port: 4000,
     historyApiFallback: true,
   },
 
@@ -52,9 +52,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html',
-      inject: 'body',
+      template: './src/index.html',
       favicon: './src/assets/Images/favicon.png',
     }),
     new ImageminPlugin({ test: /\.(png|jpg|gif)$/ }),

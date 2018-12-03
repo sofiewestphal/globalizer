@@ -84,11 +84,15 @@ class CreateProfileForm extends React.Component {
       dispatchAddUser(user);
       dispatchLoginSucces(id);
 
-      fetch("http://localhost:5000/api/users", {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user }),
-      });
+      try{
+        fetch("http://localhost:5000/api/users", {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user }),
+        });
+      } catch(e) {
+        console.log('oops user not saved');
+      }
 
       this.setState({
         navigate: true,
@@ -283,7 +287,7 @@ CreateProfileForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  categories: state.filters.categories,
+  categories: state.categories.categories,
   users: state.users.users,
 });
 

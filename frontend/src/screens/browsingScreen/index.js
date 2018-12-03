@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 /**
  * Components
  */
@@ -18,9 +18,7 @@ import Loading from '../../components/Loading';
 /**
  * Actions
  */
-import {
-  setCategoryChecked, fetchActivitiesRequest, fetchActivitiesSuccess, fetchActivitiesFailure,
-} from '../../actions';
+import { setCategoryChecked, addActivity } from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -40,34 +38,16 @@ class BrowsingScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    const {
-      dispatchFetchActivitiesRequest,
-      dispatchFetchActivitiesSuccess,
-      dispatchFetchActivitiesFailure,
-    } = this.props;
-
-    dispatchFetchActivitiesRequest();
-
+    const { dispatchAddActivity } = this.props;
+    
     fetch("http://localhost:5000/api/activities")
       .then(res => res.json())
-      .then(
-        (result) => {
-          dispatchFetchActivitiesSuccess(result);
-        },
-        (error) => {
-          dispatchFetchActivitiesFailure(error);
-        },
-      );
-
-
-    //  // move this to confirm selected categories
-    // const { categories, initialSelectedCategories, dispatchSetCategoryChecked } = this.props;
-
-    // categories.forEach((category) => {
-    //   if(initialSelectedCategories.indexOf(category.label) > -1) {
-    //     dispatchSetCategoryChecked(category.label);
-    //   }
-    // });
+      .then((result) => {
+        result.map(user => dispatchAddActivity(user));
+      },
+      (error) => {
+        console.log(error);
+      });
 
     this.filterActivities();
 
@@ -132,7 +112,10 @@ class BrowsingScreen extends React.Component {
 
   filterBasedOnAttendees = (filteredActivities) => {
     const { attendees } = this.props;
-    const filteredOnAttendees = filteredActivities.filter(activity => activity.maxNumberOfAttendees >= attendees.min && activity.maxNumberOfAttendees <= attendees.max);
+    const filteredOnAttendees = filteredActivities.filter(activity => (
+      activity.maxNumberOfAttendees >= attendees.min
+      && activity.maxNumberOfAttendees <= attendees.max
+    ));
     return filteredOnAttendees;
   }
 
@@ -221,24 +204,20 @@ BrowsingScreen.propTypes = {
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
   attendees: PropTypes.object.isRequired,
-  dispatchFetchActivitiesRequest: PropTypes.func.isRequired,
-  dispatchFetchActivitiesSuccess: PropTypes.func.isRequired,
-  dispatchFetchActivitiesFailure: PropTypes.func.isRequired,
+  dispatchAddActivity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   activities: state.activities.activities,
-  categories: state.filters.categories,
-  when: state.filters.when,
-  attendees: state.filters.attendees,
+  categories: state.categories.categories,
+  when: state.categories.when,
+  attendees: state.categories.attendees,
 });
 
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
-  dispatchFetchActivitiesRequest: () => dispatch(fetchActivitiesRequest()),
-  dispatchFetchActivitiesSuccess: activities => dispatch(fetchActivitiesSuccess(activities)),
-  dispatchFetchActivitiesFailure: e => dispatch(fetchActivitiesFailure(e)),
+  dispatchAddActivity: activity => dispatch(addActivity(activity)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen));

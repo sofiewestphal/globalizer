@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './authReducer';
+import userReducer from './userReducer';
 import usersReducer from './usersReducer';
 import activitiesReducer from './activitiesReducer';
-import filtersReducer from './filtersReducer';
+import categoriesReducer from './categoriesReducer';
 
 export default combineReducers({
   auth: authReducer,
+  user: userReducer,
   users: usersReducer,
   activities: activitiesReducer,
-  filters: filtersReducer,
+  categories: categoriesReducer,
 });
