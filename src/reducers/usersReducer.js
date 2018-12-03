@@ -1,6 +1,8 @@
-import { RESET, USER_ADD } from '../actions/actionCreators';
+import { RESET, USER_ADD, USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE } from '../actions/actionCreators';
 
 const initialState = {
+  fetching: true,
+  fetchingError: null,
   users: [
     {
       id: 1,
@@ -43,11 +45,32 @@ const initialState = {
 
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
+    case USERS_FETCH_REQUEST:
+      return ({
+        ...state,
+        fetching: true,
+      });
+
+    case USERS_FETCH_SUCCESS:
+      return({
+        ...state,
+        fetching: false,
+        users: [...state.users, ...action.payload],
+      });
+
+    case USERS_FETCH_FAILURE:
+      return({
+        ...state,
+        fetching: false,
+        fetchingError: action.payload,
+      });
+
     case USER_ADD:
       return ({
         ...state,
         users: [...state.users, action.payload],
       });
+
     case RESET:
       return (initialState);
 

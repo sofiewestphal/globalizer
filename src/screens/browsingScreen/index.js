@@ -3,9 +3,8 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 /**
  * Components
  */
@@ -19,7 +18,9 @@ import Loading from '../../components/Loading';
 /**
  * Actions
  */
-import { setCategoryChecked, fetchRequest, fetchSuccess, fetchFailure, addActivity } from '../../actions';
+import {
+  setCategoryChecked, fetchActivitiesRequest, fetchActivitiesSuccess, fetchActivitiesFailure,
+} from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -39,17 +40,22 @@ class BrowsingScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    const { dispatchAddActivity } = this.props;
+    const {
+      dispatchFetchActivitiesRequest,
+      dispatchFetchActivitiesSuccess,
+      dispatchFetchActivitiesFailure,
+    } = this.props;
+
+    dispatchFetchActivitiesRequest();
 
     fetch("http://localhost:3000/api/activities")
       .then(res => res.json())
       .then(
         (result) => {
-          result.map(activity => dispatchAddActivity(activity));
-          console.log(result);
+          dispatchFetchActivitiesSuccess(result);
         },
         (error) => {
-          console.log(error);
+          dispatchFetchActivitiesFailure(error);
         },
       );
 
@@ -215,7 +221,9 @@ BrowsingScreen.propTypes = {
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
   attendees: PropTypes.object.isRequired,
-  dispatchAddActivity: PropTypes.func.isRequired,
+  dispatchFetchActivitiesRequest: PropTypes.func.isRequired,
+  dispatchFetchActivitiesSuccess: PropTypes.func.isRequired,
+  dispatchFetchActivitiesFailure: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -228,10 +236,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
-  dispatchAddActivity: activity => dispatch(addActivity(activity)),
-  dispatchFetchRequest: () => dispatch(fetchRequest()),
-  dispatchFetchSuccess: activities => dispatch(fetchSuccess(activities)),
-  dispatchFetchFailure: e => dispatch(fetchFailure(e)),
+  dispatchFetchActivitiesRequest: () => dispatch(fetchActivitiesRequest()),
+  dispatchFetchActivitiesSuccess: activities => dispatch(fetchActivitiesSuccess(activities)),
+  dispatchFetchActivitiesFailure: e => dispatch(fetchActivitiesFailure(e)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen));

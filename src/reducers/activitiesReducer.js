@@ -1,6 +1,12 @@
-import { RESET, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from '../actions/actionCreators';
+import {
+  RESET,
+  ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND,
+  ACTIVITY_FETCH, ACTIVITY_FETCH_SUCCESS, ACTIVITY_FETCH_ERROR,
+} from '../actions/actionCreators';
 
 const initialState = {
+  fetching: false,
+  fetchingError: null,
   activities: [
     {
       id: 1,
@@ -99,6 +105,26 @@ const initialState = {
 
 export default function activitiesReducer(state = initialState, action) {
   switch (action.type) {
+    case ACTIVITY_FETCH:
+      return ({
+        ...state,
+        fetching: true,
+      });
+
+    case ACTIVITY_FETCH_SUCCESS:
+      return ({
+        ...state,
+        fetching: false,
+        activities: [...state.activities, ...action.payload],
+      });
+
+    case ACTIVITY_FETCH_ERROR:
+      return ({
+        ...state,
+        fetching: false,
+        fetchingError: action.payload,
+      });
+
     case ACTIVITY_ADD:
       return ({
         ...state,

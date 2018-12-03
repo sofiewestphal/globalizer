@@ -6,8 +6,6 @@ import store from './store';
 import Navigation from './navigation';
 import './style/main.scss';
 
-console.log('hola hola');
-
 // // const initialState = (localStorage["redux-store"]) ?
 // //     JSON.parse(localStorage["redux-store"]) :
 // //     sampleData
@@ -18,6 +16,8 @@ console.log('hola hola');
 // //     localStorage["redux-store"] = JSON.stringify(store.getState())
 
 // // store.subscribe(saveState)
+
+console.log('index called');
 
 window.React = React;
 window.store = store;

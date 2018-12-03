@@ -14,7 +14,8 @@ import LandingTopBar from '../../components/LandingTopBar';
 import CreateProfileForm from '../../components/Modal/CreateProfileForm';
 import Modal from '../../components/Modal';
 import LoginForm from '../../components/Modal/LoginForm';
-import { addUser } from '../../actions';
+import { fetchUsersRequest, fetchUsersSuccess, fetchUsersFailure } from '../../actions';
+import Loading from '../../components/Loading';
 
 /* END OF IMPORTS */
 
@@ -24,8 +25,9 @@ import { addUser } from '../../actions';
 class LandingScreen extends React.Component {
   constructor(props) {
     super(props);
-    const { userId } = this.props;
+    const { userId, fetchingUsers } = this.props;
     this.state = {
+      loaded: !fetchingUsers,
       showPopup: false,
       showLogin: false,
       navigate: userId !== '',
@@ -33,16 +35,27 @@ class LandingScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    const { dispatchAddUser } = this.props;
+    console.log('componentDidMount bliver kaldt');
+    this.fetchUsers();
+  }
+
+  fetchUsers = () => {
+    const {
+      dispatchFetchUsersRequest, dispatchFetchUsersSuccess, dispatchFetchUsersFailure,
+      // dispatchAddUser,
+    } = this.props;
+
+    console.log('fetchusers bliver kaldt');
+
+    dispatchFetchUsersRequest();
 
     fetch("http://localhost:3000/api/users")
       .then(res => res.json())
       .then((result) => {
-        result.map(user => dispatchAddUser(user));
-        console.log(result);
+        dispatchFetchUsersSuccess(result);
       },
       (error) => {
-        console.log(error);
+        dispatchFetchUsersFailure(error);
       });
   }
 
@@ -53,9 +66,14 @@ class LandingScreen extends React.Component {
   }
 
   render() {
-    const { showPopup, showLogin, navigate } = this.state;
+    const {
+      showPopup, showLogin, navigate,
+    } = this.state;
+
+    console.log(navigate);
 
     if (navigate === true) {
+      console.log('navigate');
       return <Redirect to="/browse" />;
     }
 
@@ -108,15 +126,21 @@ LandingScreen.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]).isRequired,
-  dispatchAddUser: PropTypes.func.isRequired,
+  fetchingUsers: PropTypes.bool.isRequired,
+  dispatchFetchUsersRequest: PropTypes.func.isRequired,
+  dispatchFetchUsersSuccess: PropTypes.func.isRequired,
+  dispatchFetchUsersFailure: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   userId: state.auth.userId,
+  fetchingUsers: state.users.fetching,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchAddUser: user => dispatch(addUser(user)),
+  dispatchFetchUsersRequest: () => dispatch(fetchUsersRequest()),
+  dispatchFetchUsersSuccess: users => dispatch(fetchUsersSuccess(users)),
+  dispatchFetchUsersFailure: error => dispatch(fetchUsersFailure(error)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingScreen));
