@@ -85,7 +85,7 @@ class CreateProfileForm extends React.Component {
       dispatchLoginSucces(id);
 
       try{
-        fetch("http://localhost:5000/api/users", {
+        fetch("https://radiant-depths-55581.herokuapp.com/api/users", {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user }),

@@ -40,7 +40,7 @@ class BrowsingScreen extends React.Component {
   componentDidMount = () => {
     const { dispatchAddActivity } = this.props;
     
-    fetch("http://localhost:5000/api/activities")
+    fetch("https://radiant-depths-55581.herokuapp.com/api/activities")
       .then(res => res.json())
       .then((result) => {
         result.map(activity => dispatchAddActivity(activity));

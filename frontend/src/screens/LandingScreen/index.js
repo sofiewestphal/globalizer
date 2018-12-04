@@ -35,14 +35,14 @@ class LandingScreen extends React.Component {
   componentDidMount = () => {
     const { dispatchAddUser } = this.props;
 
-    fetch("http://localhost:5000/api/users")
+    fetch("https://radiant-depths-55581.herokuapp.com/api/users")
       .then(res => res.json())
       .then((result) => {
         result.map(user => dispatchAddUser(user));
       },
-        (error) => {
-          console.log(error);
-        });
+      (error) => {
+        console.log(error);
+      });
   }
 
   toggleModal(key) {
