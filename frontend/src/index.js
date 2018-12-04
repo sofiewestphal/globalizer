@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import Navigation from './navigation';
+import Futura from './assets/fonts/Futura.otf';
+import BrownStd from './assets/fonts/BrownStdRegular.otf';
 import './style/main.scss';
-
-console.log('hola hola');
 
 // // const initialState = (localStorage["redux-store"]) ?
 // //     JSON.parse(localStorage["redux-store"]) :
