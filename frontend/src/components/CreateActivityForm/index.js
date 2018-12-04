@@ -63,7 +63,10 @@ class CreateActivityForm extends React.Component {
       date, numberOfAttendees, category,
     } = this.state;
 
-    const { userId, dispatchAddActivity } = this.props;
+    const {
+      userId,
+      // dispatchAddActivity,
+    } = this.props;
 
     const activity = {
       id: `${Date.now()}_${userId}`,
@@ -79,7 +82,7 @@ class CreateActivityForm extends React.Component {
       maxNumberOfAttendees: Number(numberOfAttendees),
     };
 
-    dispatchAddActivity(activity);
+    // dispatchAddActivity(activity);
 
     try{
       fetch("https://radiant-depths-55581.herokuapp.com/api/activities", {

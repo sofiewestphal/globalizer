@@ -39,7 +39,7 @@ class BrowsingScreen extends React.Component {
 
   componentDidMount = () => {
     const { dispatchAddActivity } = this.props;
-    
+    console.log('browsing screen mounting');
     fetch("https://radiant-depths-55581.herokuapp.com/api/activities")
       .then(res => res.json())
       .then((result) => {

@@ -14,7 +14,6 @@ class CreateProfileForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
       username: '',
       userlastname: '',
       dateOfBirth: '',

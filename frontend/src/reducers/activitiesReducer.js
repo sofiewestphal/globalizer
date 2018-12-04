@@ -1,7 +1,6 @@
 import { RESET, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from '../actions/actionCreators';
 
 const initialState = {
-  nextId: 7,
   activities: [
     {
       id: 1,
