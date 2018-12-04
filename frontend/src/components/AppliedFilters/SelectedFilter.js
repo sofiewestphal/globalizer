@@ -6,7 +6,7 @@ const SelectFilter = (props) => {
   return (
     <div className="selectedFilter">
       {typeof text === 'object' ? (
-        text.map(t => <p>{t}</p>)
+        text.map(t => <p key={t}>{t}</p>)
       ) : <p>{text}</p>}
     </div>
   );
@@ -16,7 +16,7 @@ SelectFilter.propTypes = {
   text: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.object,
+    PropTypes.array,
   ]),
 };
 
