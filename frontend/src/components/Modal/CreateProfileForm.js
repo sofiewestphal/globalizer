@@ -30,12 +30,14 @@ class CreateProfileForm extends React.Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidUpdate = (prevProps) => {
     const { users } = this.props;
-    const emails = users.map(user => user.email);
-    this.setState({
-      emails,
-    });
+    if(prevProps.users !== users) {
+      const emails = users.map(user => user.email);
+      this.setState({
+        emails,
+      });
+    }
   }
 
   handleInputChange = (name, value) => {
@@ -62,7 +64,7 @@ class CreateProfileForm extends React.Component {
     const selectedCategories = categories.filter(category => category.checked)
       .map(category => category.label);
 
-    const id = Number(emails.length + 1)
+    const id = Number(emails.length + 1);
 
     const user = {
       id,
