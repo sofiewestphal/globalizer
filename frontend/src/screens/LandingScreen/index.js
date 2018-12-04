@@ -40,9 +40,9 @@ class LandingScreen extends React.Component {
       .then((result) => {
         result.map(user => dispatchAddUser(user));
       },
-      (error) => {
-        console.log(error);
-      });
+        (error) => {
+          console.log(error);
+        });
   }
 
   toggleModal(key) {
