@@ -19,6 +19,7 @@ import Loading from '../../components/Loading';
  * Actions
  */
 import { setCategoryChecked, addActivity } from '../../actions';
+import { fetchedactivities } from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -38,12 +39,12 @@ class BrowsingScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    const { dispatchAddActivity } = this.props;
+    const { dispatchFetchedactivities } = this.props;
     console.log('browsing screen mounting');
     fetch("https://radiant-depths-55581.herokuapp.com/api/activities")
       .then(res => res.json())
       .then((result) => {
-        result.map(activity => dispatchAddActivity(activity));
+        dispatchFetchedactivities(result);
       },
       (error) => {
         console.log(error);
@@ -204,7 +205,7 @@ BrowsingScreen.propTypes = {
   categories: PropTypes.array.isRequired,
   when: PropTypes.array.isRequired,
   attendees: PropTypes.object.isRequired,
-  dispatchAddActivity: PropTypes.func.isRequired,
+  dispatchFetchedactivities: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -217,7 +218,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetCategoryChecked: label => dispatch(setCategoryChecked(label)),
-  dispatchAddActivity: activity => dispatch(addActivity(activity)),
+  dispatchFetchedactivities: activities => dispatch(fetchedactivities(activities)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowsingScreen));

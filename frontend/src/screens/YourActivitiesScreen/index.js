@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
 import ToggleActivities from '../../components/ToggleActivities';
+import { fetchedactivities } from '../../actions';
 
 /* END OF IMPORTS */
 
@@ -27,6 +28,17 @@ class YourActivitiesScreen extends React.Component {
   }
 
   componentDidMount = () => {
+    const { dispatchFetchedactivities } = this.props;
+
+    fetch("https://radiant-depths-55581.herokuapp.com/api/activities")
+      .then(res => res.json())
+      .then((result) => {
+        dispatchFetchedactivities(result);
+      },
+      (error) => {
+        console.log(error);
+      });
+
     this.filterActivities();
   }
 
@@ -96,6 +108,7 @@ class YourActivitiesScreen extends React.Component {
 YourActivitiesScreen.propTypes = {
   activities: PropTypes.array.isRequired,
   userId: PropTypes.number.isRequired,
+  dispatchFetchedactivities: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -103,4 +116,8 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
 });
 
-export default connect(mapStateToProps)(YourActivitiesScreen);
+const mapDispatchToProps = dispatch => ({
+  dispatchFetchedactivities: activities => dispatch(fetchedactivities(activities)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(YourActivitiesScreen);

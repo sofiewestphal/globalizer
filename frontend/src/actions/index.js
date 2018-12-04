@@ -8,6 +8,7 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_ERROR,
+  ACTIVITY_FETCH_SUCCESS,
 } from './actionCreators';
 
 export const login = (email, password) => ({
@@ -40,6 +41,11 @@ export const setWhenChecked = label => ({
 export const setAttendeesRange = newAttendees => ({
   type: ATTENDEES_SET_RANGE,
   payload: newAttendees,
+});
+
+export const fetchedactivities = activities => ({
+  type: ACTIVITY_FETCH_SUCCESS,
+  payload: activities,
 });
 
 export const addActivity = activity => ({
