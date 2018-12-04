@@ -25,9 +25,13 @@ app.use((req, res, next) => {
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/testExpress')
+mongoose.connect('mongodb://common:bs9cbM9Npty8F9B@ds237858.mlab.com:37858/globalizer')
   .then(() => console.log('connection succesful'))
   .catch(err => console.error(err));
+
+// mongoose.connect('mongodb://localhost/testExpress')
+//   .then(() => console.log('connection succesful'))
+//   .catch(err => console.error(err));
 
 const Users = require('./models/UsersModel');
 const Activities = require('./models/ActivitiesModel');
