@@ -68,7 +68,6 @@ class YourActivitiesScreen extends React.Component {
   }
 
   handleToggle = (toggleTo) => {
-    console.log(toggleTo);
     this.setState({
       activeScreen: toggleTo,
     });

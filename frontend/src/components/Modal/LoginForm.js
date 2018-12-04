@@ -33,7 +33,6 @@ class LoginForm extends React.Component {
     dispatchLogin(loginEmail, loginPassword);
 
     const correctUser = users.filter(user => user.email === loginEmail);
-    console.log(correctUser);
     const correctPassword = correctUser[0].password === loginPassword;
     let errorMessage = false;
 

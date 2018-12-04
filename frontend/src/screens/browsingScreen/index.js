@@ -40,7 +40,6 @@ class BrowsingScreen extends React.Component {
 
   componentDidMount = () => {
     const { dispatchFetchedactivities } = this.props;
-    console.log('browsing screen mounting');
     fetch("https://radiant-depths-55581.herokuapp.com/api/activities")
       .then(res => res.json())
       .then((result) => {
@@ -121,7 +120,6 @@ class BrowsingScreen extends React.Component {
   }
 
   filterBasedOnWhen = (filteredActivities) => {
-    console.log('filter based on when');
     const { when } = this.props;
     let dateInc = 0;
     const selectedWhen = when.filter(option => option.checked);
@@ -151,7 +149,6 @@ class BrowsingScreen extends React.Component {
         return true;
       }
       const activityDate = new Date(activity.date).toISOString();
-      console.log(activity.title, activityDate, limitISO);
       return activityDate <= limitISO;
     });
 
