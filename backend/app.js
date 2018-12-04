@@ -68,6 +68,28 @@ app.get('/api/activities', (req, res) => {
   });
 });
 
+app.post('/api/activities/update', (req, res) => {
+  const query = {
+    title: req.body.query.activity.title,
+    owner: req.body.query.activity.owner,
+    location: req.body.query.activity.location,
+    description: req.body.query.activity.description,
+    date: req.body.query.activity.date,
+    startTime: req.body.query.activity.startTime,
+    endTime: req.body.query.activity.endTime,
+    maxNumberOfAttendees: req.body.query.activity.maxNumberOfAttendees
+  };
+  const newAttendees = req.body.attendees;
+
+  Activities.findOneAndUpdate(query, newAttendees)
+    .then(doc => {
+      console.log(doc)
+    })
+    .catch(err => {
+      console.error(err)
+    })
+});
+
 app.post('/api/users', (req, res) => {
   const user = new Users();
   user.id = req.body.user.id;

@@ -43,7 +43,7 @@ class BrowsingScreen extends React.Component {
     fetch("http://localhost:5000/api/activities")
       .then(res => res.json())
       .then((result) => {
-        result.map(user => dispatchAddActivity(user));
+        result.map(activity => dispatchAddActivity(activity));
       },
       (error) => {
         console.log(error);

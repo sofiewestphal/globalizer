@@ -117,6 +117,19 @@ class ActivityCard extends React.Component {
     };
 
     dispatchToggleAttend(updatedActivity);
+
+    try{
+      fetch("http://localhost:5000/api/activities/update", {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: { activity },
+          attendees: { attendees: updatedActivity.attendees },
+        }),
+      });
+    } catch(e) {
+      console.log('oops user not saved');
+    }
   }
 
   toggleDesription = () => {
