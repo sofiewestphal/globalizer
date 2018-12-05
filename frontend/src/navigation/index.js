@@ -14,38 +14,38 @@ import YourActivitiesScreen from '../screens/YourActivitiesScreen';
 const Auth = ({
   component: Comp, loggedIn, path, ...rest
 }) => (
-    <Route
-      path={path}
-      {...rest}
-      render={(props) => {
-        if (!loggedIn) {
-          return <Comp {...props} />;
-        }
-        return <Redirect to="/browse" />;
-      }}
-    />
-  );
+  <Route
+    path={path}
+    {...rest}
+    render={(props) => {
+      if (!loggedIn) {
+        return <Comp {...props} />;
+      }
+      return <Redirect to="/browse" />;
+    }}
+  />
+);
 
 const ProtectedRoute = ({
   component: Comp, loggedIn, path, ...rest
 }) => (
-    <Route
-      path={path}
-      {...rest}
-      render={(props) => {
-        if (loggedIn) {
-          return (
-            <div>
-              <MainMenu />
-              <Comp {...props} />
-              <Footer />
-            </div>
-          );
-        }
-        return <Redirect to="/landing" />;
-      }}
-    />
-  );
+  <Route
+    path={path}
+    {...rest}
+    render={(props) => {
+      if (loggedIn) {
+        return (
+          <div>
+            <MainMenu />
+            <Comp {...props} />
+            <Footer />
+          </div>
+        );
+      }
+      return <Redirect to="/landing" />;
+    }}
+  />
+);
 
 const Navigation = ({ userId }) => (
   <div className="page">

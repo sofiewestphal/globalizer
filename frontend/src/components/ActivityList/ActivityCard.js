@@ -119,7 +119,7 @@ class ActivityCard extends React.Component {
     dispatchToggleAttend(updatedActivity);
 
     try{
-      fetch("https://radiant-depths-55581.herokuapp.com/api/activities/update", {
+      fetch("https://radiant-depths-55581.herokuapp.com/api/attend", {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
