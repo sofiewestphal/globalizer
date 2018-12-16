@@ -37,18 +37,11 @@ class CreateActivityForm extends React.Component {
     });
   }
 
-  handleSelect = (category) => {
-    this.setState({
-      category,
-    });
-  }
+  handleSelect = (category) =>
+    this.setState({ category });
 
-  toggleDateTime = () => {
-    const { setDateTime } = this.state;
-    this.setState({
-      setDateTime: !setDateTime,
-    });
-  }
+  toggleDateTime = () =>
+    this.setState({ setDateTime: !this.state.setDateTime });
 
   handleSetEndTime = () => {
     const { setEndTime } = this.state;

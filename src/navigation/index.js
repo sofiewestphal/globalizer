@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  Route, Switch, Redirect, withRouter,
+  Route,
+  Switch,
+  Redirect,
+  withRouter,
 } from 'react-router-dom';
+
 import MainMenu from '../components/MainMenu';
 import Footer from '../components/Footer';
 import BrowsingScreen from '../screens/browsingScreen';

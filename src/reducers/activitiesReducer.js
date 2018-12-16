@@ -2,6 +2,7 @@ import { RESET, ACTIVITY_ADD, ACTIVITY_TOGGLE_ATTEND } from '../actions/actionCr
 
 const initialState = {
   nextId: 7,
+  // why do you have to have this hardcoded?
   activities: [
     {
       id: 1,

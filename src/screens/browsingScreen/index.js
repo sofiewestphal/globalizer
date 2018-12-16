@@ -1,13 +1,8 @@
-/**
- * Core
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-/**
- * Components
- */
+
 import SearchBar from '../../components/SearchBar';
 import HeaderImage from '../../components/HeaderImage';
 import Explorer from '../../components/Explorer';
@@ -15,16 +10,8 @@ import ActivityList from '../../components/ActivityList';
 import CTA from '../../components/CTA';
 import AppliedFilters from '../../components/AppliedFilters';
 import Loading from '../../components/Loading';
-/**
- * Actions
- */
 import { setCategoryChecked } from '../../actions';
 
-/* END OF IMPORTS */
-
-/**
- * Returns browsing screen
- */
 class BrowsingScreen extends React.Component {
   constructor(props) {
     super(props);

@@ -8,6 +8,7 @@ const ActivityList = (props) => {
 
   return (
     <div className="col-xs-12 col-sm-8 col-md-6 col-md-offset-1">
+      {/* move below functions to utils.js, too complicated logic for representational component */}
       {activitiesArray.filter(removePastActivities).sort(compare).map(activity => (
         <ActivityCard
           key={activity.id}
@@ -18,6 +19,7 @@ const ActivityList = (props) => {
   );
 };
 
+// and these as well, they are utility functions and should not be present in components
 const removePastActivities = (activity) => {
   const currentDay = new Date().toISOString();
   if(activity.date === '') {

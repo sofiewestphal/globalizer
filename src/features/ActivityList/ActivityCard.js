@@ -1,20 +1,12 @@
-/**
- * Core
- */
+// very nice of you that you still use my comment system :)
+// but I find it silly now, just seperate 3rd parties from locals with one emtpy line
+
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-/**
- * Actions
- */
+
 import { toggleAttend } from '../../actions';
-/**
- * Components
- */
 import SecondaryButton from '../SecondaryButton';
-/**
- * Icons
- */
 import arrowIcon from '../../assets/icons/other_icons/arrow_icon.svg';
 import beautyIcon from '../../assets/icons/activity_icons/beauty-and-wellness_icon.svg';
 import cultureIcon from '../../assets/icons/activity_icons/culture_icon.svg';
@@ -28,8 +20,6 @@ import nightlifeIcon from '../../assets/icons/activity_icons/nightlife_icon.svg'
 import outdoorIcon from '../../assets/icons/activity_icons/outdoor_icon.svg';
 import sportsIcon from '../../assets/icons/activity_icons/sports_icon.svg';
 import { Marker } from '../../assets/icons/icons';
-
-/* END OF IMPORTS */
 
 const icons = {
   categories_beautyWellness: beautyIcon,
@@ -45,18 +35,12 @@ const icons = {
   categories_sports: sportsIcon,
 };
 
-
-/**
- * @Component - returns activity card
- */
 class ActivityCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showDescription: false,
-      btnAttendLabel: '',
-      btnAttendDisabled: false,
-    };
+  // I think you do something like this now
+  state = {
+    showDescription: false,
+    btnAttendLabel: '',
+    btnAttendDisabled: false,
   }
 
   componentDidMount = () => {
@@ -75,27 +59,22 @@ class ActivityCard extends React.Component {
       userId, activity,
     } = this.props;
 
-    let btnAttendLabel;
-    let btnAttendDisabled;
+    // I would do that differently
+    const isOwner = userId === activity.owner;
+    const blahBlah = activity.attendees.indexOf(userId) > -1;
+    const isFull = activity.attendees.length + 1 === activity.maxNumberOfAttendees;
 
-    if (userId === activity.owner) {
-      btnAttendLabel = 'Your Activity';
-      btnAttendDisabled = true;
-    } else if (activity.attendees.indexOf(userId) > -1) {
-      btnAttendLabel = 'Not Attend';
-      btnAttendDisabled = false;
-    } else if (activity.attendees.length + 1 === activity.maxNumberOfAttendees) {
-      btnAttendLabel = 'It\'s full';
-      btnAttendDisabled = true;
-    } else {
-      btnAttendLabel = 'Attend';
-      btnAttendDisabled = false;
+    // don't mind my function namings, come up with something better and more descriptive
+    const setStateWithLabelAndStatus = (btnAttendLabel, btnAttendDisabled) => this.setState({ btnAttendLabel, btnAttendDisabled });
+
+    if (isOwner) {
+      return setStateWithLabelAndStatus('Your Activity', true );
+    } else if (blahBlah) {
+      return setStateWithLabelAndStatus('Not Attend', false );
+    } else if (isFull) {
+      return setStateWithLabelAndStatus('It\'s full', true );
     }
-
-    this.setState({
-      btnAttendLabel,
-      btnAttendDisabled,
-    });
+    return setStateWithLabelAndStatus('Attend', false );    
   }
 
   toggleAttend = () => {
@@ -103,30 +82,27 @@ class ActivityCard extends React.Component {
       activity, userId, dispatchToggleAttend,
     } = this.props;
 
-    let newAttendees;
+    const someCondition = activity.attendees.indexOf(userId) > -1;
 
-    if (activity.attendees.indexOf(userId) > -1) {
-      newAttendees = activity.attendees.filter(attendee => attendee !== userId);
-    } else {
-      newAttendees = [...activity.attendees, userId];
-    }
-
-    const updatedActivity = {
+    dispatchToggleAttend({
       ...activity,
-      attendees: newAttendees,
-    };
-
-    dispatchToggleAttend(updatedActivity);
+      attendees: someCondition
+        ? activity.attendees.filter(attendee => attendee !== userId)
+        : [...activity.attendees, userId]
+    });
   }
 
   toggleDesription = () => {
-    const { showDescription } = this.state;
+    // if you destructure just one item, then it's not really neccesary
     this.setState({
-      showDescription: !showDescription,
+      showDescription: !this.state.showDescription,
     });
   }
 
   renderDateTime = () => {
+    // creating methods that return JSX is considered bad
+    // it becomes harder to work with those later on
+    // just consider turning those into components and passing props
     const { activity } = this.props;
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const activityDate = activity.date === '' ? 'Anytime' : `${new Date(activity.date).getDate()}. ${months[new Date(activity.date).getMonth()]} ${new Date(activity.date).getFullYear()}`;
@@ -206,9 +182,11 @@ class ActivityCard extends React.Component {
                       id="btnToggleAttend"
                       title={btnAttendLabel}
                       disabled={btnAttendDisabled}
-                      handleClick={() => {
-                        this.toggleAttend();
-                      }}
+                      // ok this I learned at Catawiki
+                      // what happens with this way of passing function to handler is
+                      // that this function created over and over again on every rerender
+                      // so do this instead
+                      handleClick={this.toggleAttend}
                     />
                   </div>
                 </div>
@@ -247,4 +225,11 @@ const mapDispatchToProps = dispatch => ({
   dispatchToggleAttend: updatedActivity => dispatch(toggleAttend(updatedActivity)),
 });
 
+// ok another this that should never be done is
+// components themselves should not be connected to redux store
+// only containers
+// so I would create another folder containers, next to components and
+// put all state managemenr there, and then return pure representational components
+// or use feature pattern
+// read more on this here: https://medium.freecodecamp.org/feature-u-cf3277b11318
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityCard);

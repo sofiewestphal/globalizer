@@ -31,13 +31,11 @@ class CreateProfileForm extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    const { users } = this.props;
-    const emails = users.map(user => user.email);
+  componentDidMount = () =>
+    // if it's just a single use function, it seems easier to just use it right away without definition
     this.setState({
-      emails,
+      emails: this.props.users.map(user => user.email)
     });
-  }
 
   handleInputChange = (name, value) => {
     this.setState({

@@ -1,13 +1,20 @@
 import React from 'react';
-import './index.scss';
 import PropTypes from 'prop-types';
 
-const InputField = (props) => {
-  const {
-    labelName, inputName, value, type, placeholderText,
-    onChange, disabled, required,
-  } = props;
+import './index.scss';
 
+const InputField = ({
+    labelName,
+    inputName,
+    value,
+    type,
+    placeholderText,
+    onChange,
+    disabled,
+    required,
+  }) => {
+  // this looks weird
+  // what are you trying to do here?
   let inputClassNames = 'input';
   if (inputName === 'description') {
     inputClassNames += ' description';

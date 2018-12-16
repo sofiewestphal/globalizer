@@ -28,7 +28,14 @@ export default function authReducer(state = initialState, action) {
         isLogginIn: false,
       };
     case RESET:
-      return(initialState);
+      // this still have to be spread event if you return initial state
+      // to avoid mutation
+      // if you keep it without spreading I believe redux should not even track the change
+      // I might be wrong though
+      return {
+        ...state,
+        ...initialState
+      };
 
     default:
       return state;
